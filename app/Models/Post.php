@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Like;
+use App\Models\Comment;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
 class Post extends Model
@@ -17,7 +19,8 @@ class Post extends Model
         'excerpt', 
         'body',  
         'featured', 
-        'image', 
+        'image',
+        'likes'
     ];
 
     public function setTitleAttribute($value)
@@ -50,5 +53,14 @@ class Post extends Model
 
     public function nextPost(){
         return Post::where('id', '>', $this->id)->orderBy('id')->first();
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function likes(){
+        return $this->hasMany(Like::class);
     }
 }

@@ -6,7 +6,7 @@
     <!--- basic page needs
     ================================================== -->
     <meta charset="utf-8">
-    <title>Calvin</title>
+    <title>Sistem Media Informasi Tradisi Suku Dayak Kanayatn di Kalimantan Barat</title>
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -48,12 +48,6 @@
     ================================================== -->
     <header class="s-header">
 
-        <div class="s-header__logo">
-            <a class="logo" href="{{ route('home') }}">
-                <img src="{{ asset('images/logo.svg') }}" alt="Homepage">
-            </a>
-        </div>
-
         <div class="row s-header__navigation">
 
             <nav class="s-header__nav-wrap">
@@ -62,14 +56,14 @@
 
                 <ul class="s-header__nav">
                     <li class="current"><a href="{{ route('home') }}" title="">Home</a></li>
-                    <li class="has-children">
+                    <!-- <li class="has-children">
                         <a href="#0" title="">Categories</a>
                         <ul class="sub-menu">
                             @foreach ($categories as $cat)
                                 <li><a href="{{ route('categories.view', $cat->id) }}">{{ $cat->title }}</a></li>
                             @endforeach
                         </ul>
-                    </li>
+                    </li> -->
                     @guest
                         <li>
                             <a href="{{ route('login') }}" title="">Sign In</a>
@@ -93,34 +87,6 @@
     </header> <!-- end s-header -->
 
     @yield('content')
-
-
-    <!-- footer
-    ================================================== -->
-    <footer class="s-footer">
-        <div class="s-footer__bottom">
-            <div class="row">
-                <div class="column">
-                    <div class="ss-copyright">
-                        <span>© Copyright Calvin 2020</span>
-                        <span>Design by <a href="https://www.styleshout.com/">StyleShout</a></span>
-                    </div> <!-- end ss-copyright -->
-                </div>
-            </div>
-
-            <div class="ss-go-top">
-                <a class="smoothscroll" title="Back to Top" href="#top">
-                    <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15">
-                        <path
-                            d="M7.5 1.5l.354-.354L7.5.793l-.354.353.354.354zm-.354.354l4 4 .708-.708-4-4-.708.708zm0-.708l-4 4 .708.708 4-4-.708-.708zM7 1.5V14h1V1.5H7z"
-                            fill="currentColor"></path>
-                    </svg>
-                </a>
-            </div> <!-- end ss-go-top -->
-        </div> <!-- end s-footer__bottom -->
-
-    </footer> <!-- end s-footer -->
-
 
     <!-- Java Script
     ================================================== -->

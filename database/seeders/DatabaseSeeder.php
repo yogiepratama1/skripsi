@@ -27,12 +27,27 @@ class DatabaseSeeder extends Seeder
         // insert default user 
         DB::table('users')->insert([
             [
-                'name' => 'samia',
-                'email' => 'mahisamia13@gmail.com',
-                'password' => Hash::make('12345678'),
+                'name' => 'Admin',
+                'email' => 'admin@gmail.com',
+                'password' => Hash::make('password'),
                 'role' =>   'admin',
                 'valid' => 1
-            ]
+            ],
+            [
+                'name' => 'User',
+                'email' => 'user@gmail.com',
+                'password' => Hash::make('password'),
+                'role' =>   'user',
+                'valid' => 1
+            ],
+            [
+                'name' => 'Timanggong',
+                'email' => 'timanggong@gmail.com',
+                'password' => Hash::make('password'),
+                'role' =>   'timanggong',
+                'valid' => 1
+            ],
+
         ]);
 
         // insert tags 

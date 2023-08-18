@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 
@@ -22,7 +23,7 @@ class PostController extends Controller
     public function index()
     {
         //
-        $posts = auth()->user()->posts;
+        $posts = Post::all();
         return view('back.posts.index', compact('posts'));
     }
 
@@ -111,7 +112,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return back();
+        return redirect()->route('posts.index')->with('message', 'Post deleted successfully');
     }
 
     public function uploadImage($request){

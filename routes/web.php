@@ -24,8 +24,12 @@ require __DIR__.'/auth.php';
 Route::get('/', 'PageController@index')->name('home');
 Route::get('/posts', 'PageController@posts')->name('posts');
 Route::get('/posts/{post}', 'PageController@showPost')->name('posts.view');
+Route::get('/laporan', 'PageController@laporan')->name('posts.laporan');
 Route::get('/category/{category}', 'PageController@showCategory')->name('categories.view');
 
+Route::post('/komentar', 'PageController@addComment')->name('addComment');
+Route::post('/balasan', 'PageController@addReply')->name('addReply');
+Route::post('/addLike', 'PageController@addLike')->name('addLike');
 // admin pages 
 Route::group(['prefix' => '/admin', 'middleware' => 'auth'], function () {
     Route::resource('posts','PostController');

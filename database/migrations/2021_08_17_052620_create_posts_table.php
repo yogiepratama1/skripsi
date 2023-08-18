@@ -25,6 +25,7 @@ class CreatePostsTable extends Migration
             $table->text('body');
             $table->boolean('featured')->default(false);
             $table->string('image');
+            $table->integer('likes')->default(0);
             $table->timestamps();
         });
 
@@ -51,6 +52,50 @@ class CreatePostsTable extends Migration
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
         });
+
+        Schema::create('likes', function(Blueprint $table) {
+            $table->id();
+            $table->foreignId('post_id')
+                  ->constrained()
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
+            $table->foreignId('user_id')
+                  ->constrained()
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
+            $table->integer('like')->nullable();
+            $table->timestamps();
+        });
+
+        Schema::create('comments', function(Blueprint $table) {
+            $table->id();
+            $table->foreignId('post_id')
+                  ->constrained()
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
+            $table->foreignId('user_id')
+                  ->constrained()
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
+            $table->text('comment');
+            $table->timestamps();
+        });
+
+        Schema::create('replies', function(Blueprint $table) {
+            $table->id();
+            $table->foreignId('comment_id')
+                  ->constrained()
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
+            $table->foreignId('user_id')
+                  ->constrained()
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
+            $table->text('reply');
+            $table->timestamps();
+        });
+
+        
     }
 
     /**
@@ -63,5 +108,7 @@ class CreatePostsTable extends Migration
         Schema::dropIfExists('posts');
         Schema::dropIfExists('category_post');
         Schema::dropIfExists('post_tag');
+        Schema::dropIfExists('comments');
+        Schema::dropIfExists('replies');
     }
 }

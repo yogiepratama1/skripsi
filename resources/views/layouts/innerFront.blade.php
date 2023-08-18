@@ -6,7 +6,7 @@
     <!--- basic page needs
         ================================================== -->
     <meta charset="utf-8">
-    <title>Calvin</title>
+    <title>Sistem Media Informasi Tradisi Suku Dayak Kanayatn di Kalimantan Barat</title>
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -47,11 +47,6 @@
     ================================================== -->
     <header class="s-header s-header--opaque">
 
-        <div class="s-header__logo">
-            <a class="logo" href="{{ route('home') }}">
-                <img src="{{ asset('images/logo.svg') }}" alt="Homepage">
-            </a>
-        </div>
 
         <div class="row s-header__navigation">
 
@@ -61,24 +56,35 @@
 
                 <ul class="s-header__nav">
                     <li><a href="{{ route('home') }}" title="">Home</a></li>
-                    <li class="has-children current">
-                        <a href="#0" title="">Categories</a>
-                        <ul class="sub-menu">
-                            @foreach ($categories as $cat)
-                                <li><a href="{{ route('categories.view', $cat->id) }}">{{ $cat->title }}</a></li>
-                            @endforeach
-                        </ul>
-                    </li>
-                    @guest
-                        <li>
-                            <a href="{{ route('login') }}" title="">Sign In</a>
-                        </li>
-                    @endguest
                     @auth
                         <li>
                             <a href="{{ route('dashboard') }}" title="">Dashboard</a>
                         </li>
                     @endauth
+                    @if (auth()->user()->role == 'user')
+                    <li>
+                        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+                        <form id="logout-form" action="{{ url('logout') }}" method="post" style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
+                    @endif
+                    @if (auth()->user()->isAdmin())    
+                    <li>
+                        <a class="" href="{{ route('posts.create') }}">
+                            Create new Post
+                        </a>
+                    </li>        
+                        @endif
+                        @if (auth()->user()->role != 'user')
+                            <li>
+                                <a class="" href="{{ route('posts.laporan') }}">
+                                    Buat Laporan
+                                </a>
+                            </li>
+                        @endif
                 </ul> <!-- end s-header__nav -->
 
                 <a href="#0" title="Close Menu" class="s-header__overlay-close close-mobile-menu">Close</a>
@@ -97,14 +103,6 @@
     ================================================== -->
     <footer class="s-footer">
         <div class="s-footer__bottom">
-            <div class="row">
-                <div class="column">
-                    <div class="ss-copyright">
-                        <span>© Copyright Calvin 2020</span>
-                        <span>Design by <a href="https://www.styleshout.com/">StyleShout</a></span>
-                    </div> <!-- end ss-copyright -->
-                </div>
-            </div>
 
             <div class="ss-go-top">
                 <a class="smoothscroll" title="Back to Top" href="#top">
