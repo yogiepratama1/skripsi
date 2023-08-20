@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .table th, .table td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .table th {
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+        .table-striped tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Laporan Akhir</h1>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th width="5%">No</th>
+                <th>NIS</th>
+                <th>Nama</th>
+                <th>Kelas</th>
+                <th>Tahun Ajaran</th>
+                <th>Keterangan</th>
+                <th>Mata Pelajaran</th>
+                <th>Nilai</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in data %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ s.nis }}</td>
+                <td>{{ s.nama }}</td>
+                <td>{{ s.kelas }}</td>
+                <td>{{ s.tahun_ajaran }}</td>
+                <td>Hadir</td>
+                <td>{{ s.mapel }}</td>
+                <td>{{ s.avg_nilai }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

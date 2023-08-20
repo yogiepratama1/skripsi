@@ -20,10 +20,10 @@ Data Pengajar - {{ parent() }}
 
             <div class="span5">
                 <div class="btn-group pull-right">
-                    {{ anchor('pengajar/index/1', 'Aktif', {'class' : (status_id == 1) ? 'btn btn-info' : 'btn btn-default'})|raw }}
-                    {{ anchor('pengajar/index/0', 'Pending '  ~ ((count_pending > 0) ? '<span class="label label-warning">' ~ count_pending  ~ '</span>'), {'class' : (status_id == 0) ? 'btn btn-info' : 'btn btn-default'})|raw }}
-                    {{ anchor('pengajar/index/2', 'Blocking', {'class' : (status_id == 2) ? 'btn btn-info' : 'btn btn-default'})|raw }}
-                    {{ anchor('pengajar/filter', '<i class="icon-search" style="line-height: 0px;"></i> Filter', {'class' : 'btn btn-default'})|raw }}
+                    <!-- {{ anchor('pengajar/index/1', 'Aktif', {'class' : (status_id == 1) ? 'btn btn-info' : 'btn btn-default'})|raw }} -->
+                    <!-- {{ anchor('pengajar/index/0', 'Pending '  ~ ((count_pending > 0) ? '<span class="label label-warning">' ~ count_pending  ~ '</span>'), {'class' : (status_id == 0) ? 'btn btn-info' : 'btn btn-default'})|raw }} -->
+                    <!-- {{ anchor('pengajar/index/2', 'Blocking', {'class' : (status_id == 2) ? 'btn btn-info' : 'btn btn-default'})|raw }}
+                    {{ anchor('pengajar/filter', '<i class="icon-search" style="line-height: 0px;"></i> Filter', {'class' : 'btn btn-default'})|raw }} -->
                 </div>
             </div>
         </div>
@@ -33,12 +33,12 @@ Data Pengajar - {{ parent() }}
             <div id="form-filter" class="collapse" style="margin-top: 5px;">
                 {{ form_open('pengajar/filter')|raw }}
                 <table class="table table-condensed" id="form-search">
-                    <tr>
+                    <!-- <tr>
                         <th width="20%" style="border-top:none;">NIP</th>
                         <td style="border-top:none;">
                             <input type="text" name="nip" class="span2" style="margin-bottom:0px;" value="{{ set_value('nip', (filter.nip is defined) ? filter.nip) }}">
                         </td>
-                    </tr>
+                    </tr> -->
                     <tr>
                         <th>Nama</th>
                         <td>
@@ -132,22 +132,21 @@ Data Pengajar - {{ parent() }}
                     </td>
                     <td>
                         <img style="height:40px;width:40px; margin-right: 10px;" class="img-polaroid img-circle pull-left" src="{{ get_url_image_pengajar(v.foto, 'medium', v.jenis_kelamin) }}">
-                        <b>{{ v.nama }} {{ ((v.nip is not empty) ? '<span class="text-muted">(' ~ v.nip ~ ')</span>')|raw }}</b>
+                        <b>{{ v.nama }}</b>
                         {% set is_admin =  get_row_data('login_model', 'retrieve', [null, null, null, null, v.id], 'is_admin') %}
-                        {% if is_admin == 1 %}
+                        <!-- {% if is_admin == 1 %}
                             <span class="label label-warning">Administrator</span>
-                        {% endif %}
-                        <br><b>Alamat :</b> {{ v.alamat }}
+                        {% endif %} -->
                     </td>
                     <td>
                         <ul class="nav nav-pills" style="margin-bottom:0px;">
                             {% if is_admin() == true %}
-                            <li><a class="btn btn-default btn-small" href="{{ site_url('pengajar/detail/' ~ status_id ~ '/' ~ v.id) }}"><i class="icon-zoom-in"></i> Detail</a></li>
+                            <!-- <li><a class="btn btn-default btn-small" href="{{ site_url('pengajar/detail/' ~ status_id ~ '/' ~ v.id) }}"><i class="icon-zoom-in"></i> Detail</a></li> -->
                             <li class="dropdown">
                                 <a class="btn btn-default btn-small" href="#" id="act-{{ v.id }}" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-edit"></i> Edit <b class="caret" style="margin-top:5px;"></b></a>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="act-{{ v.id }}">
                                     <li>{{ anchor('pengajar/edit_profile/' ~ status_id ~ '/' ~ v.id, 'Edit Profil', {'class' : 'pengajar-iframe-4', 'title' : 'Edit Profil Pengajar'})|raw }}</li>
-                                    <li>{{ anchor('pengajar/edit_picture/' ~ status_id ~ '/' ~ v.id, 'Edit Foto', {'class' : 'pengajar-iframe-5', 'title' : 'Edit Foto Pengajar'})|raw }}</li>
+                                    <!-- <li>{{ anchor('pengajar/edit_picture/' ~ status_id ~ '/' ~ v.id, 'Edit Foto', {'class' : 'pengajar-iframe-5', 'title' : 'Edit Foto Pengajar'})|raw }}</li> -->
                                     <li>{{ anchor('pengajar/edit_username/' ~ status_id ~ '/' ~ v.id, 'Edit Username', {'class' : 'pengajar-iframe-2', 'title' : 'Edit Username Pengajar'})|raw }}</li>
                                     <li>{{ anchor('pengajar/edit_password/' ~ status_id ~ '/' ~ v.id, 'Edit Password', {'class' : 'pengajar-iframe-3', 'title' : 'Edit Password Pengajar'})|raw }}</li>
                                 </ul>
@@ -173,9 +172,6 @@ Data Pengajar - {{ parent() }}
                             <select name="status_id" style="width:100%;">
                                 <option>--Pilih Status--</option>
                                 <option value="1">Aktif</option>
-                                {% if status_id == 0 %}
-                                <option value="2">Blocking</option>
-                                {% endif %}
                             </select>
                         </td>
                         <td valign="top">

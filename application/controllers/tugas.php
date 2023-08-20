@@ -1404,7 +1404,7 @@ class Tugas extends MY_Controller
             }
 
             $config['upload_path']   = get_path_file();
-            $config['allowed_types'] = 'doc|zip|rar|txt|docx|xls|xlsx|pdf|tar|gz|jpg|jpeg|JPG|JPEG|png|ppt|pptx';
+            $config['allowed_types'] = 'docx|zip|rar|txt|docx|xls|xlsx|pdf|tar|gz|jpg|jpeg|JPG|JPEG|png|ppt|pptx';
             $config['max_size']      = '0';
             $config['max_width']     = '0';
             $config['max_height']    = '0';
@@ -1679,7 +1679,7 @@ class Tugas extends MY_Controller
         }
         $data['data_siswa']  = $data_siswa;
         $data['kelas_nilai'] = $kelas_nilai;
-
+        $data['tahun_ajaran'] = $this->pengaturan_model->get_tahun_ajaran()->value;
         if ($mode == 'print') {
             $this->twig->display('print-nilai.html', $data);
         } elseif ($mode == 'export_excel') {

@@ -75,6 +75,8 @@ class Welcome extends MY_Controller
                 'tgl_tutup >='  => date('Y-m-d'),
                 'tampil_siswa'  => 1
             );
+
+            $data['is_orangtua'] = get_sess_data('user', 'is_orangtua');
         }
 
         if (is_pengajar()) {

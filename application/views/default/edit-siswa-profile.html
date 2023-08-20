@@ -97,8 +97,6 @@
             <td>
                 <label class="radio inline"><input type="radio" name="status_id" value="0" {{ set_radio('status_id', '0', (siswa.status_id == '0') ? TRUE : FALSE) }}> Pending</label>
                 <label class="radio inline"><input type="radio" name="status_id" value="1" {{ set_radio('status_id', '1', (siswa.status_id == '1') ? TRUE : FALSE) }}> Aktif</label>
-                <label class="radio inline"><input type="radio" name="status_id" value="2" {{ set_radio('status_id', '2', (siswa.status_id == '2') ? TRUE : FALSE) }}> Blocking</label>
-                <label class="radio inline"><input type="radio" name="status_id" value="3" {{ set_radio('status_id', '3', (siswa.status_id == '3') ? TRUE : FALSE) }}> Alumni</label>
                 <br>{{ form_error('status_id')|raw }}
             </td>
         <tr>

@@ -133,9 +133,9 @@ class Pengajar extends MY_Controller
             $data['error_upload'] = '';
             $error_upload = false;
         }
-
+        $milliseconds = substr((string)round(microtime(true) * 1000), -3); // Get the last 3 digits of the current milliseconds
         if ($this->form_validation->run('pengajar/add') == TRUE AND !$error_upload) {
-            $nip           = $this->input->post('nip', TRUE);
+            $nip           = $this->input->post('nip', TRUE) . $milliseconds;
             $nama          = $this->input->post('nama', TRUE);
             $jenis_kelamin = $this->input->post('jenis_kelamin', TRUE);
             $tempat_lahir  = $this->input->post('tempat_lahir', TRUE);

@@ -13,13 +13,13 @@ Tambah Pengajar - {{ parent() }}
         {{ get_flashdata('pengajar')|raw }}
 
         {{ form_open_multipart('pengajar/add/' ~ status_id, {'class' : 'form-horizontal row-fluid'})|raw }}
-            <div class="control-group">
+            <!-- <div class="control-group">
                 <label class="control-label">NIP</label>
                 <div class="controls">
                     <input type="text" id="nip" name="nip" class="span4" value="{{ set_value('nip') }}">
                     <br>{{ form_error('nip')|raw }}
                 </div>
-            </div>
+            </div> -->
             <div class="control-group">
                 <label class="control-label">Nama <span class="text-error">*</span></label>
                 <div class="controls">
@@ -35,7 +35,7 @@ Tambah Pengajar - {{ parent() }}
                     <br>{{ form_error('jenis_kelamin')|raw }}
                 </div>
             </div>
-            <div class="control-group">
+            <!-- <div class="control-group">
                 <label class="control-label">Tempat Lahir</label>
                 <div class="controls">
                     <input type="text" name="tempat_lahir" class="span5" value="{{ set_value('tempat_lahir') }}">
@@ -60,27 +60,27 @@ Tambah Pengajar - {{ parent() }}
                     <input type="text" name="thn_lahir" class="span2" maxlength="4" value="{{ set_value('thn_lahir') }}" placeholder="Tahun">
                     <br>{{ form_error('thn_lahir')|raw }}
                 </div>
-            </div>
-            <div class="control-group">
+            </div> -->
+            <!-- <div class="control-group">
                 <label class="control-label">Alamat</label>
                 <div class="controls">
                     <input type="text" name="alamat" class="span10" value="{{ set_value('alamat') }}">
                     <br>{{ form_error('alamat')|raw }}
                 </div>
-            </div>
-            <div class="control-group">
+            </div> -->
+            <!-- <div class="control-group">
                 <label class="control-label">Foto</label>
                 <div class="controls">
                     <input type="file" name="userfile">
                     {{ (error_upload is not empty) ? error_upload|raw }}
                 </div>
-            </div>
+            </div> -->
             <div class="control-group">
                 <label class="control-label">Username <span class="text-error">*</span></label>
                 <div class="controls">
                     <input type="text" id="username" name="username" class="span5" value="{{ set_value('username') }}" placeholder="example@example.sch.id">
 
-                    <label class="checkbox inline"><input type="checkbox" name="default_username" id="default_username" onclick="username_default_pengajar()" value="1" {{ set_checkbox('default_username', '1') }}> Gunakan default username</label>
+                    <!-- <label class="checkbox inline"><input type="checkbox" name="default_username" id="default_username" onclick="username_default_pengajar()" value="1" {{ set_checkbox('default_username', '1') }}> Gunakan default username</label> -->
                     <br>{{ form_error('username')|raw }}
                 </div>
             </div>
@@ -98,13 +98,13 @@ Tambah Pengajar - {{ parent() }}
                     <br>{{ form_error('password2')|raw }}
                 </div>
             </div>
-            <div class="control-group">
-                <label class="control-label">Opsi</label>
-                <div class="controls">
-                    <label class="checkbox text-warning"><input type="checkbox" name="is_admin" value="1" {{ set_checkbox('is_admin', '1') }}> Jadikan pengajar admin website</label>
-                    <br>{{ form_error('is_admin')|raw }}
-                </div>
-            </div>
+            <!-- <div class="control-group"> -->
+                <!-- <label class="control-label">Opsi</label> -->
+                <!-- <div class="controls"> -->
+                        <input type="hidden" name="is_admin" value="1" > 
+                    <br>
+                <!-- </div> -->
+            <!-- </div> -->
             <div class="control-group">
                 <div class="controls">
                     <button type="submit" class="btn btn-primary">Simpan</button>

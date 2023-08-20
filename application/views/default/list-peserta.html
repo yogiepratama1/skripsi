@@ -68,7 +68,7 @@ Koreksi - {{ parent() }}
             <a href="{{ site_url('tugas/pantau/' ~ tugas.id) }}" class="btn btn-primary">Pantau Ujian</a>
             {% endif %}
             <a data-original-title="Print Query" href="#" class="btn btn-primary" data-toggle="popover" data-html="true" data-placement="top" data-content="<form method='post' target='_blank' action='{{ site_url('tugas/koreksi/' ~ tugas.id ~ '/print') }}'><select name='kelas_id'><option value='all'>--Semua Kelas--</option>{% for k in kelas_nilai %} <option value='{{ k.id }}'>{{ k.nama }}</option> {% endfor %}</select><button class='btn btn-primary btn-sm'>Print</button</form>">Print</a>
-            <a data-original-title="Export Query" href="#" class="btn btn-primary" data-toggle="popover" data-html="true" data-placement="bottom" data-content="<form method='post' target='_blank' action='{{ site_url('tugas/koreksi/' ~ tugas.id ~ '/export_excel') }}'><select name='kelas_id'><option value='all'>--Semua Kelas--</option>{% for k in kelas_nilai %} <option value='{{ k.id }}'>{{ k.nama }}</option> {% endfor %}</select><button class='btn btn-primary btn-sm'>Export Excel</button</form>">Export Excel</a>
+            <!-- <a data-original-title="Export Query" href="#" class="btn btn-primary" data-toggle="popover" data-html="true" data-placement="bottom" data-content="<form method='post' target='_blank' action='{{ site_url('tugas/koreksi/' ~ tugas.id ~ '/export_excel') }}'><select name='kelas_id'><option value='all'>--Semua Kelas--</option>{% for k in kelas_nilai %} <option value='{{ k.id }}'>{{ k.nama }}</option> {% endfor %}</select><button class='btn btn-primary btn-sm'>Export Excel</button</form>">Export Excel</a> -->
         </div>
 
         <br><br>

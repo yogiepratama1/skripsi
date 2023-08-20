@@ -236,6 +236,7 @@ class Login extends MY_Controller
                 $alamat        = $this->input->post('alamat', TRUE);
                 $username      = $this->input->post('username', TRUE);
                 $password      = $this->input->post('password2', TRUE);
+                $is_orangtua   = $this->input->post('is_orangtua', TRUE) ? 1 : 0;
 
                 if (empty($thn_lahir)) {
                     $tanggal_lahir = null;
@@ -259,7 +260,8 @@ class Login extends MY_Controller
                     $alamat,
                     $tahun_masuk,
                     $foto,
-                    $status_id
+                    1,
+                    $is_orangtua
                 );
 
                 # simpan data login
@@ -290,7 +292,7 @@ class Login extends MY_Controller
                         'nama_sekolah' => get_pengaturan('nama-sekolah', 'value')
                     ));
 
-                    $pesan = "Registrasi sebagai siswa berhasil, tunggu pengaktifan akun oleh admin.";
+                    $pesan = "Registrasi berhasil.";
                 }
 
                 $this->session->set_flashdata('register', get_alert('success', $pesan));

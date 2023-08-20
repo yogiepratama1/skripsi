@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<b>Nilai {{ tugas.judul }}, {{ tugas.mapel.nama }}</b>
+<b>Nilai {{ tugas.judul }}, &nbsp; {{ tugas.mapel.nama }}</b>
 
 {% if tugas.type_id == 3 %}
 <table class="table table-bordered table-striped">
@@ -15,6 +15,7 @@
             <th>Nis</th>
             <th>Nama</th>
             <th>Kelas</th>
+            <th>Tahun Ajaran</th>
             {% if tampil_jawaban == 1 %}
             <th>Jawaban (no_soal. kunci:jawaban, ...)</th>
             {% endif %}
@@ -31,6 +32,7 @@
             <td>{{ n.siswa.nis }}</td>
             <td>{{ n.siswa.nama }}</td>
             <td>{{ n.siswa.kelas_aktif.nama }}</td>
+            <td>{{ tahun_ajaran }}</td>
             {% if tampil_jawaban == 1 %}
             <td>{{ n.tampil_jawaban }}</td>
             {% endif %}
@@ -52,6 +54,7 @@
             <th>Nis</th>
             <th>Nama</th>
             <th>Kelas</th>
+            <th>Tahun Ajaran</th>
             <th>Nilai</th>
         </tr>
     </thead>
@@ -62,6 +65,7 @@
             <td>{{ s.nis }}</td>
             <td>{{ s.nama }}</td>
             <td>{{ s.kelas_aktif.nama }}</td>
+            <td>{{ tahun_ajaran }}</td>
             <td>{{ round(s.nilai.nilai, 2) }}</td>
         </tr>
         {% endfor %}

@@ -29,36 +29,49 @@
                         {{ materi.konten|raw }}
                     {% elseif type == 'file' %}
                         <dl class="dl-horizontal">
-                            <dt>Name</dt>
+                            <!-- <dt>Name</dt>
                             <dd>{{ (materi.file_info.name is empty) ? 'noname' : materi.file_info.name }}</dd>
                             <dt>Size</dt>
                             <dd>{{ byte_format(materi.file_info.size) }}</dd>
                             <dt>Modified</dt>
                             <dd>{{ tgl_jam_indo(mdate('%Y-%m-%d %H:%i:%s', materifile_info.date)) }}</dd>
                             <dt>Mime</dt>
-                            <dd>{{ materi.file_info.mime }}</dd>
+                            <dd>{{ materi.file_info.mime }}</dd> -->
                             <dt></dt>
-                            <dd><br><a href="{{ materi.download_link }}" class="btn btn-warning"><i class="icon-download"></i> Download File</a></dd>
+                            <dd><br><a href="{{ materi.download_link }}" class="btn btn-warning"><i class="icon-download"></i> Download File Materi</a></dd>
                         </dl>
                     {% endif %}
 
                     <br>
                     <div class="row-fluid">
                         <div class="span8">
-                            <h4>
-                                <i class="icon-pencil"></i> Tulis komentar
-                                <div class="pull-right" style="font-size: 14px;">{{ form_error('komentar')|raw }}</div>
-                            </h4>
                             <div class="bg-form-komentar" id="form-komentar">
-                                <form method="post" action="{{ site_url('materi/detail/' ~ materi.id) }}">
-                                    <p><textarea class="span12 texteditor" id="komentar" name="komentar">{{ set_value('komentar')|raw }}</textarea></p>
+                                <!-- <form method="post" action="{{ site_url('materi/detail/' ~ materi.id) }}">
+                                    <p><textarea class="span12 " id="komentar" name="komentar">{{ set_value('komentar')|raw }}</textarea></p>
                                     <p>
                                         <button class="btn btn-primary pull-right">Post komentar</button>
                                         <img src="{{ get_url_image_session(get_sess_data('user', 'foto'), 'medium', get_sess_data('user', 'jenis_kelamin')) }}" style="height:30px;width:30px; margin-right:5px;" class="img-circle img-polaroid">
                                         {{ get_sess_data('user', 'nama') }}
                                     </p>
                                     <div class="clear"></div>
+                                </form> -->
+                                {% if show_presensi_form %}
+                                <form method="post" action="{{ site_url('materi/presensi/' ~ materi.id) }}">
+                                    <label>
+                                        <input type="radio" name="absen" value="hadir"> Hadir
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="absen" value="izin"> Izin
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="absen" value="sakit"> Sakit
+                                    </label>
+                                    <button type="submit">Submit</button>
                                 </form>
+                            {% else %}
+                                Kamu sudah melakukan presensi.
+                            {% endif %}
+                            
                             </div>
                             <br>
 

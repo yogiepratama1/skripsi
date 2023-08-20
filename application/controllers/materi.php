@@ -39,6 +39,37 @@ class Materi extends MY_Controller
         must_login();
     }
 
+    function laporanAkhir()
+    {
+        $this->db->select('pengaturan.nama, pengaturan.value');
+        $this->db->from('pengaturan');
+        $this->db->where('id', 'tahun-ajaran'); // Adjust the condition if needed
+        
+        $result = $this->db->get()->row_array();
+        $tahun_ajaran = $result['value'];
+        $this->db->select('siswa.nis, siswa.nama, kelas.nama AS kelas, AVG(nilai_tugas.nilai) AS avg_nilai, mapel.nama AS mapel');
+        $this->db->select("'$tahun_ajaran' AS tahun_ajaran", FALSE); // Add the tahun_ajaran value
+        $this->db->from('siswa');
+        $this->db->join('kelas_siswa', 'kelas_siswa.siswa_id = siswa.id');
+        $this->db->join('kelas', 'kelas.id = kelas_siswa.kelas_id');
+        $this->db->join('nilai_tugas', 'nilai_tugas.siswa_id = siswa.id');
+        $this->db->join('tugas', 'tugas.id = nilai_tugas.tugas_id');
+        $this->db->join('mapel', 'mapel.id = tugas.mapel_id');
+        $this->db->join('pengaturan pt', '30', 'LEFT'); // Join with pengaturan table for tahun_ajaran
+        $this->db->group_by('siswa.id, mapel.id'); 
+        $data = $this->db->get()->result_array();
+
+        $this->load->library('twig');
+        $template = 'laporan-akhir.twig'; // Path to your Twig template
+        $html = $this->twig->render($template, ['data' => $data]);
+        
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'landscape');
+        $this->pdf->loadHtml($html);
+        $this->pdf->render();
+        $this->pdf->stream("laporan-akhir.pdf", array("Attachment" => false));
+    }
+
     private function formatData($val)
     {
         # cari pembuatnya
@@ -541,6 +572,15 @@ class Materi extends MY_Controller
         redirect($uri_back);
     }
 
+    function checkIfUserHasPresensi($user_id, $materi_id) {
+        $this->db->where('siswa_id', $user_id);
+        $this->db->where('materi_id', $materi_id);
+        $query = $this->db->get('presensi');
+    
+        return $query->num_rows() > 0;
+    }
+    
+
     function detail($segment_3 = '', $segment_4 = '', $segment_5 = '')
     {
         $materi_id = (int)$segment_3;
@@ -559,6 +599,24 @@ class Materi extends MY_Controller
         } else {
             # cek sesuai kelas aktif tidak
 
+        }
+
+        $user_id = get_sess_data('user', 'id');
+        $is_pengajar = is_pengajar();
+        $is_siswa = is_siswa();
+
+        if ($is_pengajar) {
+            // Do something for pengajar
+        } elseif ($is_siswa) {
+            // Check if the user already has a presensi for the current materi
+            $materi_id = $materi['id'];
+            $this->db->where('siswa_id', $user_id);
+            $this->db->where('materi_id', $materi_id);
+            $query = $this->db->get('presensi');
+            $userHasPresensi = $query->num_rows() > 0;
+    
+            // Set flag to show/hide the presensi form
+            $data['show_presensi_form'] = !$userHasPresensi;
         }
 
         /**
@@ -830,6 +888,26 @@ class Materi extends MY_Controller
             break;
         }
     }
+
+    public function presensi($materi_id)
+    {
+        // Get the selected attendance status from the form
+        $absen = $this->input->post('absen');
+        
+        // Assuming $user_id is the ID of the currently logged-in user
+        $user_id = get_sess_data('user', 'id');
+        // Insert data into the presensi table
+        $data = array(
+            'siswa_id' => $user_id,
+            'materi_id' => $materi_id,
+            'absen' => $absen
+        );
+        $this->db->insert('presensi', $data);
+
+        // Redirect or perform other actions as needed
+        redirect('materi/detail/'.$materi_id);
+    }
+
 
     function komentar($segment_3 = '', $segment_4 = '')
     {

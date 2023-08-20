@@ -35,6 +35,7 @@ Register - {{ parent() }}
                     {% if get_pengaturan('registrasi-siswa', 'value') == 1 %}
                     <div class="tab-pane fade {{ (sebagai == 'siswa') ? 'active' }} in" id="register-siswa">
                         {{ form_open_multipart('login/register/siswa', {'class' : 'form-horizontal row-fluid'})|raw }}
+                        <p>Jika mendaftar sebagai orang tua maka email wajib seperti ini orangtua_(namasiswa)@gmail.com. NIS dikosongkan</p>
                             <div class="control-group">
                                 <label class="control-label">NIS</label>
                                 <div class="controls">
@@ -144,6 +145,14 @@ Register - {{ parent() }}
                                     <br>{{ form_error('password2')|raw }}
                                 </div>
                             </div>
+                            <div class="control-group">
+                                <label class="control-label">Orang Tua ? <span class="text-error">*</span></label>
+                                <div class="controls">
+                                    <input type="checkbox" name="is_orangtua" class="span5" value="1" {{ set_checkbox('is_orangtua', '1', FALSE) }}>
+                                    <br>{{ form_error('is_orangtua')|raw }}
+                                </div>
+                            </div>
+                            
                             <div class="control-group">
                                 <div class="controls">
                                     <button type="submit" class="btn btn-primary">Register</button>

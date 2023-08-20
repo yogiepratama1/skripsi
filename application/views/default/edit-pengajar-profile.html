@@ -12,13 +12,13 @@
 <input type="hidden" name="pengajar_id" value="{{ pengajar_id }}">
 <table class="table table-striped">
     <tbody>
-        <tr>
+        <!-- <tr>
             <th width="30%">NIP</th>
             <td>
                 <input type="text" id="nip" name="nip" style="width:40%;" value="{{ set_value('nip', pengajar.nip) }}">
                 <br>{{ form_error('nip')|raw }}
             </td>
-        <tr>
+        <tr> -->
         <tr>
             <th>Nama <span class="text-error">*</span></th>
             <td>
@@ -34,7 +34,7 @@
                 <br>{{ form_error('jenis_kelamin')|raw }}
             </td>
         <tr>
-        <tr>
+        <!-- <tr>
             <th>Tempat Lahir</th>
             <td>
                 <input type="text" name="tempat_lahir" value="{{ set_value('tempat_lahir', pengajar.tempat_lahir) }}">
@@ -69,9 +69,9 @@
                 <input type="text" name="alamat" style="width:90%;" value="{{ set_value('alamat', pengajar.alamat) }}">
                 <br>{{ form_error('alamat')|raw }}
             </td>
-        <tr>
+        <tr> -->
         {% if is_admin() %}
-        <tr>
+        <!-- <tr>
             <th>Status <span class="text-error">*</span></th>
             <td>
                 {% if pengajar.status_id == 0 %}
@@ -81,14 +81,14 @@
                 <label class="radio inline"><input type="radio" name="status_id" value="2" {{ set_radio('status_id', '2', (pengajar.status_id == '2') ? TRUE : FALSE) }}> Blocking</label>
                 <br>{{ form_error('status_id')|raw }}
             </td>
-        <tr>
-        <tr>
+        <tr> -->
+        <!-- <tr>
             <th>Opsi</th>
             <td>
                 <label class="checkbox text-warning"><input type="checkbox" name="is_admin" value="1" {{ set_checkbox('is_admin', '1', (pengajar.is_admin == 1) ? TRUE : FALSE) }}> Jadikan pengajar admin website</label>
                 <br>{{ form_error('is_admin')|raw }}
             </td>
-        <tr>
+        <tr> -->
         {% endif %}
 
         {% if is_demo_app() == false or pengajar.is_admin == false %}

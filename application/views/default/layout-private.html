@@ -26,9 +26,9 @@
                         <ul class="nav pull-right">
                             {% include 'top-mobile-menu.html' %}
 
-                            {% if is_admin() %}
+                            <!-- {% if is_admin() %}
                             <li><a href="{{ site_url('welcome/get_plugin') }}">PLUGINS</a></li>
-                            {% endif %}
+                            {% endif %} -->
                             <li class="nav-user dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 {{ nama_panggilan(get_sess_data('user', 'nama')) }}
 
@@ -49,7 +49,6 @@
                                     <li>{{ anchor('login/pp', 'Profil & Akun Login')|raw }}</li>
                                     {% endif %}
 
-                                    <li><a href="{{ site_url('login/login_log/' ~ get_sess_data('login', 'id')) }}">Login log</a></li>
                                     <li><a href="{{ site_url('login/logout') }}">Logout</a></li>
                                 </ul>
                             </li>
@@ -85,15 +84,6 @@
                 </div>
             </div>
             <!--/.container-->
-        </div>
-        <!--/.wrapper-->
-        <div class="footer">
-            <div class="container">
-                <center>
-                    <b class="copyright">{{ copyright|raw }} </b> All rights reserved.<br>
-                    {{ version|raw }} | Page loaded in {{ elapsed_time }} seconds.
-                </center>
-            </div>
         </div>
 
         {% include 'layout-footer.html' %}

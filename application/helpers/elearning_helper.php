@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+error_reporting(E_ALL & ~E_NOTICE);
 
 /**
  * Method untuk ngecek instal sudah berhasil atau berlum
@@ -379,6 +380,51 @@ function is_siswa()
     }
 
     return false;
+}
+
+function is_orangtua()
+{
+    if (!is_login()) {
+        return false;
+    }
+
+    // Replace this with your logic to check if the user has the "Orang Tua" role/permission
+    $userIsOrangtua = get_sess_data('user', 'is_orangtua'); // Assuming this retrieves the user's role
+    if ($userIsOrangtua == true) {
+        return true; // User has the "Orang Tua" role
+    }
+
+    return false; // User does not have the "Orang Tua" role
+}
+
+function is_wakasek()
+{
+    if (!is_login()) {
+        return false;
+    }
+
+    // Replace this with your logic to check if the user has the "Orang Tua" role/permission
+    $userIsWakasek = get_sess_data('user', 'is_wakasek'); // Assuming this retrieves the user's role
+    if ($userIsWakasek == true) {
+        return true; // User has the "Orang Tua" role
+    }
+
+    return false; // User does not have the "Orang Tua" role
+}
+
+function is_kepalasekolah()
+{
+    if (!is_login()) {
+        return false;
+    }
+
+    // Replace this with your logic to check if the user has the "Orang Tua" role/permission
+    $userIsKepsek = get_sess_data('user', 'is_kepalasekolah'); // Assuming this retrieves the user's role
+    if ($userIsKepsek == true) {
+        return true; // User has the "Orang Tua" role
+    }
+
+    return false; // User does not have the "Orang Tua" role
 }
 
 /**

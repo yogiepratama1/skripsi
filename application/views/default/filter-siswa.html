@@ -22,8 +22,8 @@ Filter Siswa - {{ parent() }}
                 <div class="btn-group pull-right">
                     {{ anchor('siswa/index/1', 'Aktif', {'class' : 'btn btn-default'})|raw }}
                     {{ anchor('siswa/index/0', 'Pending ' ~ ((count_pending > 0) ? '<span class="label label-warning">' ~ count_pending  ~ '</span>'), {'class' : 'btn btn-default'})|raw }}
-                    {{ anchor('siswa/index/2', 'Blocking', {'class' : 'btn btn-default'})|raw }}
-                    {{ anchor('siswa/index/3', 'Alumni', {'class' : 'btn btn-default'})|raw }}
+                    <!-- {{ anchor('siswa/index/2', 'Blocking', {'class' : 'btn btn-default'})|raw }}
+                    {{ anchor('siswa/index/3', 'Alumni', {'class' : 'btn btn-default'})|raw }} -->
                     {{ anchor('siswa/filter', '<i class="icon-search" style="line-height: 0px;"></i> Filter', {'class' : 'btn btn-info'})|raw }}
                 </div>
             </div>
@@ -126,9 +126,9 @@ Filter Siswa - {{ parent() }}
                                 {% if is_admin() %}
                                 <label class="checkbox inline"><input type="checkbox" name="status_id[]" value="0" {{ set_checkbox('status_id[]', '0', (filter.status_id is defined and 0 in filter.status_id) ? TRUE : FALSE) }}> Pending</label>
                                 <label class="checkbox inline"><input type="checkbox" name="status_id[]" value="1" {{ set_checkbox('status_id[]', '1', (filter.status_id is defined and 1 in filter.status_id) ? TRUE : FALSE) }}> Aktif</label>
-                                <label class="checkbox inline"><input type="checkbox" name="status_id[]" value="2" {{ set_checkbox('status_id[]', '2', (filter.status_id is defined and 2 in filter.status_id) ? TRUE : FALSE) }}> Blocking</label>
+                                <!-- <label class="checkbox inline"><input type="checkbox" name="status_id[]" value="2" {{ set_checkbox('status_id[]', '2', (filter.status_id is defined and 2 in filter.status_id) ? TRUE : FALSE) }}> Blocking</label>
                                 {% endif %}
-                                <label class="checkbox inline"><input type="checkbox" name="status_id[]" value="3" {{ set_checkbox('status_id[]', '3', (filter.status_id is defined and 3 in filter.status_id) ? TRUE : FALSE) }}> Alumni</label>
+                                <label class="checkbox inline"><input type="checkbox" name="status_id[]" value="3" {{ set_checkbox('status_id[]', '3', (filter.status_id is defined and 3 in filter.status_id) ? TRUE : FALSE) }}> Alumni</label> -->
                             </p>
                         </td>
                     <tr>
@@ -218,8 +218,8 @@ Filter Siswa - {{ parent() }}
                             <select name="status_id" style="width:auto;">
                                 <option value="">--Update Status--</option>
                                 <option value="1">Aktif</option>
-                                <option value="2">Blocking</option>
-                                <option value="3">Alumni</option>
+                                <!-- <option value="2">Blocking</option>
+                                <option value="3">Alumni</option> -->
                             </select>
                         </td>
                         <td valign="top">

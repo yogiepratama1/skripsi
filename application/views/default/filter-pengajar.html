@@ -22,8 +22,8 @@ Filter Pengajar - {{ parent() }}
                 <div class="btn-group pull-right">
                     {{ anchor('pengajar/index/1', 'Aktif', {'class' : 'btn btn-default'})|raw }}
                     {{ anchor('pengajar/index/0', 'Pending '  ~ ((count_pending > 0) ? '<span class="label label-warning">' ~ count_pending  ~ '</span>'), {'class' : 'btn btn-default'})|raw }}
-                    {{ anchor('pengajar/index/2', 'Blocking', {'class' : 'btn btn-default'})|raw }}
-                    {{ anchor('pengajar/filter', '<i class="icon-search" style="line-height: 0px;"></i> Filter', {'class' : 'btn btn-info'})|raw }}
+                    <!-- {{ anchor('pengajar/index/2', 'Blocking', {'class' : 'btn btn-default'})|raw }}
+                    {{ anchor('pengajar/filter', '<i class="icon-search" style="line-height: 0px;"></i> Filter', {'class' : 'btn btn-info'})|raw }} -->
                 </div>
             </div>
         </div>

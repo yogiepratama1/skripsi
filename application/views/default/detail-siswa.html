@@ -35,7 +35,7 @@
                     {{ anchor('siswa/edit_profile/' ~ status_id ~ '/' ~ siswa.id, 'Edit Profil', {'class' : 'siswa-iframe-4 btn btn-small btn-primary', 'title' : 'Edit Profil Siswa'})|raw }}
                     {{ anchor('siswa/edit_picture/' ~ status_id ~ '/' ~ siswa.id, 'Edit Foto', {'class' : 'siswa-iframe-5 btn btn-small btn-primary', 'title' : 'Edit Foto Siswa'})|raw }}
                     {% if is_admin() %}
-                    {{ anchor('login/login_log/' ~ siswa_login.id, 'Login log', {'class' : 'btn btn-small btn-default', 'title' : 'Login log'})|raw }}
+                    <!-- {{ anchor('login/login_log/' ~ siswa_login.id, 'Login log', {'class' : 'btn btn-small btn-default', 'title' : 'Login log'})|raw }} -->
                     {% endif %}
                 </div>
                 {% endif %}
@@ -84,10 +84,6 @@
                                 Pending
                             {% elseif siswa.status_id == 1 %}
                                 Aktif
-                            {% elseif siswa.status_id == 2 %}
-                                Blocking
-                            {% elseif siswa.status_id == 3 %}
-                                Alumni
                             {% endif %}
                         </td>
                     </tr>

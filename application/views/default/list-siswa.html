@@ -21,9 +21,9 @@ Data Siswa - {{ parent() }}
                 <div class="btn-group pull-right">
                     {{ anchor('siswa/index/1', 'Aktif', {'class' : (status_id == 1) ? 'btn btn-info' : 'btn btn-default'})|raw }}
                     {{ anchor('siswa/index/0', 'Pending ' ~ ((count_pending > 0) ? '<span class="label label-warning">' ~ count_pending  ~ '</span>'), {'class' : (status_id == 0) ? 'btn btn-info' : 'btn btn-default'})|raw }}
-                    {{ anchor('siswa/index/2', 'Blocking', {'class' : (status_id == 2) ? 'btn btn-info' : 'btn btn-default'})|raw }}
+                    <!-- {{ anchor('siswa/index/2', 'Blocking', {'class' : (status_id == 2) ? 'btn btn-info' : 'btn btn-default'})|raw }}
                     {{ anchor('siswa/index/3', 'Alumni', {'class' : (status_id == 3) ? 'btn btn-info' : 'btn btn-default'})|raw }}
-                    {{ anchor('siswa/filter', '<i class="icon-search" style="line-height: 0px;"></i> Filter', {'class' : 'btn btn-default'})|raw }}
+                    {{ anchor('siswa/filter', '<i class="icon-search" style="line-height: 0px;"></i> Filter', {'class' : 'btn btn-default'})|raw }} -->
                 </div>
             </div>
         </div>
@@ -91,9 +91,9 @@ Data Siswa - {{ parent() }}
                                 <option>--Pilih Status--</option>
                                 <option value="1">Aktif</option>
                                 {% if status_id == 0 %}
-                                <option value="2">Blocking</option>
+                                <!-- <option value="2">Blocking</option>
                                 {% elseif status_id == 2 %}
-                                <option value="3">Alumni</option>
+                                <option value="3">Alumni</option> -->
                                 {% endif %}
                             </select>
                         </td>

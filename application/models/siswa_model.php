@@ -368,7 +368,8 @@ class Siswa_model extends CI_Model
         $alamat = '',
         $tahun_masuk,
         $foto = null,
-        $status_id = 0
+        $status_id = 0,
+        $is_orangtua = 0
     ) {
         $tahun_masuk = (int)$tahun_masuk;
         $status_id   = (int)$status_id;
@@ -383,7 +384,8 @@ class Siswa_model extends CI_Model
             'alamat'        => $alamat,
             'tahun_masuk'   => $tahun_masuk,
             'foto'          => $foto,
-            'status_id'     => $status_id
+            'status_id'     => $status_id,
+            'is_orangtua'   => $is_orangtua
         );
         $this->db->insert('siswa', $data);
         return $this->db->insert_id();

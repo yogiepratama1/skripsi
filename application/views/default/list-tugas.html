@@ -15,8 +15,6 @@ Tugas - {{ parent() }}
         <div class="bs-callout bs-callout-info">
             {% if (is_siswa() == false) %}
             <div class="btn-group pull-right" style="margin-top:-5px;">
-                {{ anchor('tugas/add/3', 'Tambah Tugas Ganda', {'class' : 'btn btn-primary'})|raw }}
-                {{ anchor('tugas/add/2', 'Tambah Tugas Essay', {'class' : 'btn btn-primary'})|raw }}
                 {{ anchor('tugas/add/1', 'Tambah Tugas Upload', {'class' : 'btn btn-primary'})|raw }}
             </div>
             {% endif %}
