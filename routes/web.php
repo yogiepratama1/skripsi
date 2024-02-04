@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\Admin\AssetController;
 use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\PembayaranController;
@@ -29,6 +31,8 @@ Route::get('/', function() {
     });
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
+Route::get('register', [LoginController::class, 'showRegisterForm'])->name('register');
+Route::post('register', [LoginController::class, 'register'])->name('register');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 
@@ -65,7 +69,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'namespace' => 'Adm
     Route::delete('assets/destroy', [AssetController::class, 'massDestroy'])->name('assets.massDestroy');
 
     // Assets History
-    Route::get('assets-histories', [AssetsHistoryController::class, 'index'])->name('assets-histories.index');
+    // Route::get('assets-histories', [AssetsHistoryController::class, 'index'])->name('assets-histories.index');
 
     // Permintaan
     Route::get('permintaans', [PermintaanController::class, 'index'])->name('permintaans.index');
@@ -77,19 +81,30 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'namespace' => 'Adm
     Route::delete('permintaans/{permintaan}', [PermintaanController::class, 'destroy'])->name('permintaans.destroy');
     Route::delete('permintaans/destroy', [PermintaanController::class, 'massDestroy'])->name('permintaans.massDestroy');
 
-    // Pembayaran
-    Route::get('pembayarans', [PembayaranController::class, 'index'])->name('pembayarans.index');
-    Route::get('pembayarans/create', [PembayaranController::class, 'create'])->name('pembayarans.create');
-    Route::post('pembayarans', [PembayaranController::class, 'store'])->name('pembayarans.store');
-    Route::get('pembayarans/{pembayaran}', [PembayaranController::class, 'show'])->name('pembayarans.show');
-    Route::get('pembayarans/{pembayaran}/edit', [PembayaranController::class, 'edit'])->name('pembayarans.edit');
-    Route::put('pembayarans/{pembayaran}', [PembayaranController::class, 'update'])->name('pembayarans.update');
-    Route::delete('pembayarans/{pembayaran}', [PembayaranController::class, 'destroy'])->name('pembayarans.destroy');
-    Route::delete('pembayarans/destroy', [PembayaranController::class, 'massDestroy'])->name('pembayarans.massDestroy');
+    // Test
+    Route::get('tests', [TestController::class, 'index'])->name('tests.index');
+    Route::get('tests/create', [TestController::class, 'create'])->name('tests.create');
+    Route::post('tests', [TestController::class, 'store'])->name('tests.store');
+    Route::get('tests/{test}', [TestController::class, 'show'])->name('tests.show');
+    Route::get('tests/{test}/edit', [TestController::class, 'edit'])->name('tests.edit');
+    Route::put('tests/{test}', [TestController::class, 'update'])->name('tests.update');
+    Route::delete('tests/{test}', [TestController::class, 'destroy'])->name('tests.destroy');
+    Route::delete('tests/destroy', [TestController::class, 'massDestroy'])->name('tests.massDestroy');
+
+    // Interview
+    Route::get('interviews', [InterviewController::class, 'index'])->name('interviews.index');
+    Route::get('interviews/create', [InterviewController::class, 'create'])->name('interviews.create');
+    Route::post('interviews', [InterviewController::class, 'store'])->name('interviews.store');
+    Route::get('interviews/{interview}', [InterviewController::class, 'show'])->name('interviews.show');
+    Route::get('interviews/{interview}/edit', [InterviewController::class, 'edit'])->name('interviews.edit');
+    Route::put('interviews/{interview}', [InterviewController::class, 'update'])->name('interviews.update');
+    Route::delete('interviews/{interview}', [InterviewController::class, 'destroy'])->name('interviews.destroy');
+    Route::delete('interviews/destroy', [InterviewController::class, 'massDestroy'])->name('interviews.massDestroy');
 
     // Laporan
     Route::get('laporans', [LaporanController::class, 'index'])->name('laporans.index');
     Route::get('laporans/create', [LaporanController::class, 'create'])->name('laporans.create');
+    Route::get('laporans/create-average', [LaporanController::class, 'createAverageAksesoris'])->name('laporans.create-average');
     Route::post('laporans', [LaporanController::class, 'store'])->name('laporans.store');
     Route::get('laporans/{laporan}', [LaporanController::class, 'show'])->name('laporans.show');
     Route::get('laporans/{laporan}/edit', [LaporanController::class, 'edit'])->name('laporans.edit');

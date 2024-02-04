@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>                Sistem Informasi Tracking dan Tracing
+    <title>                SISTEM INFORMASI PENGIRIMAN DAN PEMASANGAN AKSESORIS KENDARAAN
 </title>
     <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" /> -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
@@ -19,7 +19,7 @@
     <link href="{{ asset('css/icheck-bootstrap.min.css') }}" rel="stylesheet" />
     <!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" /> -->
     @yield('styles')
-    <link rel="icon" href="{{ asset('logo.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('logo-perusahaan.png') }}" type="image/x-icon">
 
 </head>
 

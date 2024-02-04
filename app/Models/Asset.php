@@ -20,15 +20,7 @@ class Asset extends Model
         'deleted_at',
     ];
 
-    protected $fillable = [
-        'category_id',
-        'name',
-        'harga',
-        'deskripsi',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
+    protected $guarded = ['id'];
 
     protected function serializeDate(DateTimeInterface $date)
     {

@@ -1,72 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Laporan List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>PDF Export</title>
     <style>
         body {
             font-family: Arial, sans-serif;
         }
-
-        h1 {
-            text-align: center;
-        }
-
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
-            font-size: 12px;
         }
-
         th, td {
-            border: 1px solid #000;
+            border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
         }
-
-        th {
-            background-color: #f2f2f2;
+        th.no-export {
+            display: none;
         }
-
-        /* Striped Rows */
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
-
+        th {
+            background-color: #3490dc;
+            color: white;
+            text-align: center;
+        }
+        
         tr:nth-child(odd) {
-            background-color: #ffffff;
+            background-color: #f2f2f2; /* Odd row stripe color */
+        }
+
+        tr:nth-child(even) {
+            background-color: #ffffff; /* Even row stripe color */
         }
     </style>
 </head>
 <body>
-    <h1>Laporan List</h1>
+    <h2 style="text-align: center;">List Permintaan Pemasangan Aksesoris</h2>
     <table>
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Permintaan</th>
-                <th>Nama Pelanggan</th>
-                <th>Alamat Pelanggan</th>
-                <th>Harga</th>
-                <th>Sudah Dikirim</th>
-                <th>Sudah Bayar</th>
-                <th>Tanggal Bayar</th>
+            <th width="10">No</th>
+                            <th>Nama</th>
+                            <th>Jenis Kelamin</th>
+                            <th>Alamat</th>
+                            <th>Status</th>
+                            <th>Setuju Kontrak</th>
+                            <th>Tanggal Melamar</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($laporans as $key => $laporan)
-                <tr data-entry-id="{{ $laporan->id }}">
-                    <td>{{ $laporan->id ?? '' }}</td>
-                    <td>{{ $laporan->permintaan->barang->name ?? '' }}</td>
-                    <td>{{ $laporan->permintaan->nama_pelanggan ?? '' }}</td>
-                    <td>{{ $laporan->permintaan->alamat_pelanggan ?? '' }}</td>
-                    <td>Rp. {{ number_format($laporan->permintaan->barang->harga ?? 0, 0, ',', '.') }}</td>
-                    <td>{{ $laporan->permintaan->sudah_dikirim ? 'Ya' : 'Belum' }}</td>
-                    <td>{{ $laporan->permintaan->pembayaran?->sudah_bayar ? 'Ya' : 'Belum' }}</td>
-                    <td>{{ $laporan->permintaan->pembayaran?->tanggal_bayar ?? '' }}</td>
-                </tr>
-            @endforeach
+        @foreach($laporans as $key => $permintaan)
+                            <tr data-entry-id="{{ $permintaan->id }}">
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $permintaan->nama ?? '' }}</td>
+                                <td>{{ $permintaan->jenis_kelamin ?? '' }}</td>
+                                <td>{{ $permintaan->alamat ?? '' }}</td>
+                                <td class="text-center">
+                                    @if ($permintaan->status == 'terkirim')
+                                        <span class="badge badge-info">Terkirim</span>
+                                    @elseif ($permintaan->status == 'test')
+                                        <span class="badge badge-warning">Test</span>
+                                    @elseif ($permintaan->status == 'interview')
+                                        <span class="badge badge-warning">Interview</span>
+                                    @elseif ($permintaan->status == 'ttd')
+                                        <span class="badge badge-warning">Tanda Tangan Kontrak</span>
+                                    @else
+                                    @endif
+                                </td>
+                                <td>{{ $permintaan->setuju_kontrak == '1' ? 'Ya' : 'Tidak' }}</td>
+                                <td>{{ $permintaan->created_at ? \Carbon\Carbon::parse($permintaan->created_at)->format('Y-m-d') : '' }}</td>
+                            </tr>
+                        @endforeach
         </tbody>
     </table>
 </body>

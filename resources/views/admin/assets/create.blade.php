@@ -10,17 +10,6 @@
         <form method="POST" action="{{ route("dashboard.assets.store") }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label class="required" for="category_id">Merek</label>
-                <select class="form-control select2 {{ $errors->has('category') ? 'is-invalid' : '' }}" name="category_id" id="category_id" required>
-                    @foreach($categories as $id => $entry)
-                        <option value="{{ $id }}" {{ old('category_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('category'))
-                    <span class="text-danger">{{ $errors->first('category') }}</span>
-                @endif
-            </div>
-            <div class="form-group">
                 <label class="required" for="status_id">Jenis</label>
                 <select class="form-control select2 {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status_id" id="status_id" required>
                     @foreach($statuses as $id => $entry)
@@ -36,6 +25,13 @@
                 <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', '') }}" required>
                 @if($errors->has('name'))
                     <span class="text-danger">{{ $errors->first('name') }}</span>
+                @endif
+            </div>
+            <div class="form-group">
+                <label class="required" for="name">Merek</label>
+                <input class="form-control {{ $errors->has('merek') ? 'is-invalid' : '' }}" type="text" name="merek" id="merek" value="{{ old('merek', '') }}" required>
+                @if($errors->has('merek'))
+                    <span class="text-danger">{{ $errors->first('merek') }}</span>
                 @endif
             </div>
             <div class="form-group">

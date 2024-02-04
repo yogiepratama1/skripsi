@@ -2,16 +2,25 @@
 
 @section('content')
     <div style="margin-bottom: 10px;" class="row">
-        <div class="col-lg-12">
+    @if (auth()->user()->role == 'user' && count($permintaans) < 1)
+        
+        <div class="col-lg-12" style="margin-bottom: 10px;">
             <a class="btn btn-success" href="{{ route('dashboard.permintaans.create') }}">
-                Add Permintaan
+                Add Permintaan Lamaran
             </a>
         </div>
+    @endif
+
+        <!-- <div class="col-lg-12">
+            <a class="btn btn-warning" href="{{ route('dashboard.asset-categories.index') }}">
+                List Aksesoris
+            </a>
+        </div> -->
     </div>
 
     <div class="card">
         <div class="card-header">
-            List Permintaan 
+            List Permintaan Lamaran
         </div>
 
         <div class="card-body">
@@ -20,37 +29,58 @@
                     <thead>
                         <tr>
                             <th class="no-export" width="10">No</th>
-                            <th>ID</th>
-                            <th>User</th>
-                            <th>Barang</th>
-                            <th>Merek</th>
-                            <th>Jenis</th>
-                            <th>Nama Pelanggan</th>
-                            <th>Alamat Pelanggan</th>
+                            <th>Nama</th>
+                            <th>Jenis Kelamin</th>
+                            <th>Alamat</th>
+                            <th>Link CV</th>
+                            <th>Link Berkas-berkas</th>
+                            <th>Status</th>
+                            <th>Setuju Kontrak</th>
+                            <th>Tanggal Melamar</th>
                             <th class="no-export">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($permintaans as $key => $permintaan)
                             <tr data-entry-id="{{ $permintaan->id }}">
-                                <td></td>
-                                <td class="text-center">{{ $permintaan->id ?? '' }}</td>
-                                <td>{{ $permintaan->user->name ?? '' }}</td>
-                                <td>{{ $permintaan->barang->name ?? '' }}</td>
-                                <td>{{ $permintaan->barang->category->name ?? '' }}</td>
-                                <td>{{ $permintaan->barang->status->name ?? '' }}</td>
-                                <td>{{ $permintaan->nama_pelanggan ?? '' }}</td>
-                                <td>{{ $permintaan->alamat_pelanggan ?? '' }}</td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $permintaan->nama ?? '' }}</td>
+                                <td>{{ $permintaan->jenis_kelamin ?? '' }}</td>
+                                <td>{{ $permintaan->alamat ?? '' }}</td>
                                 <td>
-
+                                    <a href="https://{{ $permintaan->cv ?? '' }}">
+                                    {{ $permintaan->cv ?? '' }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="https://{{ $permintaan->berkas ?? '' }}">
+                                    {{ $permintaan->berkas ?? '' }}
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    @if ($permintaan->status == 'terkirim')
+                                        <span class="badge badge-info">Terkirim</span>
+                                    @elseif ($permintaan->status == 'test')
+                                        <span class="badge badge-warning">Test</span>
+                                    @elseif ($permintaan->status == 'interview')
+                                        <span class="badge badge-warning">Interview</span>
+                                    @elseif ($permintaan->status == 'ttd')
+                                        <span class="badge badge-warning">Tanda Tangan Kontrak</span>
+                                    @else
+                                    @endif
+                                </td>
+                                <td>{{ $permintaan->setuju_kontrak == '1' ? 'Ya' : 'Tidak' }}</td>
+                                <td>{{ $permintaan->created_at ? \Carbon\Carbon::parse($permintaan->created_at)->format('Y-m-d') : '' }}</td>
+                                <td>
                                     <a class="btn btn-xs btn-info" href="{{ route('dashboard.permintaans.edit', $permintaan->id) }}">
                                         Edit
                                     </a>
-
+                                    @if (auth()->user()->role != 'user')
                                     <form action="{{ route('dashboard.permintaans.destroy', $permintaan->id) }}" method="POST" onsubmit="return confirm('Are you sure?');" style="display: inline-block;">
                                         @method('DELETE')
                                         @csrf
                                         <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                                    @endif
                                     </form>
                                 </td>
                             </tr>

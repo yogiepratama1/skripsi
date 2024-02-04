@@ -18,6 +18,13 @@
                 @endif
             </div>
             <div class="form-group">
+                <label class="required" for="harga">harga</label>
+                <input class="form-control {{ $errors->has('harga') ? 'is-invalid' : '' }}" type="number" name="harga" id="harga" value="{{ old('harga', $assetCategory->harga) }}" required>
+                @if($errors->has('harga'))
+                    <span class="text-danger">{{ $errors->first('harga') }}</span>
+                @endif
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     Save
                 </button>

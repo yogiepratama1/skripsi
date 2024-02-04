@@ -4,10 +4,10 @@
     <div class="login-logo">
         <div class="login-logo">
             <!-- add logo -->
-            <img src="{{ asset('logo.png') }}" alt="Logo" class="img-fluid" width="250">
+            <img src="{{ asset('logo-perusahaan.jpg') }}" alt="Logo" class="img-fluid" width="250">
             <br>
             <a href="{{ url('') }}">
-                Sistem Informasi Tracking dan Tracing
+            {{ env('JUDUL') }}
             </a>
         </div>
     </div>
@@ -55,11 +55,12 @@
                         </div>
                     </div>
                     <!-- /.col -->
-                    <div class="col-4">
+                    <div class="col-4 mb-3">
                         <button type="submit" class="btn btn-primary btn-block btn-flat">
                             Login
                         </button>
                     </div>
+                    <a class="btn btn-info btn-block btn-flat" href="{{ route('register') }}" style="color: white;">Register</a>
                     <!-- /.col -->
                 </div>
             </form>

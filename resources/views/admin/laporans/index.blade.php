@@ -7,43 +7,53 @@
             </a>
         </div>
     </div>
+
 <div class="card">
     <div class="card-header">
         Laporan List
     </div>
 
     <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped table-hover datatable datatable-Laporan">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Permintaan</th>
-                        <th>Nama Pelanggan</th>
-                        <th>Alamat Pelanggan</th>
-                        <th>Harga</th>
-                        <th>Sudah Dikirim</th>
-                        <th>Sudah Bayar</th>
-                        <th>Tanggal Bayar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($laporans as $key => $laporan)
-                        <tr data-entry-id="{{ $laporan->id }}">
-                            <td>{{ $laporan->id ?? '' }}</td>
-                            <td>{{ $laporan->permintaan->barang->name ?? '' }}</td>
-                            <td>{{ $laporan->permintaan->nama_pelanggan ?? '' }}</td>
-                            <td>{{ $laporan->permintaan->alamat_pelanggan ?? '' }}</td>
-                            <td>Rp. {{ number_format($laporan->permintaan->barang->harga ?? 0, 0, ',', '.') }}</td>
-                            <td>{{ $laporan->permintaan->sudah_dikirim ? 'Ya' : 'Belum' }}</td>
-                            <td>{{ $laporan->permintaan->pembayaran?->sudah_bayar ? 'Ya' : 'Belum' }}</td>
-                            <td>{{ $laporan->permintaan->pembayaran?->tanggal_bayar ?? '' }}</td>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover datatable datatable-Permintaan">
+                    <thead>
+                        <tr>
+                            <th class="no-export" width="10">No</th>
+                            <th>Nama</th>
+                            <th>Jenis Kelamin</th>
+                            <th>Alamat</th>
+                            <th>Status</th>
+                            <th>Setuju Kontrak</th>
+                            <th>Tanggal Melamar</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
+                    </thead>
+                    <tbody>
+                        @foreach($laporans as $key => $permintaan)
+                            <tr data-entry-id="{{ $permintaan->id }}">
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $permintaan->nama ?? '' }}</td>
+                                <td>{{ $permintaan->jenis_kelamin ?? '' }}</td>
+                                <td>{{ $permintaan->alamat ?? '' }}</td>
+                                <td class="text-center">
+                                    @if ($permintaan->status == 'terkirim')
+                                        <span class="badge badge-info">Terkirim</span>
+                                    @elseif ($permintaan->status == 'test')
+                                        <span class="badge badge-warning">Test</span>
+                                    @elseif ($permintaan->status == 'interview')
+                                        <span class="badge badge-warning">Interview</span>
+                                    @elseif ($permintaan->status == 'ttd')
+                                        <span class="badge badge-warning">Tanda Tangan Kontrak</span>
+                                    @else
+                                    @endif
+                                </td>
+                                <td>{{ $permintaan->setuju_kontrak == '1' ? 'Ya' : 'Tidak' }}</td>
+                                <td>{{ $permintaan->created_at ? \Carbon\Carbon::parse($permintaan->created_at)->format('Y-m-d') : '' }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>  
 </div>
 
 @endsection

@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
-use DateTimeInterface;
 use Hash;
+use Carbon\Carbon;
+use App\Models\Test;
+use DateTimeInterface;
+use App\Models\Interview;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -78,5 +80,15 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function test()
+    {
+        return $this->hasOne(Test::class);
+    }
+
+    public function interview()
+    {
+        return $this->hasOne(Interview::class);
     }
 }

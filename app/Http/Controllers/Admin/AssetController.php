@@ -29,7 +29,7 @@ class AssetController extends Controller
         return view('admin.assets.create', compact('categories', 'statuses'));
     }
 
-    public function store(StoreAssetRequest $request)
+    public function store(Request $request)
     {
         $asset = Asset::create($request->all());
 
@@ -46,7 +46,7 @@ class AssetController extends Controller
         return view('admin.assets.edit', compact('asset', 'categories', 'statuses'));
     }
 
-    public function update(UpdateAssetRequest $request, Asset $asset)
+    public function update(Request $request, Asset $asset)
     {
         $asset->update($request->all());
 

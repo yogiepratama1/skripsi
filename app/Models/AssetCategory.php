@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use DateTimeInterface;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Permintaan;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class AssetCategory extends Model
 {
@@ -21,6 +22,7 @@ class AssetCategory extends Model
 
     protected $fillable = [
         'name',
+        'harga',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -29,5 +31,10 @@ class AssetCategory extends Model
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
+    }
+
+    public function permintaan()
+    {
+        return $this->hasMany(Permintaan::class);
     }
 }
