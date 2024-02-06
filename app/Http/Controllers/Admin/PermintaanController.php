@@ -2,19 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Gate;
-use Carbon\Carbon;
 use App\Models\User;
-use App\Models\Asset;
-use App\Models\Laporan;
 use App\Models\Permintaan;
 use Illuminate\Http\Request;
-use App\Models\AssetCategory;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StorePermintaanRequest;
-use App\Http\Requests\UpdatePermintaanRequest;
-use Symfony\Component\HttpFoundation\Response;
-use App\Http\Requests\MassDestroyPermintaanRequest;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class PermintaanController extends Controller
@@ -31,8 +23,8 @@ class PermintaanController extends Controller
 
     public function create()
     {
-        $pelamars = User::where('role', 'user')->get();
-        return view('admin.permintaans.create', compact('pelamars'));
+        $pelanggans = User::where('role', 'user')->get();
+        return view('admin.permintaans.create', compact('pelanggans'));
     }
 
     public function store(Request $request)
@@ -55,26 +47,30 @@ class PermintaanController extends Controller
         // $barangs = Asset::pluck('name', 'id')->prepend('Please Select', '');
         // $aksesoris = AssetCategory::pluck('name', 'id')->prepend('Please Select', '');
 
-        $permintaan;
-        $pelamars = User::where('role', 'user')->get();
+        $pelanggans = User::where('role', 'user')->get();
 
-        return view('admin.permintaans.edit', compact('permintaan', 'pelamars'));
+        return view('admin.permintaans.edit', compact('permintaan', 'pelanggans'));
     }
 
     public function update(Request $request, Permintaan $permintaan)
     {
+        if ($request->status != 'reservasi') {
+            $request->merge([
+                'tanggal_diproses' => Carbon::now()
+            ]);
+        }
 
         $permintaan->update($request->all());
 
         return redirect()->route('dashboard.permintaans.index');
     }
 
-    public function show(Permintaan $permintaan)
-    {
-        $permintaan->load('user', 'barang');
-        $pelamars = User::where('role', 'user')->get();
-        return view('admin.permintaans.show', compact('permintaan', 'pelamars'));
-    }
+    // public function show(Permintaan $permintaan)
+    // {
+    //     $permintaan->load('user', 'barang');
+    //     $pelamars = User::where('role', 'user')->get();
+    //     return view('admin.permintaans.show', compact('permintaan', 'pelamars'));
+    // }
 
     public function destroy(Permintaan $permintaan)
     {
@@ -82,16 +78,4 @@ class PermintaanController extends Controller
 
         return back();
     }
-
-    public function massDestroy(MassDestroyPermintaanRequest $request)
-    {
-        $permintaans = Permintaan::find(request('ids'));
-
-        foreach ($permintaans as $permintaan) {
-            $permintaan->delete();
-        }
-
-        return response(null, Response::HTTP_NO_CONTENT);
-    }
 }
-

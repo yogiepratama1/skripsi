@@ -1,46 +1,52 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html class="no-js" lang="en">
 
 <head>
-
-    <!--====== Required meta tags ======-->
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
 
     <!--====== Title ======-->
     <title>{{ env('JUDUL') }}</title>
 
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <!--====== Favicon Icon ======-->
-    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/png">
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/png" />
 
-    <!--====== Bootstrap css ======-->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!--====== Slick CSS ======-->
+    <link rel="stylesheet" href="assets/css/slick.css" />
 
-    <!--====== Line Icons css ======-->
-    <link rel="stylesheet" href="assets/css/LineIcons.css">
+    <!--====== Font Awesome CSS ======-->
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
 
-    <!--====== Magnific Popup css ======-->
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+    <!--====== Line Icons CSS ======-->
+    <link rel="stylesheet" href="assets/css/LineIcons.css" />
 
-    <!--====== Slick css ======-->
-    <link rel="stylesheet" href="assets/css/slick.css">
+    <!--====== Animate CSS ======-->
+    <link rel="stylesheet" href="assets/css/animate.css" />
 
-    <!--====== Animate css ======-->
-    <link rel="stylesheet" href="assets/css/animate.css">
+    <!--====== Magnific Popup CSS ======-->
+    <link rel="stylesheet" href="assets/css/magnific-popup.css" />
 
-    <!--====== Default css ======-->
-    <link rel="stylesheet" href="assets/css/default.css">
+    <!--====== Bootstrap CSS ======-->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 
-    <!--====== Style css ======-->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <!--====== Default CSS ======-->
+    <link rel="stylesheet" href="assets/css/default.css" />
 
-
+    <!--====== Style CSS ======-->
+    <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
 <body>
-    
+    <!--[if IE]>
+      <p class="browserupgrade">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
+        your experience and security.
+      </p>
+    <![endif]-->
+
     <!--====== PRELOADER PART START ======-->
 
     <div class="preloader">
@@ -62,187 +68,131 @@
 
     <!--====== PRELOADER PART ENDS ======-->
 
-    <!--====== NAVBAR PART START ======-->
+    <!--====== HEADER PART START ======-->
 
-    <section class="header-area">
-        <div class="navbar-area">
+    <header class="header-area">
+        <div class="navbar-area headroom">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <nav class="navbar navbar-expand-lg">
-                            <a class="navbar-brand" href="#">
-                                <img src="logo-perusahaan.jpg" alt="Logo">
+                            <a class="navbar-brand" href="index.html">
+                                <img src="{{ asset('logo-perusahaan-dandi.jpg') }}" alt="Logo" width="80px" />
                             </a>
-
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarEight" aria-controls="navbarEight" aria-expanded="false" aria-label="Toggle navigation">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="toggler-icon"></span>
                                 <span class="toggler-icon"></span>
                                 <span class="toggler-icon"></span>
                             </button>
 
-                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarEight">
-                                <ul class="navbar-nav ml-auto">
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav m-auto">
                                     <li class="nav-item active">
-                                        <a class="page-scroll" href="#home">HOME</a>
+                                        <a href="{{ route('login') }}">Home</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="page-scroll" href="{{ route('login') }}">Login</a>
+                                    <li class="nav-item active">
+                                        <a href="{{ route('login') }}">Login</a>
                                     </li>
                                 </ul>
                             </div>
+                            <!-- navbar collapse -->
 
-                            <div class="navbar-btn d-none mt-15 d-lg-inline-block">
-                                <a class="menu-bar" href="#side-menu-right"><i class="lni-menu"></i></a>
+                            <div class="navbar-btn d-none d-sm-inline-block">
+                                <a class="main-btn" data-scroll-nav="0" href="{{ route('login') }}">Login</a>
                             </div>
-                        </nav> <!-- navbar -->
+                        </nav>
+                        <!-- navbar -->
                     </div>
-                </div> <!-- row -->
-            </div> <!-- container -->
-        </div> <!-- navbar area -->
-        
-        <div id="home" class="slider-area">
-            <div class="bd-example">
-                <div id="carouselOne" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carouselOne" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselOne" data-slide-to="1"></li>
-                        <li data-target="#carouselOne" data-slide-to="2"></li>
-                    </ol>
-
-                    <div class="carousel-inner">
-                        <div class="carousel-item bg_cover active" style="background-image: url(assets/images/slider-1.jpg)">
-                            <div class="carousel-caption">
-                                <div class="container">
-                                    <div class="row justify-content-center">
-                                        <div class="col-xl-6 col-lg-7 col-sm-10">
-                                        <h2 class="carousel-title">{{ env('JUDUL') }}</h2>
-                                            <ul class="carousel-btn rounded-buttons">
-                                                <li><a class="main-btn rounded-three" href="{{ route('login') }}">Mulai</a></li>
-                                            </ul>
-                                        </div>
-                                    </div> <!-- row -->
-                                </div> <!-- container -->
-                            </div> <!-- carousel caption -->
-                        </div> <!-- carousel-item -->
-
-                        <div class="carousel-item bg_cover" style="background-image: url(assets/images/slider-2.jpg)">
-                            <div class="carousel-caption">
-                                <div class="container">
-                                    <div class="row justify-content-center">
-                                        <div class="col-xl-6 col-lg-7 col-sm-10">
-                                            <h2 class="carousel-title">{{ env('JUDUL') }}</h2>
-                                            <ul class="carousel-btn rounded-buttons">
-                                                <li><a class="main-btn rounded-three" href="{{ route('login') }}">Mulai</a></li>
-                                            </ul>
-                                        </div>
-                                    </div> <!-- row -->
-                                </div> <!-- container -->
-                            </div> <!-- carousel caption -->
-                        </div> <!-- carousel-item -->
-
-                        <div class="carousel-item bg_cover" style="background-image: url(assets/images/slider-3.jpg)">
-                            <div class="carousel-caption">
-                                <div class="container">
-                                    <div class="row justify-content-center">
-                                        <div class="col-xl-6 col-lg-7 col-sm-10">
-                                        <h2 class="carousel-title">{{ env('JUDUL') }}</h2>
-                                            <ul class="carousel-btn rounded-buttons">
-                                                <li><a class="main-btn rounded-three" href="{{ route('login') }}">Mulai</a></li>
-                                            </ul>
-                                        </div>
-                                    </div> <!-- row -->
-                                </div> <!-- container -->
-                            </div> <!-- carousel caption -->
-                        </div> <!-- carousel-item -->
-                    </div> <!-- carousel-inner -->
-
-                    <a class="carousel-control-prev" href="#carouselOne" role="button" data-slide="prev">
-                        <i class="lni-arrow-left-circle"></i>
-                    </a>
-
-                    <a class="carousel-control-next" href="#carouselOne" role="button" data-slide="next">
-                        <i class="lni-arrow-right-circle"></i>
-                    </a>
-                </div> <!-- carousel -->
-            </div> <!-- bd-example -->
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
         </div>
+        <!-- navbar area -->
 
-    </section>
-
-    <!--====== NAVBAR PART ENDS ======-->
-
-    <!--====== SAIDEBAR PART START ======-->
-
-    <div class="sidebar-right">
-        <div class="sidebar-close">
-            <a class="close" href="#close"><i class="lni-close"></i></a>
+        <div id="home" class="header-hero bg_cover d-lg-flex align-items-center" style="background-image: url(assets/images/header-hero.jpg)">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="header-hero-content">
+                            <h1 class="hero-title wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s">
+                                <b>{{ env('JUDUL') }}<b>
+                            </h1>
+                            <br>
+                            <button class="main-btn">
+                                <a href="{{ route('login') }}">
+                                    Mulai
+                                </a>
+                            </button>
+                        </div>
+                        <!-- header hero content -->
+                    </div>
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
+            <div class="header-hero-image d-flex align-items-center wow fadeInRightBig" data-wow-duration="1s" data-wow-delay="1.1s">
+                <div class="image">
+                    <img src="{{ asset('logo-perusahaan-dandi.jpg') }}" alt="Hero Image">
+                </div>
+            </div>
+            <!-- header hero image -->
         </div>
-        <div class="sidebar-content">
-            <div class="sidebar-logo text-center">
-                <a href="#"><img src="logo-perusahaan.jpg" alt="Logo"></a>
-            </div> <!-- logo -->
-            <div class="sidebar-menu">
-                <ul>
-                    <li><a href="{{ route('login') }}">Login</a></li>
-                </ul>
-            </div> <!-- menu -->
-        </div> <!-- content -->
-    </div>
-    <div class="overlay-right"></div>
+        <!-- header hero -->
+    </header>
 
-    <!--====== SAIDEBAR PART ENDS ======-->
-    
+    <!--====== HEADER PART ENDS ======-->
+
+    <!--====== FOOTER PART ENDS ======-->
+
     <!--====== BACK TOP TOP PART START ======-->
 
     <a href="#" class="back-to-top"><i class="lni-chevron-up"></i></a>
 
-    <!--====== BACK TOP TOP PART ENDS ======-->  
+    <!--====== BACK TOP TOP PART ENDS ======-->
 
-    <!--====== PART START ======-->
-
-
-
-    <!--====== PART ENDS ======-->
-
-
-
-
-
-
-
-
-
-
-    <!--====== jquery js ======-->
-    <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <!--====== Jquery js ======-->
     <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
 
     <!--====== Bootstrap js ======-->
-    <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
 
     <!--====== Slick js ======-->
     <script src="assets/js/slick.min.js"></script>
 
     <!--====== Isotope js ======-->
+    <script src="assets/js/imagesloaded.pkgd.min.js"></script>
     <script src="assets/js/isotope.pkgd.min.js"></script>
 
-    <!--====== Images Loaded js ======-->
-    <script src="assets/js/imagesloaded.pkgd.min.js"></script>
+    <!--====== Counter Up js ======-->
+    <script src="assets/js/waypoints.min.js"></script>
+    <script src="assets/js/jquery.counterup.min.js"></script>
+
+    <!--====== Circles js ======-->
+    <script src="assets/js/circles.min.js"></script>
+
+    <!--====== Appear js ======-->
+    <script src="assets/js/jquery.appear.min.js"></script>
+
+    <!--====== WOW js ======-->
+    <script src="assets/js/wow.min.js"></script>
+
+    <!--====== Headroom js ======-->
+    <script src="assets/js/headroom.min.js"></script>
+
+    <!--====== Jquery Nav js ======-->
+    <script src="assets/js/jquery.nav.js"></script>
+
+    <!--====== Scroll It js ======-->
+    <script src="assets/js/scrollIt.min.js"></script>
 
     <!--====== Magnific Popup js ======-->
     <script src="assets/js/jquery.magnific-popup.min.js"></script>
 
-    <!--====== Scrolling js ======-->
-    <script src="assets/js/scrolling-nav.js"></script>
-    <script src="assets/js/jquery.easing.min.js"></script>
-
-    <!--====== wow js ======-->
-    <script src="assets/js/wow.min.js"></script>
-
     <!--====== Main js ======-->
     <script src="assets/js/main.js"></script>
-
 </body>
 
 </html>

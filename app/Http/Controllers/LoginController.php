@@ -29,6 +29,9 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Authentication passed
+            if (Auth::user()->role == 'direktur') {
+                return redirect()->route('dashboard.laporans.index');
+            }
             return redirect()->route('dashboard.permintaans.index');
         } else {
             // Authentication failed

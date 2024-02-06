@@ -27,7 +27,9 @@ class LaporanController extends Controller
     {
         $start = $request->input('start');
         $end = $request->input('end');
-        $laporans = Permintaan::whereBetween('created_at', [$start, $end])->get();
+        $laporans = Permintaan::whereBetween('created_at', [$start, $end])
+            ->orderBy('status')
+            ->get();
 
         $pdf = PDF::loadView('admin.laporans.pdf', compact('laporans', 'start', 'end'));
         $pdf->setPaper('a4', 'landscape');

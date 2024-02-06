@@ -11,13 +11,14 @@ class CreatePermintaansTable extends Migration
         Schema::create('permintaans', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('user_id')->constrained('users');
-            $table->string('nama');
-            $table->string('jenis_kelamin');
-            $table->text('alamat');
-            $table->text('cv');
-            $table->text('berkas');
-            $table->string('status')->default('terkirim');
-            $table->boolean('setuju_kontrak')->nullable();
+            $table->string('nama_pelanggan');
+            $table->string('nama_frontdesk')->nullable();
+            $table->text('keluhan');
+            $table->string('motor');
+            $table->string('nomor_polisi');
+            $table->double('biaya_service')->nullable();
+            $table->string('status')->default('reservasi');
+            $table->timestamp('tanggal_diproses')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

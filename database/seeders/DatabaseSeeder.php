@@ -22,28 +22,44 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         DB::table('users')->insert([
             [
-                'name' => 'Pelamar',
-                'email' => 'pelamar@gmail.com',
+                'name' => 'Pengguna',
+                'email' => 'pelanggan@gmail.com',
                 'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
                 'no_telp' => '08152718326',
                 'alamat' => 'Jakarta',
                 'role' => 'user'
             ],
             [
-                'name' => 'HRD',
-                'email' => 'hrd@gmail.com',
+                'name' => 'Front Desk',
+                'email' => 'frontdesk@gmail.com',
                 'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
-                'no_telp' => '08625341722',
+                'no_telp' => '08152718326',
                 'alamat' => 'Jakarta',
-                'role' => 'hrd'
+                'role' => 'frontdesk'
             ],
             [
-                'name' => 'Kepala Bagian HRD',
-                'email' => 'kepalahrd@gmail.com',
+                'name' => 'gudang',
+                'email' => 'gudang@gmail.com',
                 'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
-                'no_telp' => '08625341722',
+                'no_telp' => '08152718326',
                 'alamat' => 'Jakarta',
-                'role' => 'kepalahrd'
+                'role' => 'gudang'
+            ],
+            [
+                'name' => 'mekanik',
+                'email' => 'mekanik@gmail.com',
+                'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
+                'no_telp' => '08152718326',
+                'alamat' => 'Jakarta',
+                'role' => 'mekanik'
+            ],
+            [
+                'name' => 'direktur',
+                'email' => 'direktur@gmail.com',
+                'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
+                'no_telp' => '08152718326',
+                'alamat' => 'Jakarta',
+                'role' => 'direktur'
             ],
         ]);
     }
