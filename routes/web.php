@@ -22,13 +22,13 @@ use App\Http\Controllers\Admin\AssetCategoryController;
 |
 */
 
-Route::get('/', function() {
-        // if (auth()->user()) {
-        //     return redirect()->route('dashboard.assets.index');
-        // }
-    
-        return view('welcome');
-    });
+Route::get('/', function () {
+    // if (auth()->user()) {
+    //     return redirect()->route('dashboard.assets.index');
+    // }
+
+    return view('welcome');
+});
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
 Route::get('register', [LoginController::class, 'showRegisterForm'])->name('register');
@@ -37,7 +37,7 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 
 
-Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'namespace' => 'Admin','middleware' => 'auth'], function () {
+Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
     // Asset Category
     Route::get('asset-categories', [AssetCategoryController::class, 'index'])->name('asset-categories.index');
     Route::get('asset-categories/create', [AssetCategoryController::class, 'create'])->name('asset-categories.create');
@@ -103,7 +103,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'namespace' => 'Adm
 
     // Laporan
     Route::get('laporans', [LaporanController::class, 'index'])->name('laporans.index');
-    Route::get('laporans/create', [LaporanController::class, 'create'])->name('laporans.create');
+    Route::post('laporans/create', [LaporanController::class, 'create'])->name('laporans.create');
     Route::get('laporans/create-average', [LaporanController::class, 'createAverageAksesoris'])->name('laporans.create-average');
     Route::post('laporans', [LaporanController::class, 'store'])->name('laporans.store');
     Route::get('laporans/{laporan}', [LaporanController::class, 'show'])->name('laporans.show');
@@ -112,4 +112,3 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'namespace' => 'Adm
     Route::delete('laporans/{laporan}', [LaporanController::class, 'destroy'])->name('laporans.destroy');
     Route::delete('laporans/destroy', [LaporanController::class, 'massDestroy'])->name('laporans.massDestroy');
 });
-

@@ -45,6 +45,12 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
+        $user = User::where('email', $request->email)->first();
+
+        if ($user) {
+            return redirect()->route('register')->with('message', 'Email already exists');
+        }
+
         User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -52,17 +58,9 @@ class LoginController extends Controller
             'role' => 'user'
         ]);
 
-        if (Auth::attempt($credentials)) {
-            // Authentication passed
-            if (Auth::user()->role != 'user') {
-                return redirect()->route('dashboard.permintaans.index');
-            }
+        Auth::attempt($request->only('email', 'password'));
 
-            return redirect()->route('dashboard.assets.index');
-        } else {
-            // Authentication failed
-            return redirect()->route('login')->with('message', 'Invalid credentials');
-        }
+        return redirect()->route('dashboard.permintaans.index');
     }
 
     // Handle the logout request

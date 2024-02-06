@@ -23,11 +23,13 @@ class LaporanController extends Controller
     }
 
 
-    public function create()
+    public function create(Request $request)
     {
-        $laporans = Permintaan::all();
-    
-        $pdf = PDF::loadView('admin.laporans.pdf', compact('laporans'));
+        $start = $request->input('start');
+        $end = $request->input('end');
+        $laporans = Permintaan::whereBetween('created_at', [$start, $end])->get();
+
+        $pdf = PDF::loadView('admin.laporans.pdf', compact('laporans', 'start', 'end'));
         $pdf->setPaper('a4', 'landscape');
         return $pdf->download('laporan-list.pdf');
     }
@@ -35,23 +37,23 @@ class LaporanController extends Controller
     public function createAverageAksesoris()
     {
         $laporans = Permintaan::with('aksesoris')->get();
-    
+
         $averageHargaByAssetCategory = $laporans->groupBy(function ($laporan) {
             return $laporan->aksesoris->name;
         })->map(function ($groupedLaporans) {
             $totalHarga = $groupedLaporans->sum(function ($laporan) {
                 return $laporan->aksesoris->harga ?? 0;
             });
-    
+
             $totalCount = $groupedLaporans->count();
-    
+
             return $totalCount > 0 ? $totalHarga / $totalCount : 0;
         });
-    
+
         $pdf = PDF::loadView('admin.laporans.pdf-harga', compact('averageHargaByAssetCategory'));
         return $pdf->download('laporan-list.pdf');
     }
-    
+
 
     public function store(StoreLaporanRequest $request)
     {
