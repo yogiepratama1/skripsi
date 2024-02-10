@@ -3,59 +3,47 @@
 
 <div class="card">
     <div class="card-header">
-        Buat Interview
+        Buat Perencanaan Desain
     </div>
 
     <div class="card-body">
-        <form method="POST" action="{{ route('dashboard.interviews.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('dashboard.perencanaans.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label class="required" for="user_id">Akun Pelamar</label>
-                <select class="form-control select2 {{ $errors->has('user_id') ? 'is-invalid' : '' }}" name="user_id" id="user_id" required>
-                    @foreach ($pelamars as $pelamar)
-                    <option value="{{ $pelamar->id }}" {{ old('user_id') == $pelamar->id ? 'selected' : '' }}>{{ $pelamar->name }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('user_id'))
-                    <span class="text-danger">{{ $errors->first('user_id') }}</span>
+                <label class="required" for="nama">Nama</label>
+                <input class="form-control {{ $errors->has('nama') ? 'is-invalid' : '' }}" type="text" name="nama" id="nama" required>
+                @if($errors->has('nama'))
+                <span class="text-danger">{{ $errors->first('nama') }}</span>
+                @endif
+            </div>
+            <div class="form-group">
+                <label class="required" for="deskripsi">Deskripsi</label>
+                <input type="text" class="form-control {{ $errors->has('deskripsi') ? 'is-invalid' : '' }}" name="deskripsi" id="deskripsi">
+                @if($errors->has('deskripsi'))
+                <span class="text-danger">{{ $errors->first('deskripsi') }}</span>
+                @endif
+            </div>
+            <div class="form-group">
+                <label class="required" for="desain">Link Desain</label>
+                <input type="text" class="form-control {{ $errors->has('desain') ? 'is-invalid' : '' }}" name="desain" id="desain">
+                @if($errors->has('desain'))
+                <span class="text-danger">{{ $errors->first('desain') }}</span>
                 @endif
             </div>
 
+            @if (auth()->user()->role == 'cofounder')
             <div class="form-group">
-                <label class="required" for="interviewer">Nama Interviewer</label>
-                <input class="form-control {{ $errors->has('interviewer') ? 'is-invalid' : '' }}" type="text" name="interviewer" id="interviewer" required>
-                @if($errors->has('interviewer'))
-                    <span class="text-danger">{{ $errors->first('interviewer') }}</span>
+                <label class="required" for="status">Status</label>
+                <select class="form-control select2 {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status" id="status" required>
+                    <option value="setuju" {{ old('status') == 'setuju' ? 'selected' : '' }}>Setuju</option>
+                    <option value="tidaksetuju" {{ old('status') == 'tidaksetuju' ? 'selected' : '' }}>Tidak Setuju</option>
+                </select>
+                @if($errors->has('status'))
+                <span class="text-danger">{{ $errors->first('status') }}</span>
                 @endif
             </div>
-            <div class="form-group">
-                <label class="required" for="penampilan">Penampilan</label>
-                <input type="number" class="form-control {{ $errors->has('penampilan') ? 'is-invalid' : '' }}" name="penampilan" id="penampilan">
-                @if($errors->has('penampilan'))
-                    <span class="text-danger">{{ $errors->first('penampilan') }}</span>
-                @endif
-            </div>
-            <div class="form-group">
-                <label class="required" for="kesopanan">Kesopanan</label>
-                <input type="number" class="form-control {{ $errors->has('kesopanan') ? 'is-invalid' : '' }}" name="kesopanan" id="kesopanan">
-                @if($errors->has('kesopanan'))
-                    <span class="text-danger">{{ $errors->first('kesopanan') }}</span>
-                @endif
-            </div>
-            <div class="form-group">
-                <label class="required" for="komunikasi">Komunikasi</label>
-                <input type="number" class="form-control {{ $errors->has('komunikasi') ? 'is-invalid' : '' }}" name="komunikasi" id="komunikasi">
-                @if($errors->has('komunikasi'))
-                    <span class="text-danger">{{ $errors->first('komunikasi') }}</span>
-                @endif
-            </div>
-            <div class="form-group">
-                <label class="required" for="daya_tangkap">Daya Tangkap</label>
-                <input type="number" class="form-control {{ $errors->has('daya_tangkap') ? 'is-invalid' : '' }}" name="daya_tangkap" id="daya_tangkap">
-                @if($errors->has('daya_tangkap'))
-                    <span class="text-danger">{{ $errors->first('daya_tangkap') }}</span>
-                @endif
-            </div>
+            @endif
+
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     Save

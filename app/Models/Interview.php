@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Interview extends Model
 {
     use HasFactory;
-    
+
     protected $guarded = ['id'];
 
     public function user()

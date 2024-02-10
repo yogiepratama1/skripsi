@@ -1,15 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TestController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\Admin\AssetController;
 use App\Http\Controllers\Admin\LaporanController;
-use App\Http\Controllers\Admin\PembayaranController;
 use App\Http\Controllers\Admin\PermintaanController;
 use App\Http\Controllers\Admin\AssetStatusController;
 use App\Http\Controllers\Admin\AssetCategoryController;
+use App\Http\Controllers\PerencanaanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,24 +80,24 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'namespace' => 'Adm
     Route::delete('permintaans/destroy', [PermintaanController::class, 'massDestroy'])->name('permintaans.massDestroy');
 
     // Test
-    Route::get('tests', [TestController::class, 'index'])->name('tests.index');
-    Route::get('tests/create', [TestController::class, 'create'])->name('tests.create');
-    Route::post('tests', [TestController::class, 'store'])->name('tests.store');
-    Route::get('tests/{test}', [TestController::class, 'show'])->name('tests.show');
-    Route::get('tests/{test}/edit', [TestController::class, 'edit'])->name('tests.edit');
-    Route::put('tests/{test}', [TestController::class, 'update'])->name('tests.update');
-    Route::delete('tests/{test}', [TestController::class, 'destroy'])->name('tests.destroy');
-    Route::delete('tests/destroy', [TestController::class, 'massDestroy'])->name('tests.massDestroy');
+    // Route::get('tests', [TestController::class, 'index'])->name('tests.index');
+    // Route::get('tests/create', [TestController::class, 'create'])->name('tests.create');
+    // Route::post('tests', [TestController::class, 'store'])->name('tests.store');
+    // Route::get('tests/{test}', [TestController::class, 'show'])->name('tests.show');
+    // Route::get('tests/{test}/edit', [TestController::class, 'edit'])->name('tests.edit');
+    // Route::put('tests/{test}', [TestController::class, 'update'])->name('tests.update');
+    // Route::delete('tests/{test}', [TestController::class, 'destroy'])->name('tests.destroy');
+    // Route::delete('tests/destroy', [TestController::class, 'massDestroy'])->name('tests.massDestroy');
 
     // Interview
-    Route::get('interviews', [InterviewController::class, 'index'])->name('interviews.index');
-    Route::get('interviews/create', [InterviewController::class, 'create'])->name('interviews.create');
-    Route::post('interviews', [InterviewController::class, 'store'])->name('interviews.store');
-    Route::get('interviews/{interview}', [InterviewController::class, 'show'])->name('interviews.show');
-    Route::get('interviews/{interview}/edit', [InterviewController::class, 'edit'])->name('interviews.edit');
-    Route::put('interviews/{interview}', [InterviewController::class, 'update'])->name('interviews.update');
-    Route::delete('interviews/{interview}', [InterviewController::class, 'destroy'])->name('interviews.destroy');
-    Route::delete('interviews/destroy', [InterviewController::class, 'massDestroy'])->name('interviews.massDestroy');
+    Route::get('perencanaans', [PerencanaanController::class, 'index'])->name('perencanaans.index');
+    Route::get('perencanaans/create', [PerencanaanController::class, 'create'])->name('perencanaans.create');
+    Route::post('perencanaans', [PerencanaanController::class, 'store'])->name('perencanaans.store');
+    Route::get('perencanaans/{interview}', [PerencanaanController::class, 'show'])->name('perencanaans.show');
+    Route::get('perencanaans/{interview}/edit', [PerencanaanController::class, 'edit'])->name('perencanaans.edit');
+    Route::put('perencanaans/{interview}', [PerencanaanController::class, 'update'])->name('perencanaans.update');
+    Route::delete('perencanaans/{interview}', [PerencanaanController::class, 'destroy'])->name('perencanaans.destroy');
+    Route::delete('perencanaans/destroy', [PerencanaanController::class, 'massDestroy'])->name('perencanaans.massDestroy');
 
     // Laporan
     Route::get('laporans', [LaporanController::class, 'index'])->name('laporans.index');

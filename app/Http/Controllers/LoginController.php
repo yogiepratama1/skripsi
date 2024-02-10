@@ -29,7 +29,13 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Authentication passed
-            if (Auth::user()->role == 'direktur') {
+            if (Auth::user()->role == 'pemasaran' || Auth::user()->role == 'cofounder') {
+                return redirect()->route('dashboard.perencanaans.index');
+            }
+            if (Auth::user()->role == 'percetakan' || Auth::user()->role == 'finishing') {
+                return redirect()->route('dashboard.permintaans.index');
+            }
+            if (Auth::user()->role == 'founder') {
                 return redirect()->route('dashboard.laporans.index');
             }
             return redirect()->route('dashboard.permintaans.index');

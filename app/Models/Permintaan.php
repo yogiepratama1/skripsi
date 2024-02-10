@@ -3,8 +3,6 @@
 namespace App\Models;
 
 use DateTimeInterface;
-use App\Models\Pembayaran;
-use App\Models\AssetCategory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,6 +14,7 @@ class Permintaan extends Model
     public $table = 'permintaans';
     // protected $with = ['user', 'barang', 'pembayaran', 'aksesoris'];
 
+    public $with = ['desain'];
     protected $dates = [
         'created_at',
         'updated_at',
@@ -34,9 +33,9 @@ class Permintaan extends Model
         return $date->format('Y-m-d H:i:s');
     }
 
-    public function user()
+    public function desain()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(Interview::class, 'id_desain');
     }
 
     // public function barang()

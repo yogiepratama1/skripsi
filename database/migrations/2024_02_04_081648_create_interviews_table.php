@@ -15,14 +15,10 @@ class CreateInterviewsTable extends Migration
     {
         Schema::create('interviews', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->timestamp('tanggal');
-            $table->string('interviewer');
-            $table->integer('penampilan')->nullable();
-            $table->integer('kesopanan')->nullable();
-            $table->integer('komunikasi')->nullable();
-            $table->integer('daya_tangkap')->nullable();
-            $table->integer('hasil')->nullable();
+            $table->string('nama');
+            $table->string('deskripsi');
+            $table->string('desain');
+            $table->string('status')->default('tidaksetuju');
             $table->timestamps();
         });
     }

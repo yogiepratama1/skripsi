@@ -17,7 +17,7 @@ class LaporanController extends Controller
 {
     public function index()
     {
-        $laporans = Permintaan::with(['user.test', 'user.interview'])->get();
+        $laporans = Permintaan::all();
 
         return view('admin.laporans.index', compact('laporans'));
     }

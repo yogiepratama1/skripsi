@@ -26,46 +26,35 @@
                 <thead>
                     <tr>
                         <th class="no-export" width="10">No</th>
-                        <th>Nama Pelanggan</th>
-                        <th>Nama Front Desk</th>
-                        <th>Motor</th>
-                        <th>Nomor Polisi</th>
-                        <th>Keluhan</th>
-                        <th>Biaya Service</th>
+                        <th>Nama</th>
+                        <th>Link Desain</th>
+                        <th>Jumlah</th>
+                        <th>Harga per pc</th>
                         <th>Status</th>
-                        <!-- <th>Tanggal Reservasi</th>
-                        <th>Tanggal Diproses</th> -->
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($laporans as $key => $permintaan)
                     <tr data-entry-id="{{ $permintaan->id }}">
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $permintaan->nama_pelanggan ?? '' }}</td>
-                        <td>{{ $permintaan->nama_frontdesk ?? '' }}</td>
-                        <td>{{ $permintaan->motor ?? '' }}</td>
-                        <td>{{ $permintaan->nomor_polisi ?? '' }}</td>
-                        <td>{{ $permintaan->keluhan ?? '' }}</td>
-                        <td>Rp{{ number_format($permintaan->biaya_service, 2, ',', '.') }}</td>
+                        <td>{{ $permintaan->nama ?? '' }}</td>
+                        <td>{{ $permintaan->desain->desain ?? '' }}</td>
+                        <td>{{ $permintaan->jumlah ?? '' }}</td>
+                        <td>Rp{{ number_format($permintaan->harga, 2, ',', '.') }}</td>
                         <td class="text-center">
-                            @if ($permintaan->status == 'mekanik')
-                            <span class="badge badge-info">Diperbaiki Mekanik</span>
-                            @elseif ($permintaan->status == 'mekanik_selesai')
-                            <span class="badge badge-info">Selesai Diperbaiki Mekanik</span>
-                            @elseif ($permintaan->status == 'gudang')
-                            <span class="badge badge-warning">Sparepart Sedang Diperiksa Gudang</span>
-                            @elseif ($permintaan->status == 'sparepart_ready')
-                            <span class="badge badge-info">Sparepart Tersedia</span>
-                            @elseif ($permintaan->status == 'sparepart_not_ready')
-                            <span class="badge badge-danger">Sparepart Tidak Tersedia</span>
-                            @elseif ($permintaan->status == 'selesai')
-                            <span class="badge badge-success">Selesai</span>
+                            @if ($permintaan->status == 'belum_diproduksi')
+                            <span class="badge badge-info">Belum diproduksi</span>
+                            @elseif ($permintaan->status == 'diproduksi')
+                            <span class="badge badge-info">Diproduksi</span>
+                            @elseif ($permintaan->status == 'produksi_selesai')
+                            <span class="badge badge-info">Produksi Selesai</span>
+                            @elseif ($permintaan->status == 'packing')
+                            <span class="badge badge-info">Sedang Dipacking</span>
+                            @elseif ($permintaan->status == 'ready')
+                            <span class="badge badge-success">Ready</span>
                             @else
-                            <span class="badge badge-info">Menunggu frontdesk</span>
                             @endif
                         </td>
-                        <!-- <td>{{ $permintaan->created_at ? \Carbon\Carbon::parse($permintaan->created_at)->format('Y-m-d') : '' }}</td>
-                        <td>{{ $permintaan->tanggal_diproses ? \Carbon\Carbon::parse($permintaan->tanggal_diproses)->format('Y-m-d') : '' }}</td> -->
                     </tr>
                     @endforeach
                 </tbody>

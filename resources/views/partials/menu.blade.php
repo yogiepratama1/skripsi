@@ -22,29 +22,32 @@
                         </a>
                     </li> -->
                 <!-- @endif -->
-                @if (auth()->user()->role != 'direktur')
+                @if (auth()->user()->role == 'pemasaran' || auth()->user()->role == 'cofounder')
+                <li class="nav-item">
+                    <a href="{{ url("/dashboard/perencanaans") }}" class="nav-link {{ request()->is("dashboard/perencanaans") || request()->is("dashboard/perencanaans/*") ? "active" : "" }}">
+                        <img src="{{ asset('icons/pen-solid.svg') }}" alt="barang" width="20px" height="20px">
+
+                        </i>
+                        <p>
+                            Perencanaan Desain
+                        </p>
+                    </a>
+                </li>
+                @endif
+
+                @if (auth()->user()->role == 'percetakan' || auth()->user()->role == 'finishing')
                 <li class="nav-item">
                     <a href="{{ url("/dashboard/permintaans") }}" class="nav-link {{ request()->is("dashboard/permintaans") || request()->is("dashboard/permintaans/*") ? "active" : "" }}">
                         <img src="{{ asset('icons/pen-solid.svg') }}" alt="barang" width="20px" height="20px">
 
                         </i>
                         <p>
-                            Reservasi
+                            Barang dan Produksi
                         </p>
                     </a>
                 </li>
                 @endif
-
-                <!-- <li class="nav-item">
-                    <a href="{{ url("/dashboard/tests") }}" class="nav-link {{ request()->is("dashboard/tests") || request()->is("dashboard/tests/*") ? "active" : "" }}">
-                        <img src="{{ asset('icons/pen-solid.svg') }}" alt="barang" width="20px" height="20px">
-
-                        </i>
-                        <p>
-                            Test
-                        </p>
-                    </a>
-                </li>
+                <!--
                 <li class="nav-item">
                     <a href="{{ url("/dashboard/interviews") }}" class="nav-link {{ request()->is("dashboard/interviews") || request()->is("dashboard/interviews/*") ? "active" : "" }}">
                         <img src="{{ asset('icons/pen-solid.svg') }}" alt="barang" width="20px" height="20px">
@@ -70,7 +73,7 @@
                     </li>
                     @endif -->
 
-                @if (auth()->user()->role == 'direktur')
+                @if (auth()->user()->role == 'founder' || auth()->user()->role == 'finishing')
                 <li class="nav-item">
                     <a href="{{ url("/dashboard/laporans") }}" class="nav-link {{ request()->is("dashboard/laporans") || request()->is("dashboard/laporans/*") ? "active" : "" }}">
                         <img src="{{ asset('icons/file.svg') }}" alt="laporan" width="20px" height="20px">
