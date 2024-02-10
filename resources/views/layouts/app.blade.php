@@ -7,8 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>                SISTEM INFORMASI PENGIRIMAN DAN PEMASANGAN AKSESORIS KENDARAAN
-</title>
+    <title>{{ env('JUDUL') }}</title>
     <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" /> -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/adminltev3.css') }}" rel="stylesheet" />
