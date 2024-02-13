@@ -13,18 +13,18 @@ class CreateInterviewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('interviews', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->timestamp('tanggal');
-            $table->string('interviewer');
-            $table->integer('penampilan')->nullable();
-            $table->integer('kesopanan')->nullable();
-            $table->integer('komunikasi')->nullable();
-            $table->integer('daya_tangkap')->nullable();
-            $table->integer('hasil')->nullable();
-            $table->timestamps();
-        });
+        // Schema::create('interviews', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreignId('user_id')->constrained('users');
+        //     $table->timestamp('tanggal');
+        //     $table->string('interviewer');
+        //     $table->integer('penampilan')->nullable();
+        //     $table->integer('kesopanan')->nullable();
+        //     $table->integer('komunikasi')->nullable();
+        //     $table->integer('daya_tangkap')->nullable();
+        //     $table->integer('hasil')->nullable();
+        //     $table->timestamps();
+        // });
     }
 
     /**

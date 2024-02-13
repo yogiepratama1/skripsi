@@ -1,13 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TestController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\VariableController;
 use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\Admin\AssetController;
+use App\Http\Controllers\Admin\BobotController;
 use App\Http\Controllers\Admin\LaporanController;
-use App\Http\Controllers\Admin\PembayaranController;
-use App\Http\Controllers\Admin\PermintaanController;
 use App\Http\Controllers\Admin\AssetStatusController;
 use App\Http\Controllers\Admin\AssetCategoryController;
 
@@ -72,34 +71,35 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'namespace' => 'Adm
     // Route::get('assets-histories', [AssetsHistoryController::class, 'index'])->name('assets-histories.index');
 
     // Permintaan
-    Route::get('permintaans', [PermintaanController::class, 'index'])->name('permintaans.index');
-    Route::get('permintaans/create', [PermintaanController::class, 'create'])->name('permintaans.create');
-    Route::post('permintaans', [PermintaanController::class, 'store'])->name('permintaans.store');
-    Route::get('permintaans/{permintaan}', [PermintaanController::class, 'show'])->name('permintaans.show');
-    Route::get('permintaans/{permintaan}/edit', [PermintaanController::class, 'edit'])->name('permintaans.edit');
-    Route::put('permintaans/{permintaan}', [PermintaanController::class, 'update'])->name('permintaans.update');
-    Route::delete('permintaans/{permintaan}', [PermintaanController::class, 'destroy'])->name('permintaans.destroy');
-    Route::delete('permintaans/destroy', [PermintaanController::class, 'massDestroy'])->name('permintaans.massDestroy');
+    Route::get('bobots', [BobotController::class, 'index'])->name('bobots.index');
+    Route::get('bobots/create', [BobotController::class, 'create'])->name('bobots.create');
+    Route::post('bobots', [BobotController::class, 'store'])->name('bobots.store');
+    Route::get('bobots/{bobot}', [BobotController::class, 'show'])->name('bobots.show');
+    Route::get('bobots/{bobot}/edit', [BobotController::class, 'edit'])->name('bobots.edit');
+    Route::put('bobots/{bobot}', [BobotController::class, 'update'])->name('bobots.update');
+    Route::delete('bobots/{bobot}', [BobotController::class, 'destroy'])->name('bobots.destroy');
+    Route::delete('bobots/destroy', [BobotController::class, 'massDestroy'])->name('bobots.massDestroy');
 
     // Test
-    Route::get('tests', [TestController::class, 'index'])->name('tests.index');
-    Route::get('tests/create', [TestController::class, 'create'])->name('tests.create');
-    Route::post('tests', [TestController::class, 'store'])->name('tests.store');
-    Route::get('tests/{test}', [TestController::class, 'show'])->name('tests.show');
-    Route::get('tests/{test}/edit', [TestController::class, 'edit'])->name('tests.edit');
-    Route::put('tests/{test}', [TestController::class, 'update'])->name('tests.update');
-    Route::delete('tests/{test}', [TestController::class, 'destroy'])->name('tests.destroy');
-    Route::delete('tests/destroy', [TestController::class, 'massDestroy'])->name('tests.massDestroy');
+    Route::get('variables', [VariableController::class, 'index'])->name('variables.index');
+    Route::get('variables/create', [VariableController::class, 'create'])->name('variables.create');
+    Route::get('variables/hitung', [VariableController::class, 'hitung'])->name('variables.hitung');
+    Route::post('variables', [VariableController::class, 'store'])->name('variables.store');
+    Route::get('variables/{variable}', [VariableController::class, 'show'])->name('variables.show');
+    Route::get('variables/{variable}/edit', [VariableController::class, 'edit'])->name('variables.edit');
+    Route::put('variables/{variable}', [VariableController::class, 'update'])->name('variables.update');
+    Route::delete('variables/{variable}', [VariableController::class, 'destroy'])->name('variables.destroy');
+    Route::delete('variables/destroy', [VariableController::class, 'massDestroy'])->name('variables.massDestroy');
 
     // Interview
-    Route::get('interviews', [InterviewController::class, 'index'])->name('interviews.index');
-    Route::get('interviews/create', [InterviewController::class, 'create'])->name('interviews.create');
-    Route::post('interviews', [InterviewController::class, 'store'])->name('interviews.store');
-    Route::get('interviews/{interview}', [InterviewController::class, 'show'])->name('interviews.show');
-    Route::get('interviews/{interview}/edit', [InterviewController::class, 'edit'])->name('interviews.edit');
-    Route::put('interviews/{interview}', [InterviewController::class, 'update'])->name('interviews.update');
-    Route::delete('interviews/{interview}', [InterviewController::class, 'destroy'])->name('interviews.destroy');
-    Route::delete('interviews/destroy', [InterviewController::class, 'massDestroy'])->name('interviews.massDestroy');
+    // Route::get('interviews', [InterviewController::class, 'index'])->name('interviews.index');
+    // Route::get('interviews/create', [InterviewController::class, 'create'])->name('interviews.create');
+    // Route::post('interviews', [InterviewController::class, 'store'])->name('interviews.store');
+    // Route::get('interviews/{interview}', [InterviewController::class, 'show'])->name('interviews.show');
+    // Route::get('interviews/{interview}/edit', [InterviewController::class, 'edit'])->name('interviews.edit');
+    // Route::put('interviews/{interview}', [InterviewController::class, 'update'])->name('interviews.update');
+    // Route::delete('interviews/{interview}', [InterviewController::class, 'destroy'])->name('interviews.destroy');
+    // Route::delete('interviews/destroy', [InterviewController::class, 'massDestroy'])->name('interviews.massDestroy');
 
     // Laporan
     Route::get('laporans', [LaporanController::class, 'index'])->name('laporans.index');

@@ -6,19 +6,17 @@ use App\Models\User;
 use App\Models\Permintaan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Bobot;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
-class PermintaanController extends Controller
+class BobotController extends Controller
 {
     public function index()
     {
-        $permintaans = Permintaan::all();
-        if (Auth::user()->role == 'user') {
-            $permintaans = Permintaan::where('user_id', Auth::user()->id)->get();
-        }
+        $bobots = Bobot::all();
 
-        return view('admin.permintaans.index', compact('permintaans'));
+        return view('admin.permintaans.index', compact('bobots'));
     }
 
     public function create()
@@ -40,7 +38,7 @@ class PermintaanController extends Controller
         return redirect()->route('dashboard.permintaans.index');
     }
 
-    public function edit(Permintaan $permintaan)
+    public function edit(Bobot $bobot)
     {
         // $users = User::where('role', 'sales')->pluck('name', 'id')->prepend('Please Select', '');
 
@@ -49,20 +47,20 @@ class PermintaanController extends Controller
 
         $pelanggans = User::where('role', 'user')->get();
 
-        return view('admin.permintaans.edit', compact('permintaan', 'pelanggans'));
+        return view('admin.permintaans.edit', compact('bobot'));
     }
 
-    public function update(Request $request, Permintaan $permintaan)
+    public function update(Request $request, Bobot $bobot)
     {
-        if ($request->status != 'reservasi') {
-            $request->merge([
-                'tanggal_diproses' => Carbon::now()
-            ]);
-        }
+        // if ($request->status != 'reservasi') {
+        //     $request->merge([
+        //         'tanggal_diproses' => Carbon::now()
+        //     ]);
+        // }
 
-        $permintaan->update($request->all());
+        $bobot->update($request->all());
 
-        return redirect()->route('dashboard.permintaans.index');
+        return redirect()->route('dashboard.bobots.index');
     }
 
     // public function show(Permintaan $permintaan)

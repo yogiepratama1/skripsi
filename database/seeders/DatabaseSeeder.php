@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         DB::table('users')->insert([
             [
-                'name' => 'Pengguna',
+                'name' => 'Pelanggan',
                 'email' => 'pelanggan@gmail.com',
                 'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
                 'no_telp' => '08152718326',
@@ -30,36 +30,65 @@ class DatabaseSeeder extends Seeder
                 'role' => 'user'
             ],
             [
-                'name' => 'Front Desk',
-                'email' => 'frontdesk@gmail.com',
+                'name' => 'Barista',
+                'email' => 'barista@gmail.com',
                 'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
                 'no_telp' => '08152718326',
                 'alamat' => 'Jakarta',
-                'role' => 'frontdesk'
+                'role' => 'barista'
             ],
             [
-                'name' => 'gudang',
-                'email' => 'gudang@gmail.com',
+                'name' => 'Marketing',
+                'email' => 'marketing@gmail.com',
                 'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
                 'no_telp' => '08152718326',
                 'alamat' => 'Jakarta',
-                'role' => 'gudang'
+                'role' => 'marketing'
+            ],
+        ]);
+
+        DB::table('bobots')->insert([
+            [
+                'nama' => 'Porsi',
+                'jenis' => 'Benefit',
+                'nilai' => 0.35,
             ],
             [
-                'name' => 'mekanik',
-                'email' => 'mekanik@gmail.com',
-                'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
-                'no_telp' => '08152718326',
-                'alamat' => 'Jakarta',
-                'role' => 'mekanik'
+                'nama' => 'Rasa',
+                'jenis' => 'Benefit',
+                'nilai' => 0.40,
             ],
             [
-                'name' => 'direktur',
-                'email' => 'direktur@gmail.com',
-                'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
-                'no_telp' => '08152718326',
-                'alamat' => 'Jakarta',
-                'role' => 'direktur'
+                'nama' => 'Harga',
+                'jenis' => 'Cost',
+                'nilai' => 0.25,
+            ],
+        ]);
+
+        DB::table('nilai_variables')->insert([
+            [
+                'nama' => 'Vanilla Latte',
+                'jenis' => 'Kopi',
+                'porsi' => 2,
+                'rasa' => 4,
+                'harga' => 2,
+                'created_at' => now()
+            ],
+            [
+                'nama' => 'Thai Thea',
+                'jenis' => 'Tea',
+                'porsi' => 3,
+                'rasa' => 2,
+                'harga' => 3,
+                'created_at' => now()
+            ],
+            [
+                'nama' => 'Cappucino',
+                'jenis' => 'Kopi',
+                'porsi' => 1,
+                'rasa' => 3,
+                'harga' => 3,
+                'created_at' => now()
             ],
         ]);
     }

@@ -22,14 +22,27 @@
                         </a>
                     </li> -->
                 <!-- @endif -->
-                @if (auth()->user()->role != 'direktur')
+                @if (auth()->user()->role == 'barista')
                 <li class="nav-item">
-                    <a href="{{ url("/dashboard/permintaans") }}" class="nav-link {{ request()->is("dashboard/permintaans") || request()->is("dashboard/permintaans/*") ? "active" : "" }}">
+                    <a href="{{ url("/dashboard/bobots") }}" class="nav-link {{ request()->is("dashboard/bobots") || request()->is("dashboard/bobots/*") ? "active" : "" }}">
                         <img src="{{ asset('icons/pen-solid.svg') }}" alt="barang" width="20px" height="20px">
 
                         </i>
                         <p>
-                            Reservasi
+                            Bobot
+                        </p>
+                    </a>
+                </li>
+                @endif
+
+                @if (auth()->user()->role == 'user' || auth()->user()->role == 'barista')
+                <li class="nav-item">
+                    <a href="{{ url("/dashboard/variables") }}" class="nav-link {{ request()->is("dashboard/variables") || request()->is("dashboard/variables/*") ? "active" : "" }}">
+                        <img src="{{ asset('icons/pen-solid.svg') }}" alt="barang" width="20px" height="20px">
+
+                        </i>
+                        <p>
+                            Pemberian Nilai Variable
                         </p>
                     </a>
                 </li>
@@ -70,13 +83,13 @@
                     </li>
                     @endif -->
 
-                @if (auth()->user()->role == 'direktur')
+                @if (auth()->user()->role == 'marketing' || auth()->user()->role == 'barista' )
                 <li class="nav-item">
                     <a href="{{ url("/dashboard/laporans") }}" class="nav-link {{ request()->is("dashboard/laporans") || request()->is("dashboard/laporans/*") ? "active" : "" }}">
                         <img src="{{ asset('icons/file.svg') }}" alt="laporan" width="20px" height="20px">
                         </i>
                         <p>
-                            Laporan
+                            Rekomendasi Menu
                         </p>
                     </a>
                 </li>

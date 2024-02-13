@@ -7,6 +7,7 @@ use App\Http\Requests\MassDestroyLaporanRequest;
 use App\Http\Requests\StoreLaporanRequest;
 use App\Http\Requests\UpdateLaporanRequest;
 use App\Models\Laporan;
+use App\Models\NilaiVariable;
 use App\Models\Permintaan;
 use Gate;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class LaporanController extends Controller
 {
     public function index()
     {
-        $laporans = Permintaan::with(['user.test', 'user.interview'])->get();
+        $laporans = NilaiVariable::orderBy('hasil', 'desc')->get();
 
         return view('admin.laporans.index', compact('laporans'));
     }
@@ -27,8 +28,8 @@ class LaporanController extends Controller
     {
         $start = $request->input('start');
         $end = $request->input('end');
-        $laporans = Permintaan::whereBetween('created_at', [$start, $end])
-            ->orderBy('status')
+        $laporans = NilaiVariable::whereBetween('created_at', [$start, $end])
+            ->orderBy('hasil', 'desc')
             ->get();
 
         $pdf = PDF::loadView('admin.laporans.pdf', compact('laporans', 'start', 'end'));

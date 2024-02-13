@@ -48,51 +48,26 @@
 </head>
 
 <body>
-    <h2 style="text-align: center;">List Service</h2>
+    <h2 style="text-align: center;">List Rekomendasi Menu</h2>
     <h2 style="text-align: center;">{{ $start }} - {{ $end }}</h2>
     <table>
         <thead>
             <tr>
-                <th class="no-export" width="10">No</th>
-                <th>Nama Pelanggan</th>
-                <th>Nama Front Desk</th>
-                <th>Motor</th>
-                <th>Nomor Polisi</th>
-                <th>Keluhan</th>
-                <th>Biaya Service</th>
-                <th>Status</th>
-                <!-- <th>Tanggal Reservasi</th>
-                        <th>Tanggal Diproses</th> -->
+                <th width="10">Peringkat</th>
+                <th>Nama</th>
+                <th>Jenis</th>
+                <th>Hasil</th>
+                <th>Harga Menu</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($laporans as $key => $permintaan)
-            <tr data-entry-id="{{ $permintaan->id }}">
-                <td>{{ $permintaan->nama_pelanggan ?? '' }}</td>
-                <td>{{ $permintaan->nama_frontdesk ?? '' }}</td>
-                <td>{{ $permintaan->motor ?? '' }}</td>
-                <td>{{ $permintaan->nomor_polisi ?? '' }}</td>
-                <td>{{ $permintaan->keluhan ?? '' }}</td>
-                <td>Rp{{ number_format($permintaan->biaya_service, 2, ',', '.') }}</td>
-                <td class="text-center">
-                    @if ($permintaan->status == 'mekanik')
-                    <span class="badge badge-info">Diperbaiki Mekanik</span>
-                    @elseif ($permintaan->status == 'mekanik_selesai')
-                    <span class="badge badge-info">Selesai Diperbaiki Mekanik</span>
-                    @elseif ($permintaan->status == 'gudang')
-                    <span class="badge badge-warning">Sparepart Sedang Diperiksa Gudang</span>
-                    @elseif ($permintaan->status == 'sparepart_ready')
-                    <span class="badge badge-info">Sparepart Tersedia</span>
-                    @elseif ($permintaan->status == 'sparepart_not_ready')
-                    <span class="badge badge-danger">Sparepart Tidak Tersedia</span>
-                    @elseif ($permintaan->status == 'selesai')
-                    <span class="badge badge-success">Selesai</span>
-                    @else
-                    <span class="badge badge-info">Menunggu frontdesk</span>
-                    @endif
-                </td>
-                <!-- <td>{{ $permintaan->created_at ? \Carbon\Carbon::parse($permintaan->created_at)->format('Y-m-d') : '' }}</td>
-                        <td>{{ $permintaan->tanggal_diproses ? \Carbon\Carbon::parse($permintaan->tanggal_diproses)->format('Y-m-d') : '' }}</td> -->
+            @foreach($laporans as $key => $variable)
+            <tr data-entry-id="{{ $variable->id }}">
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $variable->nama ?? '' }}</td>
+                <td>{{ $variable->jenis }}</td>
+                <td>{{ $variable->hasil }}</td>
+                <td>{{ $variable->harga_menu }}</td>
             </tr>
             @endforeach
         </tbody>

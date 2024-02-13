@@ -29,10 +29,10 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Authentication passed
-            if (Auth::user()->role == 'direktur') {
-                return redirect()->route('dashboard.laporans.index');
+            if (Auth::user()->role == 'user' || Auth::user()->role == 'barista') {
+                return redirect()->route('dashboard.variables.index');
             }
-            return redirect()->route('dashboard.permintaans.index');
+            return redirect()->route('dashboard.laporans.index');
         } else {
             // Authentication failed
             return redirect()->route('login')->with('message', 'Invalid credentials');
