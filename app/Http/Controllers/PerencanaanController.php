@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Interview;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Permintaan;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -13,57 +14,80 @@ class PerencanaanController extends Controller
 {
     public function index()
     {
-        $perencanaans = Interview::all();
-        // if (Auth::user()->role == 'user') {
-        //     $interviews = Interview::where('user_id', Auth::user()->id)->get();
-        // }
+        if (Auth::user()->role == 'user') {
+            $permintaans = Permintaan::where('user_id', Auth::user()->id)->get();
+        } else {
+            $permintaans = Permintaan::all();
+        }
 
-        return view('admin.interviews.index', compact('perencanaans'));
+        return view('admin.interviews.index', compact('permintaans'));
     }
 
     public function create()
     {
-        // $pelamars = User::where('role', 'user')->get();
-        return view('admin.interviews.create');
+        $users = User::where('role', 'user')->get();
+        return view('admin.interviews.create', compact('users'));
     }
 
     public function store(Request $request)
     {
-        // if (Auth::user()->role == 'user') {
-        //     $user_id = Auth::user()->id;
-        //     $request->merge([
-        //         'user_id' => $user_id
-        //     ]);
-        // }
+        if (Auth::user()->role == 'user') {
+            $user_id = Auth::user()->id;
+            $request->merge([
+                'user_id' => $user_id
+            ]);
+        }
         // $hasil = $request->input('penampilan') + $request->input('kesopanan') + $request->input('komunikasi') + $request->input('daya_tangkap');
         // $request->merge([
         //     'hasil' => $hasil,
         //     'tanggal' => Carbon::now()
         // ]);
-        $interview = Interview::create($request->all());
+        // $interview = Interview::create($request->all());
+        Permintaan::create($request->all());
 
         return redirect()->route('dashboard.perencanaans.index');
     }
 
-    public function edit(Interview $interview)
+    public function edit(Permintaan $interview)
     {
-        // $users = User::where('role', 'sales')->pluck('name', 'id')->prepend('Please Select', '');
+        $users = User::where('role', 'user')->get();
 
-        // $barangs = Asset::pluck('name', 'id')->prepend('Please Select', '');
-        // $aksesoris = AssetCategory::pluck('name', 'id')->prepend('Please Select', '');
-
-        // $pelamars = User::where('role', 'user')->get();
-
-        return view('admin.interviews.edit', compact('interview'));
+        return view('admin.interviews.edit', compact('users', 'interview'));
     }
 
-    public function update(Request $request, Interview $interview)
+    public function staffsetuju(Permintaan $interview)
     {
-        // $hasil = $request->input('penampilan') + $request->input('kesopanan') + $request->input('komunikasi') + $request->input('daya_tangkap');
-        // $request->merge([
-        //     'hasil' => $hasil,
-        //     'tanggal' => Carbon::now()
-        // ]);
+        $interview->update([
+            'status' => 'setuju',
+            'status_direktur' => 'pending'
+        ]);
+        if (Auth::user()->role == 'user') {
+            $permintaans = Permintaan::where('user_id', Auth::user()->id)->get();
+        } else {
+            $permintaans = Permintaan::all();
+        }
+
+        return view('admin.interviews.index', compact('permintaans'));
+    }
+
+    public function direktursetuju(Permintaan $interview)
+    {
+        $interview->update([
+            'nama_direktur' => Auth::user()->name,
+            'status_direktur' => 'setuju',
+            'tanggal_disetujui_direktur' => Carbon::now(),
+        ]);
+        if (Auth::user()->role == 'user') {
+            $permintaans = Permintaan::where('user_id', Auth::user()->id)->get();
+        } else {
+            $permintaans = Permintaan::all();
+        }
+
+        return view('admin.interviews.index', compact('permintaans'));
+    }
+
+    public function update(Request $request, Permintaan $interview)
+    {
         $interview->update($request->all());
 
         return redirect()->route('dashboard.perencanaans.index');
@@ -76,7 +100,7 @@ class PerencanaanController extends Controller
         return view('admin.interviews.show', compact('interview', 'pelamars'));
     }
 
-    public function destroy(Interview $interview)
+    public function destroy(Permintaan $interview)
     {
         $interview->delete();
 

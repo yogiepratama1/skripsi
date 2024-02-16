@@ -4,16 +4,15 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePermintaansTable extends Migration
+class CreatePengembaliansTable extends Migration
 {
     public function up()
     {
-        Schema::create('penerimaans', function (Blueprint $table) {
+        Schema::create('pengembalians', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('barang_id')->constrained('permintaans');
-            $table->string('nama_sectionhead');
-            $table->string('pemeriksaan_fisik');
-            $table->string('status')->default('diterima');
+            $table->string('alasan');
+            $table->string('status')->default('pending');
             $table->timestamps();
             $table->softDeletes();
         });

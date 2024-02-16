@@ -62,6 +62,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'namespace' => 'Adm
     Route::post('assets', [AssetController::class, 'store'])->name('assets.store');
     Route::get('assets/{asset}', [AssetController::class, 'show'])->name('assets.show');
     Route::get('assets/{asset}/edit', [AssetController::class, 'edit'])->name('assets.edit');
+    Route::get('assets/{asset}/disetujuidirektur', [AssetController::class, 'disetujuidirektur'])->name('assets.disetujuidirektur');
     Route::put('assets/{asset}', [AssetController::class, 'update'])->name('assets.update');
     Route::delete('assets/{asset}', [AssetController::class, 'destroy'])->name('assets.destroy');
     Route::delete('assets/destroy', [AssetController::class, 'massDestroy'])->name('assets.massDestroy');
@@ -95,6 +96,8 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'namespace' => 'Adm
     Route::post('perencanaans', [PerencanaanController::class, 'store'])->name('perencanaans.store');
     Route::get('perencanaans/{interview}', [PerencanaanController::class, 'show'])->name('perencanaans.show');
     Route::get('perencanaans/{interview}/edit', [PerencanaanController::class, 'edit'])->name('perencanaans.edit');
+    Route::get('perencanaans/{interview}/staffsetuju', [PerencanaanController::class, 'staffsetuju'])->name('perencanaans.staffsetuju');
+    Route::get('perencanaans/{interview}/direktursetuju', [PerencanaanController::class, 'direktursetuju'])->name('perencanaans.direktursetuju');
     Route::put('perencanaans/{interview}', [PerencanaanController::class, 'update'])->name('perencanaans.update');
     Route::delete('perencanaans/{interview}', [PerencanaanController::class, 'destroy'])->name('perencanaans.destroy');
     Route::delete('perencanaans/destroy', [PerencanaanController::class, 'massDestroy'])->name('perencanaans.massDestroy');

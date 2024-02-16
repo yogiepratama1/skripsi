@@ -2,16 +2,19 @@
 
 @section('content')
 <div style="margin-bottom: 10px;" class="row">
+    @if (auth()->user()->role != 'direktur')
+
     <div class="col-lg-12" style="margin-bottom: 10px;">
         <a class="btn btn-success" href="{{ route('dashboard.perencanaans.create') }}">
-            Add perencanaan
+            Add Permintaan
         </a>
     </div>
+    @endif
 </div>
 
 <div class="card">
     <div class="card-header">
-        List Perencanaan Desain
+        List Permintaan
     </div>
 
     <div class="card-body">
@@ -20,34 +23,63 @@
                 <thead>
                     <tr>
                         <th class="no-export" width="10">No</th>
-                        <th>Nama</th>
-                        <th>Deskripsi</th>
-                        <th>Link Desain</th>
-                        <th>Status</th>
+                        <th>Jumlah</th>
+                        <th>Spesifikasi</th>
+                        <th>Keterangan</th>
+                        <th>Catatan Direktur</th>
+                        <th>Tanggal Disetujui Direktur</th>
+                        <th>Status Staff</th>
+                        <th>Status Direktur</th>
                         <th class="no-export">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($perencanaans as $key => $perencanaan)
-                    <tr data-entry-id="{{ $perencanaan->id }}">
+                    @foreach($permintaans as $key => $permintaan)
+                    <tr data-entry-id="{{ $permintaan->id }}">
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $perencanaan->nama ?? '' }}</td>
-                        <td>{{ $perencanaan->deskripsi ?? '' }}</td>
-                        <td>{{ $perencanaan->desain ?? '' }}</td>
+                        <td>{{ $permintaan->jumlah ?? '' }}</td>
+                        <td>{{ $permintaan->spesifikasi ?? '' }}</td>
+                        <td>{{ $permintaan->deskripsi ?? '' }}</td>
+                        <td>{{ $permintaan->catatan_direktur ?? '' }}</td>
+                        <td>{{ $permintaan->tanggal_disetujui_direktur ?? '' }}</td>
                         <td class="text-center">
-                            @if ($perencanaan->status == 'tidaksetuju')
-                            <span class="badge badge-info">Tidak Setuju</span>
-                            @elseif ($perencanaan->status == 'setuju')
+                            @if ($permintaan->status == 'pending')
+                            <span class="badge badge-info">Pending</span>
+                            @elseif ($permintaan->status == 'setuju')
+                            <span class="badge badge-success">Setuju</span>
+                            @else
+                            @endif
+                        </td>
+                        <td class="text-center">
+                            @if ($permintaan->status_direktur == 'pending')
+                            <span class="badge badge-info">Pending</span>
+                            @elseif ($permintaan->status_direktur == 'setuju')
                             <span class="badge badge-success">Setuju</span>
                             @else
                             @endif
                         </td>
                         <td>
-                            <a class="btn btn-xs btn-info" href="{{ route('dashboard.perencanaans.edit', $perencanaan->id) }}">
+                            @if ($permintaan->status == 'pending' && auth()->user()->role == 'staff')
+                            <a class="btn btn-xs btn-info" href="{{ route('dashboard.perencanaans.staffsetuju', $permintaan->id) }}">
+                                Setujui
+                            </a>
+                            @endif
+                            @if ($permintaan->status == 'setuju' && $permintaan->status_direktur == 'pending' && auth()->user()->role == 'direktur')
+                            <a class="btn btn-xs btn-info" href="{{ route('dashboard.perencanaans.direktursetuju', $permintaan->id) }}">
+                                Setujui
+                            </a>
+                            <a class="btn btn-xs btn-info" href="{{ route('dashboard.perencanaans.edit', $permintaan->id) }}">
                                 Edit
                             </a>
-                            @if ($perencanaan->status == 'tidaksetuju')
-                            <form action="{{ route('dashboard.perencanaans.destroy', $perencanaan->id) }}" method="POST" onsubmit="return confirm('Are you sure?');" style="display: inline-block;">
+                            @endif
+                            @if ($permintaan->status == 'pending')
+                            @if (auth()->user()->role != 'direktur')
+                            <a class="btn btn-xs btn-info" href="{{ route('dashboard.perencanaans.edit', $permintaan->id) }}">
+                                Edit
+                            </a>
+                            @endif
+
+                            <form action="{{ route('dashboard.perencanaans.destroy', $permintaan->id) }}" method="POST" onsubmit="return confirm('Are you sure?');" style="display: inline-block;">
                                 @method('DELETE')
                                 @csrf
                                 <input type="submit" class="btn btn-xs btn-danger" value="Delete">

@@ -13,13 +13,20 @@ class CreateInterviewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('interviews', function (Blueprint $table) {
+        // Permintaan Barang
+        Schema::create('permintaans', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->uuid('user_id')->constrained('users');
+            $table->string('jumlah');
+            $table->string('spesifikasi');
             $table->string('deskripsi');
-            $table->string('desain');
-            $table->string('status')->default('tidaksetuju');
+            $table->string('status')->default('pending');
+            $table->string('status_direktur')->nullable();
+            $table->string('nama_direktur')->nullable();
+            $table->string('catatan_direktur')->nullable();
+            $table->timestamp('tanggal_disetujui_direktur')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

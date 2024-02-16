@@ -7,6 +7,7 @@ use App\Models\Permintaan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Interview;
+use App\Models\Penerimaan;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,46 +15,43 @@ class PermintaanController extends Controller
 {
     public function index()
     {
-        $permintaans = Permintaan::all();
-        // if (Auth::user()->role == 'user') {
-        //     $permintaans = Permintaan::where('user_id', Auth::user()->id)->get();
-        // }
+        $penerimaans = Penerimaan::all();
 
-        return view('admin.permintaans.index', compact('permintaans'));
+        return view('admin.permintaans.index', compact('penerimaans'));
     }
 
     public function create()
     {
-        $desains = Interview::where('status', 'setuju')->get();
-        return view('admin.permintaans.create', compact('desains'));
+        // $desains = Interview::where('status', 'setuju')->get();
+        $barangs = Permintaan::where('status', 'setuju')
+            ->where('status_direktur', 'setuju')
+            ->get();
+        return view('admin.permintaans.create', compact('barangs'));
     }
 
     public function store(Request $request)
     {
         // if (Auth::user()->role == 'user') {
-        //     $user_id = Auth::user()->id;
-        //     $request->merge([
-        //         'user_id' => $user_id
-        //     ]);
+        $user_id = Auth::user()->name;
+        $request->merge([
+            'nama_sectionhead' => $user_id
+        ]);
         // }
-        $permintaan = Permintaan::create($request->all());
+        $permintaan = Penerimaan::create($request->all());
 
         return redirect()->route('dashboard.permintaans.index');
     }
 
-    public function edit(Permintaan $permintaan)
+    public function edit(Penerimaan $permintaan)
     {
-        // $users = User::where('role', 'sales')->pluck('name', 'id')->prepend('Please Select', '');
+        $barangs = Permintaan::where('status', 'setuju')
+            ->where('status_direktur', 'setuju')
+            ->get();
 
-        // $barangs = Asset::pluck('name', 'id')->prepend('Please Select', '');
-        // $aksesoris = AssetCategory::pluck('name', 'id')->prepend('Please Select', '');
-
-        $desains = Interview::where('status', 'setuju')->get();
-
-        return view('admin.permintaans.edit', compact('permintaan', 'desains'));
+        return view('admin.permintaans.edit', compact('permintaan', 'barangs'));
     }
 
-    public function update(Request $request, Permintaan $permintaan)
+    public function update(Request $request, Penerimaan $permintaan)
     {
         // if ($request->status != 'reservasi') {
         //     $request->merge([
@@ -73,7 +71,7 @@ class PermintaanController extends Controller
     //     return view('admin.permintaans.show', compact('permintaan', 'pelamars'));
     // }
 
-    public function destroy(Permintaan $permintaan)
+    public function destroy(Penerimaan $permintaan)
     {
         $permintaan->delete();
 

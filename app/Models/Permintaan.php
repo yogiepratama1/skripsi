@@ -14,42 +14,14 @@ class Permintaan extends Model
     public $table = 'permintaans';
     // protected $with = ['user', 'barang', 'pembayaran', 'aksesoris'];
 
-    public $with = ['desain'];
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at',
     ];
-
-    // public const SUDAH_DIKIRIM_RADIO = [
-    //     '1' => 'Sudah Dikirim',
-    //     '0' => 'Belum Dikirim',
-    // ];
-
     protected $guarded = ['id'];
 
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
     }
-
-    public function desain()
-    {
-        return $this->belongsTo(Interview::class, 'id_desain');
-    }
-
-    // public function barang()
-    // {
-    //     return $this->belongsTo(Asset::class, 'barang_id');
-    // }
-
-    // public function pembayaran()
-    // {
-    //     return $this->hasOne(Pembayaran::class);
-    // }
-
-    // public function aksesoris()
-    // {
-    //     return $this->belongsTo(AssetCategory::class, 'asset_categories_id');
-    // }
 }

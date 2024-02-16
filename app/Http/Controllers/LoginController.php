@@ -29,14 +29,14 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Authentication passed
-            if (Auth::user()->role == 'pemasaran' || Auth::user()->role == 'cofounder') {
+            if (Auth::user()->role == 'user' || Auth::user()->role == 'staff' || Auth::user()->role == 'direktur') {
                 return redirect()->route('dashboard.perencanaans.index');
             }
-            if (Auth::user()->role == 'percetakan' || Auth::user()->role == 'finishing') {
+            if (Auth::user()->role == 'sectionhead') {
                 return redirect()->route('dashboard.permintaans.index');
             }
-            if (Auth::user()->role == 'founder') {
-                return redirect()->route('dashboard.laporans.index');
+            if (Auth::user()->role == 'kepaladepartemen') {
+                return redirect()->route('dashboard.assets.index');
             }
             return redirect()->route('dashboard.permintaans.index');
         } else {

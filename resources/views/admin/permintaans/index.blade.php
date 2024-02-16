@@ -2,10 +2,10 @@
 
 @section('content')
 <div style="margin-bottom: 10px;" class="row">
-    @if (auth()->user()->role == 'percetakan')
+    @if (auth()->user()->role == 'sectionhead')
     <div class="col-lg-12" style="margin-bottom: 10px;">
         <a class="btn btn-success" href="{{ route('dashboard.permintaans.create') }}">
-            Add Produksi
+            Add Penerimaan
         </a>
     </div>
     @endif
@@ -19,7 +19,7 @@
 
 <div class="card">
     <div class="card-header">
-        List Permintaan Service
+        List Penerimaan Barang
     </div>
 
     <div class="card-body">
@@ -28,49 +28,34 @@
                 <thead>
                     <tr>
                         <th class="no-export" width="10">No</th>
-                        <th>Nama</th>
-                        <th>Link Desain</th>
-                        <th>Jumlah</th>
-                        <th>Harga per pc</th>
+                        <th>Spesifikasi</th>
+                        <th>Nama Section Head</th>
+                        <th>Pemeriksaan Fisik</th>
                         <th>Status</th>
                         <th class="no-export">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($permintaans as $key => $permintaan)
-                    <tr data-entry-id="{{ $permintaan->id }}">
+                    @foreach($penerimaans as $key => $penerimaan)
+                    <tr data-entry-id="{{ $penerimaan->id }}">
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $permintaan->nama ?? '' }}</td>
-                        <td>{{ $permintaan->desain->desain ?? '' }}</td>
-                        <td>{{ $permintaan->jumlah ?? '' }}</td>
-                        <td>Rp{{ number_format($permintaan->harga, 2, ',', '.') }}</td>
+                        <td>{{ $penerimaan->barang->spesifikasi ?? '' }}</td>
+                        <td>{{ $penerimaan->nama_sectionhead ?? '' }}</td>
+                        <td>{{ $penerimaan->pemeriksaan_fisik ?? '' }}</td>
                         <td class="text-center">
-                            @if ($permintaan->status == 'belum_diproduksi')
-                            <span class="badge badge-info">Belum diproduksi</span>
-                            @elseif ($permintaan->status == 'diproduksi')
-                            <span class="badge badge-info">Diproduksi</span>
-                            @elseif ($permintaan->status == 'produksi_selesai')
-                            <span class="badge badge-info">Produksi Selesai</span>
-                            @elseif ($permintaan->status == 'packing')
-                            <span class="badge badge-info">Sedang Dipacking</span>
-                            @elseif ($permintaan->status == 'ready')
-                            <span class="badge badge-success">Ready</span>
-                            @else
+                            @if ($penerimaan->status == 'diterima')
+                            <span class="badge badge-success">Diterima</span>
                             @endif
                         </td>
                         <td>
-                            <a class="btn btn-xs btn-info" href="{{ route('dashboard.permintaans.edit', $permintaan->id) }}">
+                            <a class="btn btn-xs btn-info" href="{{ route('dashboard.permintaans.edit', $penerimaan->id) }}">
                                 Edit
                             </a>
-                            @if ($permintaan->status == 'belum_diproduksi')
-                            @if (auth()->user()->role == 'percetakan')
-                            <form action="{{ route('dashboard.permintaans.destroy', $permintaan->id) }}" method="POST" onsubmit="return confirm('Are you sure?');" style="display: inline-block;">
+                            <form action="{{ route('dashboard.permintaans.destroy', $penerimaan->id) }}" method="POST" onsubmit="return confirm('Are you sure?');" style="display: inline-block;">
                                 @method('DELETE')
                                 @csrf
                                 <input type="submit" class="btn btn-xs btn-danger" value="Delete">
                             </form>
-                            @endif
-                            @endif
                         </td>
                     </tr>
                     @endforeach

@@ -9,29 +9,43 @@
     <div class="card-body">
         <form method="POST" action="{{ route('dashboard.perencanaans.store') }}" enctype="multipart/form-data">
             @csrf
+            @if (auth()->user()->role == 'staff')
             <div class="form-group">
-                <label class="required" for="nama">Nama</label>
-                <input class="form-control {{ $errors->has('nama') ? 'is-invalid' : '' }}" type="text" name="nama" id="nama" required>
-                @if($errors->has('nama'))
-                <span class="text-danger">{{ $errors->first('nama') }}</span>
+                <label class="required" for="user_id">User</label>
+                <select class="form-control select2 {{ $errors->has('user_id') ? 'is-invalid' : '' }}" name="user_id" id="user_id" required>
+                    @foreach($users as $id => $user)
+                    <option value="{{ $id }}" {{ old('user_id') == $id ? 'selected' : '' }}>{{ $user->name }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('user_id'))
+                <span class="text-danger">{{ $errors->first('user_id') }}</span>
+                @endif
+            </div>
+            @endif
+
+            <div class="form-group">
+                <label class="required" for="jumlah">jumlah</label>
+                <input class="form-control {{ $errors->has('jumlah') ? 'is-invalid' : '' }}" type="number" name="jumlah" id="jumlah" required>
+                @if($errors->has('jumlah'))
+                <span class="text-danger">{{ $errors->first('jumlah') }}</span>
                 @endif
             </div>
             <div class="form-group">
-                <label class="required" for="deskripsi">Deskripsi</label>
+                <label class="required" for="spesifikasi">Spesifikasi</label>
+                <input type="text" class="form-control {{ $errors->has('spesifikasi') ? 'is-invalid' : '' }}" name="spesifikasi" id="spesifikasi">
+                @if($errors->has('spesifikasi'))
+                <span class="text-danger">{{ $errors->first('spesifikasi') }}</span>
+                @endif
+            </div>
+            <div class="form-group">
+                <label class="required" for="deskripsi">Keterangan</label>
                 <input type="text" class="form-control {{ $errors->has('deskripsi') ? 'is-invalid' : '' }}" name="deskripsi" id="deskripsi">
                 @if($errors->has('deskripsi'))
                 <span class="text-danger">{{ $errors->first('deskripsi') }}</span>
                 @endif
             </div>
-            <div class="form-group">
-                <label class="required" for="desain">Link Desain</label>
-                <input type="text" class="form-control {{ $errors->has('desain') ? 'is-invalid' : '' }}" name="desain" id="desain">
-                @if($errors->has('desain'))
-                <span class="text-danger">{{ $errors->first('desain') }}</span>
-                @endif
-            </div>
 
-            @if (auth()->user()->role == 'cofounder')
+            <!-- @if (auth()->user()->role == 'cofounder')
             <div class="form-group">
                 <label class="required" for="status">Status</label>
                 <select class="form-control select2 {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status" id="status" required>
@@ -42,7 +56,7 @@
                 <span class="text-danger">{{ $errors->first('status') }}</span>
                 @endif
             </div>
-            @endif
+            @endif -->
 
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
