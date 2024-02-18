@@ -38,7 +38,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" rel="stylesheet" /> -->
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
-    <link rel="icon" href="{{ asset('logo-perusahaan.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('logo-perusahaan.jpg') }}" type="image/x-icon">
     @yield('styles')
     <style>
         .no-export,

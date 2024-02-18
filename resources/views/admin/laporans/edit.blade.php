@@ -3,30 +3,27 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.edit') }} {{ trans('cruds.laporan.title_singular') }}
+        Edit Hasil Laporan
     </div>
 
     <div class="card-body">
         <form method="POST" action="{{ route("dashboard.laporans.update", [$laporan->id]) }}" enctype="multipart/form-data">
-            @method('PUT')
             @csrf
+            @method('PUT')
             <div class="form-group">
-                <label class="required" for="permintaan_id">{{ trans('cruds.laporan.fields.permintaan') }}</label>
-                <select class="form-control select2 {{ $errors->has('permintaan') ? 'is-invalid' : '' }}" name="permintaan_id" id="permintaan_id" required>
-                    @foreach($permintaans as $id => $entry)
-                        <option value="{{ $id }}" {{ (old('permintaan_id') ? old('permintaan_id') : $laporan->permintaan->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('permintaan'))
-                    <span class="text-danger">{{ $errors->first('permintaan') }}</span>
+                <label class="required" for="hasillaporan">Hasil Laporan</label>
+                <input value="{{ $laporan->hasillaporan }}" class="form-control {{ $errors->has('hasillaporan') ? 'is-invalid' : '' }}" type="text" name="hasillaporan" id="hasillaporan" required>
+                @if($errors->has('hasillaporan'))
+                <span class="text-danger">{{ $errors->first('hasillaporan') }}</span>
                 @endif
-                <span class="help-block">{{ trans('cruds.laporan.fields.permintaan_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
-                    {{ trans('global.save') }}
+                    Save
                 </button>
             </div>
         </form>
     </div>
 </div>
+
+@endsection

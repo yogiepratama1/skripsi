@@ -25,35 +25,35 @@
             <table class="table table-bordered table-striped table-hover datatable datatable-Permintaan">
                 <thead>
                     <tr>
-                        <th class="no-export" width="10">No</th>
-                        <th>Nama</th>
-                        <th>Link Desain</th>
-                        <th>Jumlah</th>
-                        <th>Harga per pc</th>
+                        <th width="10">No</th>
+                        <th>Spesifikasi</th>
+                        <th>Alasan</th>
+                        <th>Hasil Laporan</th>
+                        <th>Tanggal Laporan</th>
                         <th>Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($laporans as $key => $permintaan)
-                    <tr data-entry-id="{{ $permintaan->id }}">
+                    @foreach($laporans as $key => $pengembalian)
+                    <tr data-entry-id="{{ $pengembalian->id }}">
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $permintaan->nama ?? '' }}</td>
-                        <td>{{ $permintaan->desain->desain ?? '' }}</td>
-                        <td>{{ $permintaan->jumlah ?? '' }}</td>
-                        <td>Rp{{ number_format($permintaan->harga, 2, ',', '.') }}</td>
+                        <td>{{ $pengembalian->barang->spesifikasi ?? '' }}</td>
+                        <td>{{ $pengembalian->alasan ?? '' }}</td>
+                        <td>{{ $pengembalian->laporan->hasillaporan ?? '' }}</td>
+                        <td>{{ $pengembalian->created_at ?? '' }}</td>
                         <td class="text-center">
-                            @if ($permintaan->status == 'belum_diproduksi')
-                            <span class="badge badge-info">Belum diproduksi</span>
-                            @elseif ($permintaan->status == 'diproduksi')
-                            <span class="badge badge-info">Diproduksi</span>
-                            @elseif ($permintaan->status == 'produksi_selesai')
-                            <span class="badge badge-info">Produksi Selesai</span>
-                            @elseif ($permintaan->status == 'packing')
-                            <span class="badge badge-info">Sedang Dipacking</span>
-                            @elseif ($permintaan->status == 'ready')
-                            <span class="badge badge-success">Ready</span>
+                            @if ($pengembalian->status == 'pending')
+                            <span class="badge badge-info">Pending</span>
+                            @elseif ($pengembalian->status == 'setuju')
+                            <span class="badge badge-success">Setuju</span>
                             @else
                             @endif
+                        </td>
+                        <td>
+                            <a class="btn btn-xs btn-info" href="{{ route('dashboard.laporans.edit', $pengembalian->id) }}">
+                                Edit Hasil Laporan
+                            </a>
                         </td>
                     </tr>
                     @endforeach

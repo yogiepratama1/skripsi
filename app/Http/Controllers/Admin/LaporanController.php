@@ -7,6 +7,7 @@ use App\Http\Requests\MassDestroyLaporanRequest;
 use App\Http\Requests\StoreLaporanRequest;
 use App\Http\Requests\UpdateLaporanRequest;
 use App\Models\Laporan;
+use App\Models\Pengembalian;
 use App\Models\Permintaan;
 use Gate;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class LaporanController extends Controller
 {
     public function index()
     {
-        $laporans = Permintaan::all();
+        $laporans = Pengembalian::with('laporan')->get();
 
         return view('admin.laporans.index', compact('laporans'));
     }
@@ -27,7 +28,8 @@ class LaporanController extends Controller
     {
         $start = $request->input('start');
         $end = $request->input('end');
-        $laporans = Permintaan::whereBetween('created_at', [$start, $end])
+        $laporans = Pengembalian::with('laporan')
+            ->whereBetween('created_at', [$start, $end])
             ->orderBy('status')
             ->get();
 
@@ -64,18 +66,18 @@ class LaporanController extends Controller
         return redirect()->route('dashboard.laporans.index');
     }
 
-    public function edit(Laporan $laporan)
+    public function edit(Pengembalian $laporan)
     {
-        $permintaans = Permintaan::pluck('nama_pelanggan', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        $laporan->load('permintaan');
-
-        return view('admin.laporans.edit', compact('laporan', 'permintaans'));
+        return view('admin.laporans.edit', compact('laporan'));
     }
 
-    public function update(UpdateLaporanRequest $request, Laporan $laporan)
+    public function update(Pengembalian $laporan, Request $request)
     {
-        $laporan->update($request->all());
+        $pengembalian = Pengembalian::find($laporan->id);
+        $laporan = Laporan::create([
+            'pengembalian_id' => $pengembalian->id,
+            'hasillaporan' => $request->hasillaporan
+        ]);
 
         return redirect()->route('dashboard.laporans.index');
     }
