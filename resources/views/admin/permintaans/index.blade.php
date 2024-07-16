@@ -2,16 +2,16 @@
 
 @section('content')
     <div style="margin-bottom: 10px;" class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-12" style="margin-bottom: 10px;">
             <a class="btn btn-success" href="{{ route('dashboard.permintaans.create') }}">
-                Add Permintaan
+                Add Penyidikan
             </a>
         </div>
     </div>
 
     <div class="card">
         <div class="card-header">
-            List Permintaan 
+            List Penyidikan 
         </div>
 
         <div class="card-body">
@@ -19,38 +19,32 @@
                 <table class="table table-bordered table-striped table-hover datatable datatable-Permintaan">
                     <thead>
                         <tr>
-                            <th class="no-export" width="10">No</th>
                             <th>ID</th>
-                            <th>User</th>
-                            <th>Barang</th>
-                            <th>Merek</th>
-                            <th>Jenis</th>
-                            <th>Nama Pelanggan</th>
-                            <th>Alamat Pelanggan</th>
+                            <th>Nama Penyidik</th>
+                            <th>Tersangka</th>
+                            <th>Kelengkapan Berkas</th>
+                            <th>Tanggal dibuat</th>
+                            <th>Detail</th>
                             <th class="no-export">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($permintaans as $key => $permintaan)
-                            <tr data-entry-id="{{ $permintaan->id }}">
-                                <td></td>
-                                <td class="text-center">{{ $permintaan->id ?? '' }}</td>
-                                <td>{{ $permintaan->user->name ?? '' }}</td>
-                                <td>{{ $permintaan->barang->name ?? '' }}</td>
-                                <td>{{ $permintaan->barang->category->name ?? '' }}</td>
-                                <td>{{ $permintaan->barang->status->name ?? '' }}</td>
-                                <td>{{ $permintaan->nama_pelanggan ?? '' }}</td>
-                                <td>{{ $permintaan->alamat_pelanggan ?? '' }}</td>
+                            <tr>
+                                <td>{{ $permintaan->id }}</td>
+                                <td>{{ $permintaan->nama_penyidik }}</td>
+                                <td>{{ $permintaan->nama_tersangka }}</td>
+                                <td>{{ $permintaan->kelengkapan ? 'Lengkap' : 'Tidak Lengkap' }}</td>
+                                <td>{{ $permintaan->created_at->format('Y-m-d') }}</td>
                                 <td>
-
-                                    <a class="btn btn-xs btn-info" href="{{ route('dashboard.permintaans.edit', $permintaan->id) }}">
-                                        Edit
-                                    </a>
-
-                                    <form action="{{ route('dashboard.permintaans.destroy', $permintaan->id) }}" method="POST" onsubmit="return confirm('Are you sure?');" style="display: inline-block;">
-                                        @method('DELETE')
+                                    <a class="btn btn-primary" href="{{ route('dashboard.permintaans.show', $permintaan->id) }}">Detail</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-warning" href="{{ route('dashboard.permintaans.edit', $permintaan->id) }}">Edit</a>
+                                    <form action="{{ route('dashboard.permintaans.destroy', $permintaan->id) }}" method="POST" style="display: inline-block;">
                                         @csrf
-                                        <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
                                     </form>
                                 </td>
                             </tr>

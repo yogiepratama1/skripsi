@@ -7,54 +7,49 @@
     </div>
 
     <div class="card-body">
-        <form method="POST" action="{{ route("dashboard.assets.update", [$asset->id]) }}" enctype="multipart/form-data">
-            @method('PUT')
+        <form method="POST" action="{{ route('dashboard.assets.update', $asset->id) }}" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="form-group">
-                <label class="required" for="category_id">Merek</label>
-                <select class="form-control select2 {{ $errors->has('category') ? 'is-invalid' : '' }}" name="category_id" id="category_id" required>
-                    @foreach($categories as $id => $entry)
-                        <option value="{{ $id }}" {{ (old('category_id') ? old('category_id') : $asset->category->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('category'))
-                    <span class="text-danger">{{ $errors->first('category') }}</span>
-                @endif
-            </div>
-
-            <div class="form-group">
-                <label class="required" for="status_id">Jenis</label>
-                <select class="form-control select2 {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status_id" id="status_id" required>
-                    @foreach($statuses as $id => $entry)
-                        <option value="{{ $id }}" {{ (old('status_id') ? old('status_id') : $asset->status->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                <label class="required" for="id_permintaan">Nama Penyidik</label>
+                <select class="form-control select2 {{ $errors->has('status') ? 'is-invalid' : '' }}" name="id_permintaan" id="id_permintaan" required>
+                    @foreach($permintaans as $id => $entry)
+                        <option value="{{ $id }}" {{ (old('id_permintaan') ? old('id_permintaan') : $asset->id_permintaan) == $id ? 'selected' : '' }}>{{ $entry }}</option>
                     @endforeach
                 </select>
                 @if($errors->has('status'))
                     <span class="text-danger">{{ $errors->first('status') }}</span>
                 @endif
             </div>
+            <div class="form-group">
+                <label class="required" for="barang">Barang</label>
+                <input class="form-control {{ $errors->has('barang') ? 'is-invalid' : '' }}" type="text" name="barang" id="barang" value="{{ old('barang', $asset->barang) }}" required>
+                @if($errors->has('barang'))
+                    <span class="text-danger">{{ $errors->first('barang') }}</span>
+                @endif
+            </div>
+            <div class="form-group">
+                <label class="required" for="jumlah">Jumlah</label>
+                <input class="form-control {{ $errors->has('jumlah') ? 'is-invalid' : '' }}" type="number" name="jumlah" id="jumlah" value="{{ old('jumlah', $asset->jumlah) }}" required>
+                @if($errors->has('jumlah'))
+                    <span class="text-danger">{{ $errors->first('jumlah') }}</span>
+                @endif
+            </div>
+            @if (auth()->user()->role != 'penyidik')
+            <div class="form-group">
+                <label class="required" for="status">Status</label>
+                <select class="form-control select2 {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status" id="status" required>
+                    <option value="0" {{ (old('status') ? old('status') : $asset->status) == 0 ? 'selected' : '' }}>Disetujui</option>
+                    <option value="1" {{ (old('status') ? old('status') : $asset->status) == 1 ? 'selected' : '' }}>Diproses</option>
+                    <option value="2" {{ (old('status') ? old('status') : $asset->status) == 2 ? 'selected' : '' }}>Siap Diambil</option>
+                    <option value="3" {{ (old('status') ? old('status') : $asset->status) == 3 ? 'selected' : '' }}>Diterima</option>
+                </select>
+                @if($errors->has('status'))
+                    <span class="text-danger">{{ $errors->first('status') }}</span>
+                @endif
+            </div>
+            @endif
 
-            <div class="form-group">
-                <label class="required" for="name">Name</label>
-                <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', $asset->name) }}" required>
-                @if($errors->has('name'))
-                    <span class="text-danger">{{ $errors->first('name') }}</span>
-                @endif
-            </div>
-            <div class="form-group">
-                <label class="required" for="harga">Harga</label>
-                <input class="form-control {{ $errors->has('harga') ? 'is-invalid' : '' }}" type="number" name="harga" id="harga" value="{{ old('harga', $asset->harga) }}" step="0.01" required>
-                @if($errors->has('harga'))
-                    <span class="text-danger">{{ $errors->first('harga') }}</span>
-                @endif
-            </div>
-            <div class="form-group">
-                <label for="deskripsi">Deskripsi</label>
-                <textarea class="form-control {{ $errors->has('deskripsi') ? 'is-invalid' : '' }}" name="deskripsi" id="deskripsi">{{ old('deskripsi', $asset->deskripsi) }}</textarea>
-                @if($errors->has('deskripsi'))
-                    <span class="text-danger">{{ $errors->first('deskripsi') }}</span>
-                @endif
-            </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     Save

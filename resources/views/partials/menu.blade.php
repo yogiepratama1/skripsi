@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4" style="min-height: 917px;">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-        <span class="brand-text font-weight-light">Selamat Datang</span>
+        <span class="brand-text font-weight-light">Selamat Datang, <br> {{ auth()->user()->name }}</span>
     </a>
 
     <!-- Sidebar -->
@@ -11,31 +11,29 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    @if (auth()->user()->role == 'vendor')
+                    @if (auth()->user()->role != 'kepalaresmob')
                     <li class="nav-item">
                         <a href="{{ url("/dashboard/assets") }}" class="nav-link {{ request()->is("dashboard/assets") || request()->is("dashboard/assets/*") ? "active" : "" }}">
-                        <img src="{{ asset('icons/car-solid.svg') }}" alt="barang" width="20px" height="20px">
+                        <img src="{{ asset('icons/pen-solid.svg') }}" alt="barang" width="20px" height="20px">
                             </i>
                             <p>
-                                Barang
+                                Permintaan Barang
                             </p>
                         </a>
                     </li>
-                    @endif
-                    @if (auth()->user()->role == 'sales' || auth()->user()->role == 'gudang')
                     <li class="nav-item">
                         <a href="{{ url("/dashboard/permintaans") }}" class="nav-link {{ request()->is("dashboard/permintaans") || request()->is("dashboard/permintaans/*") ? "active" : "" }}">
                         <img src="{{ asset('icons/pen-solid.svg') }}" alt="barang" width="20px" height="20px">
 
                             </i>
                             <p>
-                                Permintaan
+                                Penyidikan
                             </p>
                         </a>
                     </li>
                     @endif
 
-                    @if (auth()->user()->role == 'vendor' || auth()->user()->role == 'finance' || auth()->user()->role == 'gudang')
+                    <!-- @if (auth()->user()->role == 'vendor' || auth()->user()->role == 'finance' || auth()->user()->role == 'gudang')
                     <li class="nav-item">
                         <a href="{{ url("/dashboard/pembayarans") }}" class="nav-link {{ request()->is("dashboard/pembayarans") || request()->is("dashboard/pembayarans/*") ? "active" : "" }}">
                         <img src="{{ asset('icons/cash-register-solid.svg') }}" alt="barang" width="20px" height="20px">
@@ -46,9 +44,9 @@
                             </p>
                         </a>
                     </li>
-                    @endif
+                    @endif -->
 
-                    @if (auth()->user()->role != 'vendor')
+                    @if (auth()->user()->role == 'kepalaresmob')                        
                     <li class="nav-item">
                         <a href="{{ url("/dashboard/laporans") }}" class="nav-link {{ request()->is("dashboard/laporans") || request()->is("dashboard/laporans/*") ? "active" : "" }}">
                         <img src="{{ asset('icons/file.svg') }}" alt="laporan" width="20px" height="20px">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Asset;
+use App\Models\Permintaan;
 use App\Models\AssetStatus;
 use Illuminate\Http\Request;
 use App\Models\AssetCategory;
@@ -16,47 +17,48 @@ class AssetController extends Controller
 {
     public function index()
     {
-        $assets = Asset::with('category')->get();
-
+        $assets = Asset::with('permintaan')->get();
         return view('admin.assets.index', compact('assets'));
     }
 
     public function create()
     {
-        $categories = AssetCategory::pluck('name', 'id')->prepend('Please Select', '');
-        $statuses = AssetStatus::pluck('name', 'id')->prepend('Please Select', '');
+        $permintaans = Permintaan::pluck('nama_penyidik', 'id')->prepend('Please Select', '');
 
-        return view('admin.assets.create', compact('categories', 'statuses'));
+        return view('admin.assets.create', compact('permintaans'));
     }
 
-    public function store(StoreAssetRequest $request)
+    public function store(Request $request)
     {
         $asset = Asset::create($request->all());
-
         return redirect()->route('dashboard.assets.index');
     }
 
     public function edit(Asset $asset)
     {
-        $categories = AssetCategory::pluck('name', 'id')->prepend('Please Select', '');
-        $statuses = AssetStatus::pluck('name', 'id')->prepend('Please Select', '');
+        $permintaans = Permintaan::pluck('nama_penyidik', 'id')->prepend('Please Select', '');
 
-        $asset->load('category');
-
-        return view('admin.assets.edit', compact('asset', 'categories', 'statuses'));
+        return view('admin.assets.edit', compact('asset', 'permintaans'));
     }
 
-    public function update(UpdateAssetRequest $request, Asset $asset)
+    public function update(Request $request, Asset $asset)
     {
         $asset->update($request->all());
 
         return redirect()->route('dashboard.assets.index');
     }
 
+    public function terimabarang(Request $request, Asset $asset)
+    {
+        $asset->update([
+            'status' => 3
+        ]);
+
+        return redirect()->route('dashboard.assets.index');
+    }
+
     public function show(Asset $asset)
     {
-        $asset->load('category');
-
         return view('admin.assets.show', compact('asset'));
     }
 

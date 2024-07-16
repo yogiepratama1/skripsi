@@ -2,11 +2,16 @@
 @section('content')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
+        @if($laporans->isNotEmpty())
             <a class="btn btn-success" href="{{ route('dashboard.laporans.create') }}">
                 Export Laporan
             </a>
+        @else
+            <button class="btn btn-success" disabled>Export Laporan</button>
+        @endif
         </div>
     </div>
+
 <div class="card">
     <div class="card-header">
         Laporan List
@@ -14,34 +19,42 @@
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered table-striped table-hover datatable datatable-Laporan">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Permintaan</th>
-                        <th>Nama Pelanggan</th>
-                        <th>Alamat Pelanggan</th>
-                        <th>Harga</th>
-                        <th>Sudah Dikirim</th>
-                        <th>Sudah Bayar</th>
-                        <th>Tanggal Bayar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($laporans as $key => $laporan)
-                        <tr data-entry-id="{{ $laporan->id }}">
-                            <td>{{ $laporan->id ?? '' }}</td>
-                            <td>{{ $laporan->permintaan->barang->name ?? '' }}</td>
-                            <td>{{ $laporan->permintaan->nama_pelanggan ?? '' }}</td>
-                            <td>{{ $laporan->permintaan->alamat_pelanggan ?? '' }}</td>
-                            <td>Rp. {{ number_format($laporan->permintaan->barang->harga ?? 0, 0, ',', '.') }}</td>
-                            <td>{{ $laporan->permintaan->sudah_dikirim ? 'Ya' : 'Belum' }}</td>
-                            <td>{{ $laporan->permintaan->pembayaran?->sudah_bayar ? 'Ya' : 'Belum' }}</td>
-                            <td>{{ $laporan->permintaan->pembayaran?->tanggal_bayar ?? '' }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    <table class="table table-bordered table-striped table-hover datatable datatable-Laporan">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Penyidik</th>
+                                <th>Tersangka</th>
+                                <th>Kelengkapan Berkas</th>
+                                <th>Permintaan Barang</th>
+                                <th>Status Barang</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($laporans as $key => $permintaan)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $permintaan->nama_penyidik }}</td>
+                                    <td>{{ $permintaan->nama_tersangka }}</td>
+                                    <td>{{ $permintaan->kelengkapan ? 'Lengkap' : 'Tidak Lengkap' }}</td>
+                                    @foreach ($permintaan->barangs as $barang)                                        
+                                    <td>{{ $barang->barang }}</td>
+                                    @endforeach
+                                    <td>
+                                        @if ($permintaan->barangs[0]->status == 0)
+                                            Disetujui
+                                        @elseif ($permintaan->barangs[0]->status == 1)
+                                            Diproses
+                                        @elseif ($permintaan->barangs[0]->status == 2)
+                                            Siap Diambil
+                                        @elseif ($permintaan->barangs[0]->status == 3)
+                                            Diterima
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
         </div>
     </div>
 </div>

@@ -25,7 +25,7 @@ class AssetCategoryController extends Controller
     {
         $AssetCategory = AssetCategory::create($request->all());
 
-        return redirect()->route('dashboard.asset-categories.index');
+        return redirect()->route('dashboard.penyidikan.index');
     }
 
     public function edit(AssetCategory $assetCategory)
@@ -37,10 +37,10 @@ class AssetCategoryController extends Controller
     {
         $AssetCategory->update($request->all());
 
-        return redirect()->route('dashboard.asset-categories.index');
+        return redirect()->route('dashboard.penyidikan.index');
     }
 
-    public function show(AssetCategory $AssetCategory)
+    public function show(AssetCategory $assetCategory)
     {
         return view('admin.assetCategories.show', compact('assetCategory'));
     }

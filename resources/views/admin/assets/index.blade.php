@@ -5,68 +5,70 @@
             <a class="btn btn-success" href="{{ route('dashboard.assets.create') }}">
                 Tambah Barang
             </a>
-            <a class="btn btn-warning" href="{{ route('dashboard.asset-categories.create') }}">
-                Tambah Merek
-            </a>
-            <a class="btn btn-info" href="{{ route('dashboard.asset-statuses.create') }}">
-                Tambah Jenis
-            </a>
-        </div>
-        <div class="col-lg-12">
-            <a class="btn btn-warning" href="{{ route('dashboard.asset-categories.index') }}">
-                List Merek
-            </a>
-            <a class="btn btn-info" href="{{ route('dashboard.asset-statuses.index') }}">
-                List Jenis
-            </a>
-        </div>
+        <div>
     </div>
-<div class="card">
+    <div class="card">
     <div class="card-header">
         List Barang
     </div>
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered table-striped table-hover datatable datatable-Asset">
+            <table class="table table-bordered table-striped table-hover datatable datatable-Barang">
                 <thead>
                     <tr>
-                        <th width="10"></th>
-                        <th>Id</th>
-                        <th>Category</th>
-                        <th>Name</th>
-                        <th>Harga</th>
-                        <th>Deskripsi</th>
-                        <th>&nbsp;</th>
+                        <th>No</th>
+                        <th>ID</th>
+                        <th>Nama Penyidik</th>
+                        <th>Barang</th>
+                        <th>Jumlah</th>
+                        <th>Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($assets as $key => $asset)
-                        <tr data-entry-id="{{ $asset->id }}">
-                            <td></td>
-                            <td>{{ $asset->id ?? '' }}</td>
-                            <td>{{ $asset->category->name ?? '' }}</td>
-                            <td>{{ $asset->name ?? '' }}</td>
-                            <td>{{ $asset->harga ?? '' }}</td>
-                            <td>{{ $asset->deskripsi ?? '' }}</td>
+                    @if (!$assets->isEmpty())
+                    @foreach($assets as $key => $barang)
+                        <tr>
+                            <td>{{ $key + 1 }}</td>
+                            <td>{{ $barang->id }}</td>
+                            <td>{{ $barang->permintaan->nama_penyidik }}</td>
+                            <td>{{ $barang->barang }}</td>
+                            <td>{{ $barang->jumlah }}</td>
                             <td>
-                                    <a class="btn btn-xs btn-info" href="{{ route('dashboard.assets.edit', $asset->id) }}">
-                                        Edit
-                                    </a>
-                                    <form action="{{ route('dashboard.assets.destroy', $asset->id) }}" method="POST" onsubmit="return confirm('Are you sure?');" style="display: inline-block;">
-                                        @method('DELETE')
-                                        @csrf
-                                        <input type="submit" class="btn btn-xs btn-danger" value="Delete">
-                                    </form>
-                    
+                                @if ($barang->status == 0)
+                                    Disetujui
+                                @elseif ($barang->status == 1)
+                                    Diproses
+                                @elseif ($barang->status == 2)
+                                    Siap Diambil
+                                @elseif ($barang->status == 3)
+                                    Diterima
+                                @endif
+                            </td>
+                            <td>
+                                @if ($barang->status == 2 && auth()->user()->role == 'penyidik')
+                                    <a class="btn btn-success" href="{{ route('dashboard.assets.terimabarang', $barang->id) }}">Terima Barang</a>                                    
+                                @endif
+                                <a class="btn btn-warning" href="{{ route('dashboard.assets.edit', $barang->id) }}">Edit</a>
+                                <form action="{{ route('dashboard.assets.destroy', $barang->id) }}" method="POST" style="display: inline-block;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
+                    @endif
+
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
+</div>
+
 @endsection
 
 @section('scripts')
@@ -80,7 +82,7 @@
     order: [[ 1, 'desc' ]],
     pageLength: 100,
   });
-  let table = $('.datatable-Asset:not(.ajaxTable)').DataTable({ buttons: dtButtons });
+  let table = $('.datatable-Barang:not(.ajaxTable)').DataTable({ buttons: dtButtons });
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
       $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
   });

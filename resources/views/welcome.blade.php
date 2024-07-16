@@ -2,60 +2,72 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <title>Sistem Informasi Tracking dan Tracing</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <!-- Favicon -->
-    <link rel="icon" href="{{ asset('logo.png') }}" type="image/x-icon">
+  <title>PERANCANGAN DAN PEMBUATAN SISTEM INFORMASI MONITORING PENYIDIKAN BERBASIS WEB PADA UNIT V SUBDIT RESMOB POLDA METRO JAYA</title>
+  <link rel="icon" href="{{ asset('logo.png') }}" type="image/x-icon">
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{ asset('css/willson/bootstrap.min.css') }}" rel="stylesheet">
 
-    <!-- Template Stylesheet -->
-    <link href="{{ asset('css/willson/style.css') }}" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Dosis:300,400,500,,600,700,700i|Lato:300,300i,400,400i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
 </head>
 
 <body>
-    <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow border-top border-5 border-primary sticky-top p-0">
-        <a href="" class="navbar-brand bg-primary d-flex align-items-center px-4 px-lg-5">
-            <h2 class="mb-2 text-white">PT Panca Traktor Indonesia</h2>
-        </a>
-        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="{{ url('login') }}" class="nav-item nav-link">Login</a>
-            </div>
-            <h4 class="m-0 pe-lg-5 d-none d-lg-block"><i class="fa fa-headphones text-primary me-3"></i>(021) 2464 – 8286</h4>
-        </div>
-    </nav>
-    <!-- Navbar End -->
 
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center justify-content-between">
 
-    <!-- Carousel Start -->
-    <div class="container-fluid p-0 pb-5">
-        <div class=" position-relative mb-5">
-            <div class=" position-relative">
-                <img class="img-fluid" src="{{ asset('traktor-pic.png') }}" alt="">
-                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(6, 3, 21, .5);">
-                    <div class="container">
-                        <div class="row justify-content-start">
-                            <div class="col-10 col-lg-8">
-                                <h5 class="text-white text-uppercase mb-3 animated slideInDown">PT Panca Traktor Indonesia</h5>
-                                <h1 class="display-3 text-white animated slideInDown mb-4">Sistem Informasi <span class="text-primary">Tracking & Tracing Unit Traktor Menggunakan Teknologi QR Code</span> </h1>
-                                <p class="fs-5 fw-medium text-white mb-4 pb-2">The official Indonesian Dealership of LiuGong Heavy Equipments</p>
-                                <a href="{{ url('login') }}" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Mulai</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      <a href="index.html" class="logo">UNIT V SUBDIT RESMOB POLDA METRO JAYA</a>
+      <!-- Uncomment below if you prefer to use text as a logo -->
+      <!-- <h1 class="logo"><a href="index.html">Butterfly</a></h1> -->
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="{{ url('login') }}">Login</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
     </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
+          <h1> PERANCANGAN DAN PEMBUATAN SISTEM INFORMASI MONITORING PENYIDIKAN BERBASIS WEB PADA UNIT V SUBDIT RESMOB POLDA METRO JAYA </h1>
+          <h2></h2>
+          <div><a href="{{ url('login') }}" class="btn-get-started scrollto">Mulai</a></div>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2 hero-img">
+          <img src="assets/img/hero-img.png" class="img-fluid" alt="">
+        </div>
+      </div>
+    </div>
+
+  </section><!-- End Hero -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
 </body>
+
 </html>

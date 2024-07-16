@@ -35,14 +35,14 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'namespace' => 'Admin','middleware' => 'auth'], function () {
     // Asset Category
-    Route::get('asset-categories', [AssetCategoryController::class, 'index'])->name('asset-categories.index');
-    Route::get('asset-categories/create', [AssetCategoryController::class, 'create'])->name('asset-categories.create');
-    Route::post('asset-categories', [AssetCategoryController::class, 'store'])->name('asset-categories.store');
-    Route::get('asset-categories/{asset_category}', [AssetCategoryController::class, 'show'])->name('asset-categories.show');
-    Route::get('asset-categories/{asset_category}/edit', [AssetCategoryController::class, 'edit'])->name('asset-categories.edit');
-    Route::put('asset-categories/{asset_category}', [AssetCategoryController::class, 'update'])->name('asset-categories.update');
-    Route::delete('asset-categories/{asset_category}', [AssetCategoryController::class, 'destroy'])->name('asset-categories.destroy');
-    Route::delete('asset-categories/destroy', [AssetCategoryController::class, 'massDestroy'])->name('asset-categories.massDestroy');
+    Route::get('1', [AssetCategoryController::class, 'index'])->name('1.index');
+    Route::get('1/create', [AssetCategoryController::class, 'create'])->name('1.create');
+    Route::post('1', [AssetCategoryController::class, 'store'])->name('1.store');
+    Route::get('1/{asset_category}', [AssetCategoryController::class, 'show'])->name('1.show');
+    Route::get('1/{asset_category}/edit', [AssetCategoryController::class, 'edit'])->name('1.edit');
+    Route::put('1/{asset_category}', [AssetCategoryController::class, 'update'])->name('1.update');
+    Route::delete('1/{asset_category}', [AssetCategoryController::class, 'destroy'])->name('1.destroy');
+    Route::delete('1/destroy', [AssetCategoryController::class, 'massDestroy'])->name('1.massDestroy');
 
     // Asset Status
     Route::get('asset-statuses', [AssetStatusController::class, 'index'])->name('asset-statuses.index');
@@ -61,6 +61,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'namespace' => 'Adm
     Route::get('assets/{asset}', [AssetController::class, 'show'])->name('assets.show');
     Route::get('assets/{asset}/edit', [AssetController::class, 'edit'])->name('assets.edit');
     Route::put('assets/{asset}', [AssetController::class, 'update'])->name('assets.update');
+    Route::get('assets/{asset}/terimabarang', [AssetController::class, 'terimabarang'])->name('assets.terimabarang');
     Route::delete('assets/{asset}', [AssetController::class, 'destroy'])->name('assets.destroy');
     Route::delete('assets/destroy', [AssetController::class, 'massDestroy'])->name('assets.massDestroy');
 
@@ -90,6 +91,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'namespace' => 'Adm
     // Laporan
     Route::get('laporans', [LaporanController::class, 'index'])->name('laporans.index');
     Route::get('laporans/create', [LaporanController::class, 'create'])->name('laporans.create');
+    Route::get('laporans/create-average', [LaporanController::class, 'createAverageAksesoris'])->name('laporans.create-average');
     Route::post('laporans', [LaporanController::class, 'store'])->name('laporans.store');
     Route::get('laporans/{laporan}', [LaporanController::class, 'show'])->name('laporans.show');
     Route::get('laporans/{laporan}/edit', [LaporanController::class, 'edit'])->name('laporans.edit');

@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>                Sistem Informasi Tracking dan Tracing
+    <title>                PERANCANGAN DAN PEMBUATAN SISTEM INFORMASI MONITORING PENYIDIKAN BERBASIS WEB PADA UNIT V SUBDIT RESMOB POLDA METRO JAYA
 </title>
     <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" /> -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />

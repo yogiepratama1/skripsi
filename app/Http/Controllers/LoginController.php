@@ -23,11 +23,8 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Authentication passed
-            if (Auth::user()->role == 'finance') {
-                return redirect()->route('dashboard.pembayarans.index');
-            }
-            if (Auth::user()->role == 'sales' || Auth::user()->role == 'gudang') {
-                return redirect()->route('dashboard.permintaans.index');
+            if (Auth::user()->role == 'kepalaresmob') {
+                return redirect()->route('dashboard.laporans.index');
             }
             
             return redirect()->route('dashboard.assets.index');

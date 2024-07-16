@@ -102,7 +102,7 @@
         </div>
 
         <footer class="main-footer">
-            <strong> &copy;</strong> Sistem Informasi Tracking dan Tracing 
+            <strong> &copy;</strong> PERANCANGAN DAN PEMBUATAN SISTEM INFORMASI MONITORING PENYIDIKAN BERBASIS WEB PADA UNIT V SUBDIT RESMOB POLDA METRO JAYA 
         </footer>
     </div>
     <script src="{{ asset('js/jquery.min.js') }}"></script>

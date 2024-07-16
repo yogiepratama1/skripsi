@@ -7,7 +7,7 @@
             <img src="{{ asset('logo.png') }}" alt="Logo" class="img-fluid" width="250">
             <br>
             <a href="{{ url('') }}">
-                Sistem Informasi Tracking dan Tracing
+                PERANCANGAN DAN PEMBUATAN SISTEM INFORMASI MONITORING PENYIDIKAN BERBASIS WEB PADA UNIT V SUBDIT RESMOB POLDA METRO JAYA
             </a>
         </div>
     </div>

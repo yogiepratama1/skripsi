@@ -3,69 +3,30 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.show') }} {{ trans('cruds.asset.title') }}
+        Detail Barang
     </div>
 
     <div class="card-body">
         <div class="form-group">
-            <div class="form-group">
-                <a class="btn btn-default" href="{{ route('dashboard.assets.index') }}">
-                    {{ trans('global.back_to_list') }}
-                </a>
-            </div>
-            <table class="table table-bordered table-striped">
-                <tbody>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.asset.fields.id') }}
-                        </th>
-                        <td>
-                            {{ $asset->id }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.asset.fields.category') }}
-                        </th>
-                        <td>
-                            {{ $asset->category->name ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.asset.fields.name') }}
-                        </th>
-                        <td>
-                            {{ $asset->name }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.asset.fields.harga') }}
-                        </th>
-                        <td>
-                            {{ $asset->harga }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.asset.fields.deskripsi') }}
-                        </th>
-                        <td>
-                            {{ $asset->deskripsi }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="form-group">
-                <a class="btn btn-default" href="{{ route('dashboard.assets.index') }}">
-                    {{ trans('global.back_to_list') }}
-                </a>
-            </div>
+            <label for="id_permintaan">Nama Penyidik:</label>
+            <input class="form-control" type="text" id="id_permintaan" value="{{ $asset->permintaan->nama_penyidik }}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="barang">Barang:</label>
+            <input class="form-control" type="text" id="barang" value="{{ $asset->barang }}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="jumlah">Jumlah:</label>
+            <input class="form-control" type="number" id="jumlah" value="{{ $asset->jumlah }}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="status">Status:</label>
+            <input class="form-control" type="text" id="status" value="{{ $asset->status_text }}" disabled>
+        </div>
+        <div class="form-group">
+            <a class="btn btn-secondary" href="{{ route('dashboard.assets.index') }}">Back</a>
         </div>
     </div>
 </div>
-
-
 
 @endsection
