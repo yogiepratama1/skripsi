@@ -2,67 +2,98 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\MassDestroyPermintaanRequest;
-use App\Http\Requests\StorePermintaanRequest;
-use App\Http\Requests\UpdatePermintaanRequest;
+use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Asset;
 use App\Models\Laporan;
 use App\Models\Permintaan;
-use App\Models\User;
-use Gate;
 use Illuminate\Http\Request;
+use App\Models\AssetCategory;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Requests\MassDestroyPermintaanRequest;
 
 class PermintaanController extends Controller
 {
     public function index()
     {
-        $permintaans = Permintaan::with(['barang'])->get();
+        if (auth()->user()->role != 'user') {
+            $permintaans = Permintaan::all();
+        } else {
+            $permintaans = Permintaan::where('user_id', auth()->id())->get();
+        }
 
         return view('admin.permintaans.index', compact('permintaans'));
     }
 
     public function create()
     {
-        $users = User::where('role', 'sales')->pluck('name', 'id')->prepend('Please Select', '');
-
-        $barangs = Asset::pluck('name', 'id')->prepend('Please Select', '');
-
-        return view('admin.permintaans.create', compact('barangs', 'users'));
+        $assets = Asset::all();
+        return view('admin.permintaans.create', compact('assets'));
     }
 
-    public function store(StorePermintaanRequest $request)
+    public function store(Request $request)
     {
-        $permintaan = Permintaan::create($request->all());
-        $laporan = Laporan::create([
-            'permintaan_id' => $permintaan->id,
-        ]);
+        if ($request->hasFile('bukti_pembayaran')) {
+            $path = $request->file('bukti_pembayaran')->store('bukti_pembayaran', 'public');
+            $request->merge(['bukti_pembayaran' => $path]);
+        }
+        
+        if ($request->has('spareparts')) {
+            $sparepartsString = implode(',', $request->spareparts ?? []);
 
+            $request->merge(['spareparts' => $sparepartsString]);
+        }
+
+        $request->merge(['user_id' => auth()->id()]);
+
+        $permintaan = Permintaan::create($request->all());
         return redirect()->route('dashboard.permintaans.index');
     }
 
     public function edit(Permintaan $permintaan)
     {
-        $users = User::where('role', 'sales')->pluck('name', 'id')->prepend('Please Select', '');
+        $assets = Asset::all();
 
-        $barangs = Asset::pluck('name', 'id')->prepend('Please Select', '');
-
-        $permintaan->load('user', 'barang');
-
-        return view('admin.permintaans.edit', compact('barangs', 'permintaan', 'users'));
+        return view('admin.permintaans.edit', compact('permintaan', 'assets'));
+    }
+    public function bayar(Permintaan $permintaan)
+    {
+        return view('admin.permintaans.bayar', compact('permintaan'));
     }
 
-    public function update(UpdatePermintaanRequest $request, Permintaan $permintaan)
+    public function update(Request $request, Permintaan $permintaan)
     {
-        $permintaan->update($request->all());
+        if ($request->input('tanggal_bayar')){
+            $tanggalBayar = Carbon::createFromFormat('Y-m-d', $request->input('tanggal_bayar'))->format('Y-m-d');
+            $request->merge(['tanggal_bayar' => $tanggalBayar]);
+        }
+
+        if ($request->hasFile('bukti_pembayaran')) {
+            // Mengambil nama file asli
+            $originalName = $request->file('bukti_pembayaran')->getClientOriginalName();
+            // Menyimpan file dengan nama asli di folder 'uploads'
+            $filePath = $request->file('bukti_pembayaran')->storeAs('uploads', $originalName, 'public');
+
+            $permintaan->bukti_pembayaran = $filePath;
+            $permintaan->save();
+        }
+
+        if ($request->has('spareparts')) {
+            $sparepartsString = implode(',', $request->spareparts ?? []);
+
+            $request->merge(['spareparts' => $sparepartsString]);
+        }
+
+        $permintaan->update($request->except('bukti_pembayaran'));
 
         return redirect()->route('dashboard.permintaans.index');
     }
 
     public function show(Permintaan $permintaan)
     {
-        $permintaan->load('user', 'barang');
+        $permintaan->load('user');
 
         return view('admin.permintaans.show', compact('permintaan'));
     }

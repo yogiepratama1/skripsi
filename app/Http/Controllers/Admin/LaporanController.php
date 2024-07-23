@@ -17,20 +17,49 @@ class LaporanController extends Controller
 {
     public function index()
     {
-        $laporans = Laporan::with(['permintaan'])->get();
+        $laporans = Permintaan::where('status', 3)->get();
 
         return view('admin.laporans.index', compact('laporans'));
     }
 
 
-
-    public function create()
+    public function create(Request $request)
     {
-        $laporans = Laporan::with(['permintaan'])->get();
+        $laporans = Permintaan::where('status', 3);
+        // Set default dates if not provided
+        $startDate = $request->start_date ?? now()->subMonth()->toDateString(); // Default to one month ago
+        $endDate = $request->end_date ?? now()->toDateString();
+        // Apply additional where condition to filter by created_at date range
+        $laporans = $laporans->whereBetween('created_at', [$startDate . " 00:00:00", $endDate . " 23:59:59"]);
+    
+        $laporans = $laporans->get();
+
     
         $pdf = PDF::loadView('admin.laporans.pdf', compact('laporans'));
+        $pdf->setPaper('a4', 'landscape');
         return $pdf->download('laporan-list.pdf');
     }
+
+    public function createAverageAksesoris()
+    {
+        $laporans = Permintaan::with('aksesoris')->get();
+    
+        $averageHargaByAssetCategory = $laporans->groupBy(function ($laporan) {
+            return $laporan->aksesoris->name;
+        })->map(function ($groupedLaporans) {
+            $totalHarga = $groupedLaporans->sum(function ($laporan) {
+                return $laporan->aksesoris->harga ?? 0;
+            });
+    
+            $totalCount = $groupedLaporans->count();
+    
+            return $totalCount > 0 ? $totalHarga / $totalCount : 0;
+        });
+    
+        $pdf = PDF::loadView('admin.laporans.pdf-harga', compact('averageHargaByAssetCategory'));
+        return $pdf->download('laporan-list.pdf');
+    }
+    
 
     public function store(StoreLaporanRequest $request)
     {

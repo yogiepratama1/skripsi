@@ -5,21 +5,7 @@
             <a class="btn btn-success" href="{{ route('dashboard.assets.create') }}">
                 Tambah Barang
             </a>
-            <a class="btn btn-warning" href="{{ route('dashboard.asset-categories.create') }}">
-                Tambah Merek
-            </a>
-            <a class="btn btn-info" href="{{ route('dashboard.asset-statuses.create') }}">
-                Tambah Jenis
-            </a>
-        </div>
-        <div class="col-lg-12">
-            <a class="btn btn-warning" href="{{ route('dashboard.asset-categories.index') }}">
-                List Merek
-            </a>
-            <a class="btn btn-info" href="{{ route('dashboard.asset-statuses.index') }}">
-                List Jenis
-            </a>
-        </div>
+        <div>
     </div>
 <div class="card">
     <div class="card-header">
@@ -33,11 +19,14 @@
                     <tr>
                         <th width="10"></th>
                         <th>Id</th>
-                        <th>Category</th>
                         <th>Name</th>
-                        <th>Harga</th>
+                        <!-- <th>Harga</th> -->
                         <th>Deskripsi</th>
+                        <!-- <th>Jenis</th>
+                        <th>Merek</th> -->
+                        @if (auth()->user()->role == 'user')                            
                         <th>&nbsp;</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -45,10 +34,14 @@
                         <tr data-entry-id="{{ $asset->id }}">
                             <td></td>
                             <td>{{ $asset->id ?? '' }}</td>
-                            <td>{{ $asset->category->name ?? '' }}</td>
                             <td>{{ $asset->name ?? '' }}</td>
-                            <td>{{ $asset->harga ?? '' }}</td>
                             <td>{{ $asset->deskripsi ?? '' }}</td>
+                            <!-- <td>
+                                {{ number_format($asset->harga, 0, ',', '.') ?? ''  }}
+                            </td>                            
+                            <td>{{ $asset->status->name ?? '' }}</td> -->
+                            <!-- <td>{{ $asset->merek ?? '' }}</td> -->
+                            @if (auth()->user()->role == 'user')
                             <td>
                                     <a class="btn btn-xs btn-info" href="{{ route('dashboard.assets.edit', $asset->id) }}">
                                         Edit
@@ -58,8 +51,8 @@
                                         @csrf
                                         <input type="submit" class="btn btn-xs btn-danger" value="Delete">
                                     </form>
-                    
                             </td>
+                            @endif
                         </tr>
                     @endforeach
                 </tbody>

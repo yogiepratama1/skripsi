@@ -1,49 +1,83 @@
 @extends('layouts.admin')
 @section('content')
     <div style="margin-bottom: 10px;" class="row">
+    <div class="col-lg-12">
+        @if($laporans->isNotEmpty())
+        <form action="{{ route('dashboard.laporans.create') }}" method="GET">
+            <div class="form-group col-lg-3">
+                <label for="start_date">Start Date:</label>
+                <input type="date" class="form-control" id="start_date" name="start_date" required>
+                <label for="end_date">End Date:</label>
+                <input type="date" class="form-control" id="end_date" name="end_date" required>
+            </div>
+            <button type="submit" class="btn btn-success">Export Laporan</button>
+        </form>
+        @else
+            <button class="btn btn-success" disabled>Export Laporan</button>
+        @endif
+        </div>
+    </div>
+    <!-- @if (auth()->user()->role == 'bendahara')        
+    <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route('dashboard.laporans.create') }}">
-                Export Laporan
+            <a class="btn btn-info" href="{{ route('dashboard.laporans.create-average') }}">
+                Export Rata-Rata Penjualan Aksesoris
             </a>
         </div>
     </div>
+    @endif -->
+
 <div class="card">
     <div class="card-header">
         Laporan List
     </div>
 
     <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped table-hover datatable datatable-Laporan">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Permintaan</th>
-                        <th>Nama Pelanggan</th>
-                        <th>Alamat Pelanggan</th>
-                        <th>Harga</th>
-                        <th>Sudah Dikirim</th>
-                        <th>Sudah Bayar</th>
-                        <th>Tanggal Bayar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($laporans as $key => $laporan)
-                        <tr data-entry-id="{{ $laporan->id }}">
-                            <td>{{ $laporan->id ?? '' }}</td>
-                            <td>{{ $laporan->permintaan->barang->name ?? '' }}</td>
-                            <td>{{ $laporan->permintaan->nama_pelanggan ?? '' }}</td>
-                            <td>{{ $laporan->permintaan->alamat_pelanggan ?? '' }}</td>
-                            <td>Rp. {{ number_format($laporan->permintaan->barang->harga ?? 0, 0, ',', '.') }}</td>
-                            <td>{{ $laporan->permintaan->sudah_dikirim ? 'Ya' : 'Belum' }}</td>
-                            <td>{{ $laporan->permintaan->pembayaran?->sudah_bayar ? 'Ya' : 'Belum' }}</td>
-                            <td>{{ $laporan->permintaan->pembayaran?->tanggal_bayar ?? '' }}</td>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover datatable datatable-Permintaan">
+                    <thead>
+                        <tr>
+                            <th class="no-export" width="10">No</th>
+                            <th>Nama Pelanggan</th>
+                            <th>Motor</th>
+                            <th>Keluhan</th>
+                            <th>Harga</th>
+                            <th>Tanggal Servis</th>
+                            <th>Status</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach($laporans as $index => $laporan)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $laporan->nama_pelanggan }}</td>
+                            <td>{{ $laporan->motor }}</td>
+                            <td>{{ $laporan->keluhan }}</td>
+                            <td>{{ $laporan->harga }}</td>
+                            <td>{{ $laporan->created_at->format('d/m/Y') }}</td>
+                            <td>
+                            @switch($laporan->status)
+                                    @case(0)
+                                        Menunggu Konfirmasi
+                                        @break
+                                    @case(1)
+                                        Diproses
+                                        @break
+                                    @case(2)
+                                        Menunggu Pembayaran
+                                        @break
+                                    @case(3)
+                                        Selesai
+                                        @break
+                                @endswitch
+
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
 </div>
 
 @endsection
