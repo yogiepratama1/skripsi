@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,6 +14,11 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
+    public function showRegisterForm()
+    {
+        return view('auth.register');
+    }
+
     // Handle the login request
     public function login(Request $request)
     {
@@ -22,19 +28,34 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            // Authentication passed
-            if (Auth::user()->role == 'finance') {
-                return redirect()->route('dashboard.pembayarans.index');
+            if(auth()->user()->role == 'pemilikbengkel') {
+                return redirect()->route('dashboard.laporans.index');
             }
-            if (Auth::user()->role == 'sales' || Auth::user()->role == 'gudang') {
-                return redirect()->route('dashboard.permintaans.index');
-            }
-            
-            return redirect()->route('dashboard.assets.index');
+            return redirect()->route('dashboard.permintaans.index');
         } else {
             // Authentication failed
             return redirect()->route('login')->with('message', 'Invalid credentials');
         }
+    }
+
+    public function register(Request $request)
+    {
+        $credentials = $request->validate([
+            'name' => ['required'],
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        $user = new User();
+        $user->name = $credentials['name'];
+        $user->email = $credentials['email'];
+        $user->password = bcrypt($credentials['password']);
+        $user->role = 'user';
+        $user->save();
+
+        Auth::login($user);
+        return redirect()->route('dashboard.permintaans.index');
+
     }
 
     // Handle the logout request

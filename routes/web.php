@@ -28,7 +28,9 @@ Route::get('/', function() {
         return view('welcome');
     });
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::get('register', [LoginController::class, 'showRegisterForm'])->name('register');
 Route::post('login', [LoginController::class, 'login']);
+Route::post('register', [LoginController::class, 'register']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 
@@ -73,6 +75,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'namespace' => 'Adm
     Route::post('permintaans', [PermintaanController::class, 'store'])->name('permintaans.store');
     Route::get('permintaans/{permintaan}', [PermintaanController::class, 'show'])->name('permintaans.show');
     Route::get('permintaans/{permintaan}/edit', [PermintaanController::class, 'edit'])->name('permintaans.edit');
+    Route::get('permintaans/{permintaan}/bayar', [PermintaanController::class, 'bayar'])->name('permintaans.bayar');
     Route::put('permintaans/{permintaan}', [PermintaanController::class, 'update'])->name('permintaans.update');
     Route::delete('permintaans/{permintaan}', [PermintaanController::class, 'destroy'])->name('permintaans.destroy');
     Route::delete('permintaans/destroy', [PermintaanController::class, 'massDestroy'])->name('permintaans.massDestroy');

@@ -20,8 +20,13 @@
                             Name
                         </th>
                         <th>
-                            &nbsp;
+                            Harga
                         </th>
+                        @if (auth()->user()->role == 'vendor')
+                        <th>
+                            &nbsp;
+                        </th>                            
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -37,6 +42,10 @@
                                 {{ $assetCategory->name ?? '' }}
                             </td>
                             <td>
+                                {{ number_format($assetCategory->harga, 0, ',', '.') ?? ''  }}
+                            </td>
+                            @if (auth()->user()->role == 'vendor')
+                            <td>
 
                                     <a class="btn btn-xs btn-info" href="{{ route('dashboard.asset-categories.edit', $assetCategory->id) }}">
                                         Edit
@@ -47,9 +56,8 @@
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="Delete">
                                     </form>
-
                             </td>
-
+                            @endif
                         </tr>
                     @endforeach
                 </tbody>
