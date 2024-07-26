@@ -9,7 +9,7 @@
     <div class="card-body">
         <form method="POST" action="{{ route("dashboard.assets.store") }}" enctype="multipart/form-data">
             @csrf
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label class="required" for="status_id">Jenis</label>
                 <select class="form-control select2 {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status_id" id="status_id" required>
                     @foreach($statuses as $id => $entry)
@@ -19,7 +19,7 @@
                 @if($errors->has('status'))
                     <span class="text-danger">{{ $errors->first('status') }}</span>
                 @endif
-            </div>
+            </div> -->
             <div class="form-group">
                 <label class="required" for="name">Name</label>
                 <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', '') }}" required>
@@ -28,6 +28,14 @@
                 @endif
             </div>
             <div class="form-group">
+                <label for="deskripsi">Deskripsi</label>
+                <textarea class="form-control {{ $errors->has('deskripsi') ? 'is-invalid' : '' }}" name="deskripsi" id="deskripsi">{{ old('deskripsi') }}</textarea>
+                @if($errors->has('deskripsi'))
+                    <span class="text-danger">{{ $errors->first('deskripsi') }}</span>
+                @endif
+            </div>
+
+            <!-- <div class="form-group">
                 <label class="required" for="name">Merek</label>
                 <input class="form-control {{ $errors->has('merek') ? 'is-invalid' : '' }}" type="text" name="merek" id="merek" value="{{ old('merek', '') }}" required>
                 @if($errors->has('merek'))
@@ -40,14 +48,7 @@
                 @if($errors->has('harga'))
                     <span class="text-danger">{{ $errors->first('harga') }}</span>
                 @endif
-            </div>
-            <div class="form-group">
-                <label for="deskripsi">Deskripsi</label>
-                <textarea class="form-control {{ $errors->has('deskripsi') ? 'is-invalid' : '' }}" name="deskripsi" id="deskripsi">{{ old('deskripsi') }}</textarea>
-                @if($errors->has('deskripsi'))
-                    <span class="text-danger">{{ $errors->first('deskripsi') }}</span>
-                @endif
-            </div>
+            </div> -->
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     Save

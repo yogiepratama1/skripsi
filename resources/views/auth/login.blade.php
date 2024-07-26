@@ -4,10 +4,10 @@
     <div class="login-logo">
         <div class="login-logo">
             <!-- add logo -->
-            <img src="{{ asset('logo-perusahaan.png') }}" alt="Logo" class="img-fluid" width="250">
+            <img src="{{ asset('logo-perusahaan2.png') }}" alt="Logo" class="img-fluid" width="250">
             <br>
             <a href="{{ url('') }}">
-                {{ env('JUDUL') }}
+                SISTEM INFORMASI TRANSAKSI BERBASIS WEB PADA BENGKEL MOTOR HIDUP BARU
             </a>
         </div>
     </div>
@@ -18,9 +18,9 @@
             </p>
 
             @if(session()->has('message'))
-            <p class="alert alert-info">
-                {{ session()->get('message') }}
-            </p>
+                <p class="alert alert-info">
+                    {{ session()->get('message') }}
+                </p>
             @endif
 
             <form action="{{ route('login') }}" method="POST">
@@ -30,9 +30,9 @@
                     <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" required autocomplete="email" autofocus placeholder="Email" name="email" value="{{ old('email', null) }}">
 
                     @if($errors->has('email'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('email') }}
-                    </div>
+                        <div class="invalid-feedback">
+                            {{ $errors->first('email') }}
+                        </div>
                     @endif
                 </div>
 
@@ -40,9 +40,9 @@
                     <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required placeholder="Password">
 
                     @if($errors->has('password'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('password') }}
-                    </div>
+                        <div class="invalid-feedback">
+                            {{ $errors->first('password') }}
+                        </div>
                     @endif
                 </div>
 
@@ -55,12 +55,14 @@
                         </div>
                     </div>
                     <!-- /.col -->
-                    <div class="col-4 mb-3">
+                    <div class="col-4">
                         <button type="submit" class="btn btn-primary btn-block btn-flat">
                             Login
                         </button>
                     </div>
-                    <!-- <a class="btn btn-info btn-block btn-flat" href="{{ route('register') }}" style="color: white;">Register</a> -->
+                    <div class="col-4">
+                        <a href="{{ route('register') }}" class="btn btn-secondary btn-block btn-flat">Register</a>
+                    </div>
                     <!-- /.col -->
                 </div>
             </form>

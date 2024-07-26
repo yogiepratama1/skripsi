@@ -2,120 +2,114 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-
+    <!-- Basic Page Needs
+  ================================================== -->
+    <meta charset="utf-8" />
     <title>{{ env('JUDUL') }}</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Mobile Specific Metas
+  ================================================== -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Bootstrap App Landing Template" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta name="author" content="Themefisher" />
+    <meta name="generator" content="Themefisher Small Apps Template v1.0" />
 
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css" />
-    <link rel="stylesheet" href="assets/css/templatemo-digimedia-v1.css" />
-    <link rel="stylesheet" href="assets/css/animated.css" />
-    <link rel="stylesheet" href="assets/css/owl.css" />
-    <!--
+    <!-- Favicon -->
+    <link rel="icon" href="{{ asset('logo-perusahaan2.png') }}" type="image/x-icon">
 
-TemplateMo 568 DigiMedia
+<!-- PLUGINS CSS STYLE -->
+<link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap/bootstrap.min.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/plugins/themify-icons/themify-icons.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/plugins/slick/slick.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/plugins/slick/slick-theme.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/plugins/fancybox/jquery.fancybox.min.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/plugins/aos/aos.css') }}" />
 
-https://templatemo.com/tm-568-digimedia
-
--->
+<!-- CUSTOM CSS -->
+<link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
 </head>
 
-<body>
-    <!-- ***** Preloader Start ***** -->
-    <div id="js-preloader" class="js-preloader">
-        <div class="preloader-inner">
-            <span class="dot"></span>
-            <div class="dots">
-                <span></span>
-                <span></span>
-                <span></span>
+<body class="body-wrapper" data-spy="scroll" data-target=".privacy-nav">
+    <nav class="navbar main-nav navbar-expand-lg px-2 px-sm-0 py-2 py-lg-0">
+        <div class="container">
+            <a class="navbar-brand"></a>
+            <img src="{{ asset('logo-perusahaan2.png') }}" alt="logo" width="50px" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="ti-menu"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Home
+                        </a>
+                    </li>
+                    <li class="nav-item @@about">
+                        <a class="nav-link" href="{{ route('login') }}">Login</a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </div>
-    <!-- ***** Preloader End ***** -->
+    </nav>
 
-    <!-- Pre-header End -->
-
-    <!-- ***** Header Area Start ***** -->
-    <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+    <!--====================================
+=            Hero Section            =
+=====================================-->
+    <section class="section gradient-banner">
+        <div class="shapes-container">
+            <div class="shape" data-aos="fade-down-left" data-aos-duration="1500" data-aos-delay="100"></div>
+            <div class="shape" data-aos="fade-down" data-aos-duration="1000" data-aos-delay="100"></div>
+            <div class="shape" data-aos="fade-up-right" data-aos-duration="1000" data-aos-delay="200"></div>
+            <div class="shape" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"></div>
+            <div class="shape" data-aos="fade-down-left" data-aos-duration="1000" data-aos-delay="100"></div>
+            <div class="shape" data-aos="fade-down-left" data-aos-duration="1000" data-aos-delay="100"></div>
+            <div class="shape" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="300"></div>
+            <div class="shape" data-aos="fade-down-right" data-aos-duration="500" data-aos-delay="200"></div>
+            <div class="shape" data-aos="fade-down-right" data-aos-duration="500" data-aos-delay="100"></div>
+            <div class="shape" data-aos="zoom-out" data-aos-duration="2000" data-aos-delay="500"></div>
+            <div class="shape" data-aos="fade-up-right" data-aos-duration="500" data-aos-delay="200"></div>
+            <div class="shape" data-aos="fade-down-left" data-aos-duration="500" data-aos-delay="100"></div>
+            <div class="shape" data-aos="fade-up" data-aos-duration="500" data-aos-delay="0"></div>
+            <div class="shape" data-aos="fade-down" data-aos-duration="500" data-aos-delay="0"></div>
+            <div class="shape" data-aos="fade-up-right" data-aos-duration="500" data-aos-delay="100"></div>
+            <div class="shape" data-aos="fade-down-left" data-aos-duration="500" data-aos-delay="0"></div>
+        </div>
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <nav class="main-nav">
-                        <!-- ***** Logo Start ***** -->
-                        <a href="index.html" class="logo">
-                            <img src="logo-perusahaan.png" width="150px" height="100px" alt="" />
-                        </a>
-                        <!-- ***** Logo End ***** -->
-                        <!-- ***** Menu Start ***** -->
-                        <ul class="nav">
-                            <li class="scroll-to-section">
-                                <a href="#top" class="active">Home</a>
-                            </li>
-                            <li class="scroll-to-section">
-                                <div class="border-first-button">
-                                    <a href="{{ route('login') }}">Login</a>
-                                </div>
-                            </li>
-                        </ul>
-                        <a class="menu-trigger">
-                            <span>Menu</span>
-                        </a>
-                        <!-- ***** Menu End ***** -->
-                    </nav>
+            <div class="row align-items-center">
+                <div class="col-md-6 order-2 order-md-1 text-center text-md-left">
+                    <h1 class="text-white font-weight-bold mb-4">
+                    Bengkel Motor Hidup Baru</h1>
+                    <p class="text-white mb-5">
+                        {{ env('JUDUL') }}
+                    </p>
+                    <a href="{{ route('login') }}" class="btn btn-main-md">Mulai</a>
+                </div>
+                <div class="col-md-6 text-center order-1 order-md-2">
+                    <img class="img-fluid" src="{{ asset('logo-perusahaan2.png') }}" alt="screenshot" />
                 </div>
             </div>
         </div>
-    </header>
-    <!-- ***** Header Area End ***** -->
+    </section>
+    <!--====  End of Hero Section  ====-->
 
-    <div class="main-banner wow fadeIn" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="row">
-                        <div class="col-lg-6 align-self-center">
-                            <div class="left-content show-up header-text wow fadeInLeft" data-wow-duration="1s" data-wow-delay="1s">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <h6>The Sparkle Official</h6>
-                                        <h2>{{ env('JUDUl') }}</h2>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="border-first-button scroll-to-section">
-                                            <a href="{{ route('login') }}">Mulai</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="right-image wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
-                                <img src="logo-perusahaan.png" alt="" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- To Top -->
+    <div class="scroll-top-to">
+        <i class="ti-angle-up"></i>
     </div>
 
-    <!-- Scripts -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/owl-carousel.js"></script>
-    <script src="assets/js/animation.js"></script>
-    <script src="assets/js/imagesloaded.js"></script>
-    <script src="assets/js/custom.js"></script>
+<!-- JAVASCRIPTS -->
+<script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/bootstrap/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/slick/slick.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/fancybox/jquery.fancybox.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/syotimer/jquery.syotimer.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/aos/aos.js') }}"></script>
+<!-- google map -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgeuuDfRlweIs7D6uo4wdIHVvJ0LonQ6g"></script>
+<script src="{{ asset('assets/plugins/google-map/gmap.js') }}"></script>
+
+<script src="{{ asset('assets/js/script.js') }}"></script>
 </body>
 
 </html>

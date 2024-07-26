@@ -11,56 +11,32 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <!-- @if (auth()->user()->role == 'user') -->
-                <!-- <li class="nav-item">
+                @if (auth()->user()->role == 'gudang')
+                    <li class="nav-item">
                         <a href="{{ url("/dashboard/assets") }}" class="nav-link {{ request()->is("dashboard/assets") || request()->is("dashboard/assets/*") ? "active" : "" }}">
                         <img src="{{ asset('icons/car-solid.svg') }}" alt="barang" width="20px" height="20px">
                             </i>
                             <p>
-                                Barang
+                                Sparepart
                             </p>
                         </a>
-                    </li> -->
-                <!-- @endif -->
-                @if (auth()->user()->role == 'pemasaran' || auth()->user()->role == 'cofounder')
-                <li class="nav-item">
-                    <a href="{{ url("/dashboard/perencanaans") }}" class="nav-link {{ request()->is("dashboard/perencanaans") || request()->is("dashboard/perencanaans/*") ? "active" : "" }}">
-                        <img src="{{ asset('icons/pen-solid.svg') }}" alt="barang" width="20px" height="20px">
-
-                        </i>
-                        <p>
-                            Perencanaan Desain
-                        </p>
-                    </a>
-                </li>
+                    </li>
                 @endif
-
-                @if (auth()->user()->role == 'percetakan' || auth()->user()->role == 'finishing')
-                <li class="nav-item">
-                    <a href="{{ url("/dashboard/permintaans") }}" class="nav-link {{ request()->is("dashboard/permintaans") || request()->is("dashboard/permintaans/*") ? "active" : "" }}">
+                @if (auth()->user()->role != 'pemilikbengkel')                    
+                    <li class="nav-item">
+                        <a href="{{ url("/dashboard/permintaans") }}" class="nav-link {{ request()->is("dashboard/permintaans") || request()->is("dashboard/permintaans/*") ? "active" : "" }}">
                         <img src="{{ asset('icons/pen-solid.svg') }}" alt="barang" width="20px" height="20px">
 
-                        </i>
-                        <p>
-                            Barang dan Produksi
-                        </p>
-                    </a>
-                </li>
-                @endif
-                <!--
-                <li class="nav-item">
-                    <a href="{{ url("/dashboard/interviews") }}" class="nav-link {{ request()->is("dashboard/interviews") || request()->is("dashboard/interviews/*") ? "active" : "" }}">
-                        <img src="{{ asset('icons/pen-solid.svg') }}" alt="barang" width="20px" height="20px">
-
-                        </i>
-                        <p>
-                            Interview
-                        </p>
-                    </a>
-                </li> -->
+                            </i>
+                            <p>
+                                Permintaan
+                            </p>
+                        </a>
+                    </li>
+                    @endif
 
 
-                <!-- @if (auth()->user()->role == 'vendor' || auth()->user()->role == 'finance' || auth()->user()->role == 'gudang')
+                    <!-- @if (auth()->user()->role == 'vendor' || auth()->user()->role == 'finance' || auth()->user()->role == 'gudang')
                     <li class="nav-item">
                         <a href="{{ url("/dashboard/pembayarans") }}" class="nav-link {{ request()->is("dashboard/pembayarans") || request()->is("dashboard/pembayarans/*") ? "active" : "" }}">
                         <img src="{{ asset('icons/cash-register-solid.svg') }}" alt="barang" width="20px" height="20px">
@@ -73,28 +49,28 @@
                     </li>
                     @endif -->
 
-                @if (auth()->user()->role == 'founder' || auth()->user()->role == 'finishing')
-                <li class="nav-item">
-                    <a href="{{ url("/dashboard/laporans") }}" class="nav-link {{ request()->is("dashboard/laporans") || request()->is("dashboard/laporans/*") ? "active" : "" }}">
+                    @if (auth()->user()->role == 'servicecounter' || auth()->user()->role == 'kasir' || auth()->user()->role == 'pemilikbengkel')
+                    <li class="nav-item">
+                        <a href="{{ url("/dashboard/laporans") }}" class="nav-link {{ request()->is("dashboard/laporans") || request()->is("dashboard/laporans/*") ? "active" : "" }}">
                         <img src="{{ asset('icons/file.svg') }}" alt="laporan" width="20px" height="20px">
-                        </i>
-                        <p>
-                            Laporan
-                        </p>
-                    </a>
-                </li>
-                @endif
-                <li class="nav-item">
-                    <form id="logoutform" action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
+                            </i>
                             <p>
-                                <img src="{{ asset('icons/sign-out.svg') }}" alt="logout" width="20px" height="20px">
-                                <p>Logout</p>
+                                Laporan
                             </p>
                         </a>
-                    </form>
-                </li>
+                    </li>
+                    @endif
+                    <li class="nav-item">
+                        <form id="logoutform" action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
+                                <p>
+                                    <img src="{{ asset('icons/sign-out.svg') }}" alt="logout" width="20px" height="20px">
+                                    <p>Logout</p>
+                                </p>
+                            </a>
+                        </form>
+                    </li>
 
             </ul>
         </nav>
