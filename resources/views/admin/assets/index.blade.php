@@ -20,12 +20,13 @@
                         <th width="10"></th>
                         <th>Id</th>
                         <th>Name</th>
-                        <th>Harga</th>
+                        <!-- <th>Harga</th> -->
                         <th>Deskripsi</th>
-                        <th>Jenis</th>
-                        <th>Merek</th>
-                        @if (auth()->user()->role == 'user')                            
+                        <th>Harga</th>
+                        <!-- <th>Jenis</th>
+                        <th>Merek</th> -->
                         <th>&nbsp;</th>
+                        @if (auth()->user()->role == 'user')                            
                         @endif
                     </tr>
                 </thead>
@@ -35,12 +36,12 @@
                             <td></td>
                             <td>{{ $asset->id ?? '' }}</td>
                             <td>{{ $asset->name ?? '' }}</td>
+                            <td>{{ $asset->deskripsi ?? '' }}</td>
                             <td>
                                 {{ number_format($asset->harga, 0, ',', '.') ?? ''  }}
-                            </td>                            <td>{{ $asset->deskripsi ?? '' }}</td>
-                            <td>{{ $asset->status->name ?? '' }}</td>
-                            <td>{{ $asset->merek ?? '' }}</td>
-                            @if (auth()->user()->role == 'user')
+                            </td>
+                            <!-- <td>{{ $asset->status->name ?? '' }}</td> -->
+                            <!-- <td>{{ $asset->merek ?? '' }}</td> -->
                             <td>
                                     <a class="btn btn-xs btn-info" href="{{ route('dashboard.assets.edit', $asset->id) }}">
                                         Edit
@@ -51,6 +52,7 @@
                                         <input type="submit" class="btn btn-xs btn-danger" value="Delete">
                                     </form>
                             </td>
+                            @if (auth()->user()->role == 'user')
                             @endif
                         </tr>
                     @endforeach

@@ -28,14 +28,7 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            // Authentication passed
-            if (Auth::user()->role == 'pemasaran' || Auth::user()->role == 'cofounder') {
-                return redirect()->route('dashboard.perencanaans.index');
-            }
-            if (Auth::user()->role == 'percetakan' || Auth::user()->role == 'finishing') {
-                return redirect()->route('dashboard.permintaans.index');
-            }
-            if (Auth::user()->role == 'founder') {
+            if(auth()->user()->role == 'pemilikbengkel') {
                 return redirect()->route('dashboard.laporans.index');
             }
             return redirect()->route('dashboard.permintaans.index');
@@ -45,7 +38,6 @@ class LoginController extends Controller
         }
     }
 
-    // Handle the login request
     public function register(Request $request)
     {
         $credentials = $request->validate([
@@ -54,22 +46,16 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        $user = User::where('email', $request->email)->first();
+        $user = new User();
+        $user->name = $credentials['name'];
+        $user->email = $credentials['email'];
+        $user->password = bcrypt($credentials['password']);
+        $user->role = 'user';
+        $user->save();
 
-        if ($user) {
-            return redirect()->route('register')->with('message', 'Email already exists');
-        }
-
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'role' => 'user'
-        ]);
-
-        Auth::attempt($request->only('email', 'password'));
-
+        Auth::login($user);
         return redirect()->route('dashboard.permintaans.index');
+
     }
 
     // Handle the logout request

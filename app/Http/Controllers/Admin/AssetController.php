@@ -16,17 +16,14 @@ class AssetController extends Controller
 {
     public function index()
     {
-        $assets = Asset::with('category')->get();
+        $assets = Asset::all();
 
         return view('admin.assets.index', compact('assets'));
     }
 
     public function create()
     {
-        $categories = AssetCategory::pluck('name', 'id')->prepend('Please Select', '');
-        $statuses = AssetStatus::pluck('name', 'id')->prepend('Please Select', '');
-
-        return view('admin.assets.create', compact('categories', 'statuses'));
+        return view('admin.assets.create');
     }
 
     public function store(Request $request)
@@ -38,12 +35,8 @@ class AssetController extends Controller
 
     public function edit(Asset $asset)
     {
-        $categories = AssetCategory::pluck('name', 'id')->prepend('Please Select', '');
-        $statuses = AssetStatus::pluck('name', 'id')->prepend('Please Select', '');
 
-        $asset->load('category');
-
-        return view('admin.assets.edit', compact('asset', 'categories', 'statuses'));
+        return view('admin.assets.edit', compact('asset'));
     }
 
     public function update(Request $request, Asset $asset)
@@ -55,7 +48,7 @@ class AssetController extends Controller
 
     public function show(Asset $asset)
     {
-        $asset->load('category');
+        // $asset->load('category');
 
         return view('admin.assets.show', compact('asset'));
     }
