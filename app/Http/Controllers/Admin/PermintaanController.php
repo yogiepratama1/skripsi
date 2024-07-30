@@ -40,15 +40,16 @@ class PermintaanController extends Controller
             $request->merge(['bukti_pembayaran' => $path]);
         }
         
-        if ($request->has('spareparts')) {
-            $sparepartsString = implode(',', $request->spareparts ?? []);
+        if ($request->has('eskul')) {
+            $eskulString = implode(',', $request->eskul ?? []);
 
-            $request->merge(['spareparts' => $sparepartsString]);
+            $request->merge(['eskul' => $eskulString]);
         }
 
         $request->merge(['user_id' => auth()->id()]);
 
         $permintaan = Permintaan::create($request->all());
+        // dd($permintaan);
         return redirect()->route('dashboard.permintaans.index');
     }
 
@@ -57,6 +58,16 @@ class PermintaanController extends Controller
         $assets = Asset::all();
 
         return view('admin.permintaans.edit', compact('permintaan', 'assets'));
+    }
+
+    public function setujui(Permintaan $permintaan)
+    {
+        $permintaan->update([
+            'disetujui' => true
+        ]);
+
+        return redirect()->route('dashboard.permintaans.index');
+
     }
     public function bayar(Permintaan $permintaan)
     {
@@ -80,10 +91,10 @@ class PermintaanController extends Controller
             $permintaan->save();
         }
 
-        if ($request->has('spareparts')) {
-            $sparepartsString = implode(',', $request->spareparts ?? []);
+        if ($request->has('eskul')) {
+            $eskulString = implode(',', $request->eskul ?? []);
 
-            $request->merge(['spareparts' => $sparepartsString]);
+            $request->merge(['eskul' => $eskulString]);
         }
 
         $permintaan->update($request->except('bukti_pembayaran'));

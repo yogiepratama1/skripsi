@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\AssetController;
+use App\Http\Controllers\Admin\AbsensiController;
 use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\PembayaranController;
 use App\Http\Controllers\Admin\PermintaanController;
@@ -66,6 +67,18 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'namespace' => 'Adm
     Route::delete('assets/{asset}', [AssetController::class, 'destroy'])->name('assets.destroy');
     Route::delete('assets/destroy', [AssetController::class, 'massDestroy'])->name('assets.massDestroy');
 
+    // Absensi
+    Route::get('absensis', [AbsensiController::class, 'index'])->name('absensis.index');
+    Route::get('absensis/create', [AbsensiController::class, 'create'])->name('absensis.create');
+    Route::post('absensis', [AbsensiController::class, 'store'])->name('absensis.store');
+    Route::get('absensis/{absensi}', [AbsensiController::class, 'show'])->name('absensis.show');
+    Route::get('absensis/{absensi}/edit', [AbsensiController::class, 'edit'])->name('absensis.edit');
+    Route::get('absensis/{absensi}/absen', [AbsensiController::class, 'absen'])->name('absensis.absen');
+    Route::put('absensis/{absensi}', [AbsensiController::class, 'update'])->name('absensis.update');
+    Route::post('absensis/{absensi}/absen', [AbsensiController::class, 'updateAbsen'])->name('absensis.update.absen');
+    Route::delete('absensis/{absensi}', [AbsensiController::class, 'destroy'])->name('absensis.destroy');
+    Route::delete('absensis/destroy', [AbsensiController::class, 'massDestroy'])->name('absensis.massDestroy');
+
     // Assets History
     Route::get('assets-histories', [AssetsHistoryController::class, 'index'])->name('assets-histories.index');
 
@@ -75,6 +88,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'namespace' => 'Adm
     Route::post('permintaans', [PermintaanController::class, 'store'])->name('permintaans.store');
     Route::get('permintaans/{permintaan}', [PermintaanController::class, 'show'])->name('permintaans.show');
     Route::get('permintaans/{permintaan}/edit', [PermintaanController::class, 'edit'])->name('permintaans.edit');
+    Route::get('permintaans/{permintaan}/setujui', [PermintaanController::class, 'setujui'])->name('permintaans.setujui');
     Route::get('permintaans/{permintaan}/bayar', [PermintaanController::class, 'bayar'])->name('permintaans.bayar');
     Route::put('permintaans/{permintaan}', [PermintaanController::class, 'update'])->name('permintaans.update');
     Route::delete('permintaans/{permintaan}', [PermintaanController::class, 'destroy'])->name('permintaans.destroy');

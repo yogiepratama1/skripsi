@@ -2,22 +2,24 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\MassDestroyLaporanRequest;
-use App\Http\Requests\StoreLaporanRequest;
-use App\Http\Requests\UpdateLaporanRequest;
+use \PDF;
+use Gate;
+use App\Models\Absensi;
 use App\Models\Laporan;
 use App\Models\Permintaan;
-use Gate;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreLaporanRequest;
+use App\Http\Requests\UpdateLaporanRequest;
 use Symfony\Component\HttpFoundation\Response;
-use \PDF;
+use App\Http\Requests\MassDestroyLaporanRequest;
+use App\Models\AbsensiSiswa;
 
 class LaporanController extends Controller
 {
     public function index()
     {
-        $laporans = Permintaan::where('status', 3)->get();
+        $laporans = AbsensiSiswa::with('absensi', 'user')->get();
 
         return view('admin.laporans.index', compact('laporans'));
     }
@@ -25,14 +27,16 @@ class LaporanController extends Controller
 
     public function create(Request $request)
     {
-        $laporans = Permintaan::where('status', 3);
+        $laporans = AbsensiSiswa::with('absensi', 'user');
 
         // Set default dates if not provided
         $startDate = $request->start_date ?? now()->subMonth()->toDateString(); // Default to one month ago
         $endDate = $request->end_date ?? now()->toDateString();
 
         // Apply additional where condition to filter by created_at date range
-        $laporans = $laporans->whereBetween('created_at', [$startDate . " 00:00:00", $endDate . " 23:59:59"]);
+        $laporans = $laporans->whereHas('absensi', function ($q) use ($startDate, $endDate) {
+            $q->whereBetween('waktu_dan_jam', [$startDate . " 00:00:00", $endDate . " 23:59:59"]);
+        });
         $laporans = $laporans->get();
 
         $pdf = PDF::loadView('admin.laporans.pdf', compact('laporans'));

@@ -11,7 +11,7 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                @if (auth()->user()->role == 'gudang')
+                <!-- @if (auth()->user()->role == 'gudang')
                     <li class="nav-item">
                         <a href="{{ url("/dashboard/assets") }}" class="nav-link {{ request()->is("dashboard/assets") || request()->is("dashboard/assets/*") ? "active" : "" }}">
                         <img src="{{ asset('icons/car-solid.svg') }}" alt="barang" width="20px" height="20px">
@@ -21,20 +21,31 @@
                             </p>
                         </a>
                     </li>
-                @endif
-                @if (auth()->user()->role != 'pemilikbengkel')                    
+                @endif -->
+                @if (auth()->user()->role != 'walikelas')
                     <li class="nav-item">
                         <a href="{{ url("/dashboard/permintaans") }}" class="nav-link {{ request()->is("dashboard/permintaans") || request()->is("dashboard/permintaans/*") ? "active" : "" }}">
                         <img src="{{ asset('icons/pen-solid.svg') }}" alt="barang" width="20px" height="20px">
-
+    
                             </i>
                             <p>
                                 Permintaan
                             </p>
                         </a>
                     </li>
+                    
+                @endif
+                @if (auth()->user()->role == 'user' || auth()->user()->role == 'gurupiket')                    
+                    <li class="nav-item">
+                        <a href="{{ url("/dashboard/absensis") }}" class="nav-link {{ request()->is("dashboard/absensis") || request()->is("dashboard/absensis/*") ? "active" : "" }}">
+                        <img src="{{ asset('icons/file.svg') }}" alt="laporan" width="20px" height="20px">
+                            </i>
+                            <p>
+                                Absensi
+                            </p>
+                        </a>
+                    </li>
                     @endif
-
 
                     <!-- @if (auth()->user()->role == 'vendor' || auth()->user()->role == 'finance' || auth()->user()->role == 'gudang')
                     <li class="nav-item">
@@ -49,7 +60,7 @@
                     </li>
                     @endif -->
 
-                    @if (auth()->user()->role == 'servicecounter' || auth()->user()->role == 'kasir' || auth()->user()->role == 'pemilikbengkel')
+                    @if (auth()->user()->role == 'walikelas' || auth()->user()->role == 'gurupiket' || auth()->user()->role == 'pemilikbengkel')
                     <li class="nav-item">
                         <a href="{{ url("/dashboard/laporans") }}" class="nav-link {{ request()->is("dashboard/laporans") || request()->is("dashboard/laporans/*") ? "active" : "" }}">
                         <img src="{{ asset('icons/file.svg') }}" alt="laporan" width="20px" height="20px">

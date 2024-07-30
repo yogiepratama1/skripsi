@@ -28,7 +28,7 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            if(auth()->user()->role == 'pemilikbengkel') {
+            if(auth()->user()->role == 'walikelas') {
                 return redirect()->route('dashboard.laporans.index');
             }
             return redirect()->route('dashboard.permintaans.index');

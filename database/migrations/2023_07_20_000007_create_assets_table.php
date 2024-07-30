@@ -12,7 +12,7 @@ class CreateAssetsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name')->nullable();
             $table->longText('deskripsi')->nullable();
-            $table->double('harga')->nullable();
+            $table->timestamp('waktu_dan_jam')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

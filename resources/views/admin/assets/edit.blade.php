@@ -1,63 +1,28 @@
 @extends('layouts.admin')
 @section('content')
+    <div class="card">
+        <div class="card-header">
+            Edit Eskul
+        </div>
 
-<div class="card">
-    <div class="card-header">
-        Edit Barang
+        <div class="card-body">
+            <form method="POST" action="{{ route('dashboard.assets.update', $asset->id) }}">
+                @csrf
+                @method('PUT')
+                <div class="form-group">
+                    <label for="name">Nama Eskul</label>
+                    <input required type="text" class="form-control" name="name" value="{{ $asset->name }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="deskripsi">Deskripsi</label>
+                    <textarea required class="form-control" name="deskripsi" required>{{ $asset->deskripsi }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="waktu_dan_jam">Waktu dan Jam</label>
+                    <input required type="datetime-local" class="form-control" name="waktu_dan_jam" value="{{ $asset->waktu_dan_jam }}" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
     </div>
-
-    <div class="card-body">
-        <form method="POST" action="{{ route("dashboard.assets.update", [$asset->id]) }}" enctype="multipart/form-data">
-            @method('PUT')
-            @csrf
-            <!-- <div class="form-group">
-                <label class="required" for="status_id">Jenis</label>
-                <select class="form-control select2 {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status_id" id="status_id" required>
-                    @foreach($statuses as $id => $entry)
-                        <option value="{{ $id }}" {{ (old('status_id') ? old('status_id') : $asset->status->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('status'))
-                    <span class="text-danger">{{ $errors->first('status') }}</span>
-                @endif
-            </div> -->
-
-            <div class="form-group">
-                <label class="required" for="name">Name</label>
-                <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', $asset->name) }}" required>
-                @if($errors->has('name'))
-                    <span class="text-danger">{{ $errors->first('name') }}</span>
-                @endif
-            </div>
-            <div class="form-group">
-                <label for="deskripsi">Deskripsi</label>
-                <textarea class="form-control {{ $errors->has('deskripsi') ? 'is-invalid' : '' }}" name="deskripsi" id="deskripsi">{{ old('deskripsi', $asset->deskripsi) }}</textarea>
-                @if($errors->has('deskripsi'))
-                    <span class="text-danger">{{ $errors->first('deskripsi') }}</span>
-                @endif
-            </div>
-<!-- 
-            <div class="form-group">
-                <label class="required" for="name">Merek</label>
-                <input class="form-control {{ $errors->has('merek') ? 'is-invalid' : '' }}" type="text" merek="merek" id="merek" value="{{ old('merek', $asset->merek) }}" required>
-                @if($errors->has('merek'))
-                    <span class="text-danger">{{ $errors->first('merek') }}</span>
-                @endif
-            </div>
-            <div class="form-group">
-                <label class="required" for="harga">Harga</label>
-                <input class="form-control {{ $errors->has('harga') ? 'is-invalid' : '' }}" type="number" name="harga" id="harga" value="{{ old('harga', $asset->harga) }}" step="0.01" required>
-                @if($errors->has('harga'))
-                    <span class="text-danger">{{ $errors->first('harga') }}</span>
-                @endif
-            </div> -->
-            <div class="form-group">
-                <button class="btn btn-danger" type="submit">
-                    Save
-                </button>
-            </div>
-        </form>
-    </div>
-</div>
-
 @endsection

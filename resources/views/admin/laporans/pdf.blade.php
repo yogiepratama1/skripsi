@@ -38,50 +38,30 @@
     </style>
 </head>
 <body>
-    <h2 style="text-align: center;">List Transaksi Servis</h2>
-    <table>
-        <thead>
-            <tr>
-                <th width="10">No</th>
-                <th>Nama Pelanggan</th>
-                <th>Motor</th>
-                <th>Nomor Polisi</th>
-                <th>Keluhan</th>
-                <th>Harga</th>
-                <th>Tanggal Servis</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($laporans as $index => $laporan)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $laporan->nama_pelanggan }}</td>
-                <td>{{ $laporan->motor }}</td>
-                <td>{{ $laporan->nomor_polisi }}</td>
-                <td>{{ $laporan->keluhan }}</td>
-                <td>{{ number_format($laporan->harga, 0, ',', '.') ?? ''  }} </td>
-                <td>{{ $laporan->created_at->format('d/m/Y') }}</td>
-                <td>
-                @switch($laporan->status)
-                                    @case(0)
-                                        Menunggu Konfirmasi
-                                        @break
-                                    @case(1)
-                                        Diproses
-                                        @break
-                                    @case(2)
-                                        Menunggu Pembayaran
-                                        @break
-                                    @case(3)
-                                        Selesai
-                                        @break
-                                @endswitch
-
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <h2 style="text-align: center;">Daftar Absensi Siswa</h2>
+    <table class="table table-bordered table-striped table-hover datatable datatable-Permintaan">
+                    <thead>
+                        <tr>
+                            <th width="10">No</th>
+                            <th>Nama Siswa</th>
+                            <th>Kelas</th>
+                            <th>Eskul</th>
+                            <th>Tanggal</th>
+                            <th>Absen</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($laporans as $index => $laporan)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $laporan->user->name }}</td>
+                            <td>{{ $laporan->kelas }}</td>
+                            <td>{{ $laporan->absensi->asset->name }}</td>
+                            <td>{{ $laporan->absensi->waktu_dan_jam }}</td>
+                            <td>{{ $laporan->status }} </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
 </body>
 </html>
