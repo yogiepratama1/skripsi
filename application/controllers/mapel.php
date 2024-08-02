@@ -39,10 +39,6 @@ class Mapel extends MY_Controller
 
         must_login();
 
-        # harus login sebagai admin
-        if (!is_admin()) {
-            redirect('welcome');
-        }
     }
 
     function index($segment_3 = '')

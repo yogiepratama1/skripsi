@@ -1,0 +1,4 @@
+1. Download XAMPP yang PHP NYA VERSI 7.4 
+link https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/7.4.33/xampp-windows-x64-7.4.33-0-VC15-installer.exe/download
+2. Extract rar ke htdocs
+3. buka phpMyAdmin, klik import lalu masukan file agustinus.sql

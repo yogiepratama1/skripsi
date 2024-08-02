@@ -46,13 +46,14 @@ class Menu
             );
         }
 
-        $is_kepalasekolah = is_kepalasekolah(); // Call the function to check if the user has the "Orang Tua" role
+        $is_kepalasekolah = is_admin(); // Call the function to check if the user has the "Orang Tua" role
         if ($is_kepalasekolah) {
-            unset($this->menus['admin'][1]); // Remove the second menu item for "Tugas"
+            // unset($this->menus['admin'][1]); // Remove the second menu item for "Tugas"
             unset($this->menus['admin'][2]); // Remove the third menu item for "Filter admin" and "Filter admin"
-            unset($this->menus['admin'][3]);
+            // unset($this->menus['admin'][3]);
             unset($this->menus['admin'][4]);
             $this->menus['admin'][] = array(
+                '<a href="' . site_url('welcome/pengaturan') . '"><i class="menu-icon icon-wrench"></i>Pengaturan</a>',
                 '<a href="' . site_url('materi/laporanAkhir') . '"><i class="menu-icon icon-book"></i>Laporan Akhir </a>',
             );
         }
@@ -67,22 +68,26 @@ class Menu
                 '<a href="' . site_url() . '"><i class="menu-icon icon-home"></i>Beranda</a>',
             ),
             1 => array(
-                '<a href="' . site_url('pengumuman') . '"><i class="menu-icon icon-bullhorn"></i>Pengumuman</a>',
-                '<a href="' . site_url('message') . '"><i class="menu-icon icon-comments"></i>Pesan <span class="menu-count-new-msg"></span></a>',
+                // '<a href="' . site_url('pengumuman') . '"><i class=" menu-icon icon-bullhorn"></i>Pengumuman</a>',
+                // '<a href="' . site_url('message') . '"><i class="menu-icon icon-comments"></i>Pesan <span class="menu-count-new-msg"></span></a>',
                 '<a href="' . site_url('pengajar/jadwal') . '"><i class="menu-icon icon-tasks"></i>Jadwal Mengajar </a>'
             ),
             2 => array(
+                '<a href="' . site_url('kelas/mapel_kelas') . '"><i class="menu-icon icon-paste"></i>Matapelajaran Kelas </a>',
+                '<a href="' . site_url('kelas') . '"><i class="menu-icon icon-tasks"></i>Manajemen Kelas </a>',
+                '<a href="' . site_url('mapel') . '"><i class="menu-icon icon-book"></i>Manajemen Matapelajaran </a>'
+            ),
+            3 => array(
                 '<a href="' . site_url('tugas?clear_filter=true') . '"><i class="menu-icon icon-tasks"></i>Tugas </a>',
                 '<a href="' . site_url('materi?clear_filter=true') . '"><i class="menu-icon icon-book"></i>Materi </a>',
                 // '<a href="' . site_url('materi/komentar') . '"><i class="menu-icon icon-comments"></i>Komentar saya</a>'
             ),
-            3 => array(
-                // '<a href="' . site_url('pengajar/filter') . '"><i class="menu-icon icon-search"></i>Filter Pengajar </a>',
-                // '<a href="' . site_url('siswa/filter') . '"><i class="menu-icon icon-search"></i>Filter Siswa </a>'
-            ),
+            // 4 => array(
+            //     '<a href="' . site_url('welcome/pengaturan') . '"><i class="menu-icon icon-wrench"></i>Pengaturan</a>',
+            // )
             4 => array(
-                '<a href="' . site_url('welcome/pengaturan') . '"><i class="menu-icon icon-wrench"></i>Pengaturan</a>',
-            )
+                '<a href="' . site_url('login/logout') . '"><i class="menu-icon icon-signout"></i>Logout </a>'
+            ),
         );
 
         $this->menus['siswa'] = array(

@@ -39,10 +39,6 @@ class Kelas extends MY_Controller
 
         must_login();
 
-        # harus login sebagai admin
-        if (!is_admin()) {
-            redirect('welcome');
-        }
     }
 
     private function kelas_hirarki(&$str_kelas = "", $parent_id = null, $order = 0){

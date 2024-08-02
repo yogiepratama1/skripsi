@@ -1,0 +1,7 @@
+1. Login dengan kepala sekolah atau guru untuk atur mapel 
+2. Login dengan guru untuk buatkan materi(untuk absen)
+4. Login dengan siswa untuk absen (klik materi, detail, absen alpa hadir atau izin)
+3. Login dengan guru untuk buatkan tugas upload
+5. Login dengan siswa untuk upload tugas
+6. Login dengan guru untuk koreksi (klik tugas, detail, koreksi, kasih nilai)
+7. Login dengan kepala sekolah, klik laporan akhir (akan mengexport sebagai pdf)

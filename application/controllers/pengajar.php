@@ -799,9 +799,6 @@ class Pengajar extends MY_Controller
 
     function jadwal()
     {
-        if (!is_pengajar()) {
-            redirect('pengajar');
-        }
 
         # panggil colorbox
         $html_js = load_comp_js(array(

@@ -54,7 +54,7 @@ class __TwigTemplate_eac5bd087f7d7ce830ba114e3d5059d5d345ccf707b1b3ae165ebebcc76
         echo "                <i class=\"\"></i> Tahun Ajaran: &nbsp;";
         echo twig_escape_filter($this->env, get_pengaturan("tahun-ajaran", "value"), "html", null, true);
         echo " <br>
-                <img src=\"userfiles\\images\\logo-sekolah.png\" width=\"150px\" alt=\"\">
+                <img src=\"userfiles\\images\\logo.png\" width=\"350px\" alt=\"\">
             </div>
         </div>
     </div>";

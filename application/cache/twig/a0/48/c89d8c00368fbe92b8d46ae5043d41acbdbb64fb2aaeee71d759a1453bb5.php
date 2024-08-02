@@ -86,7 +86,7 @@ class __TwigTemplate_a048c89d8c00368fbe92b8d46ae5043d41acbdbb64fb2aaeee71d759a14
             // line 37
             echo form_open_multipart("login/register/siswa", array("class" => "form-horizontal row-fluid"));
             echo "
-                        <p>Jika mendaftar sebagai orang tua maka email wajib seperti ini orangtua_(namasiswa)@gmail.com. NIS dikosongkan</p>
+                        <!-- <p>Jika mendaftar sebagai orang tua maka email wajib seperti ini orangtua_(namasiswa)@gmail.com. NIS dikosongkan</p> -->
                             <div class=\"control-group\">
                                 <label class=\"control-label\">NIS</label>
                                 <div class=\"controls\">
@@ -322,7 +322,7 @@ class __TwigTemplate_a048c89d8c00368fbe92b8d46ae5043d41acbdbb64fb2aaeee71d759a14
             echo "
                                 </div>
                             </div>
-                            <div class=\"control-group\">
+                            <!-- <div class=\"control-group\">
                                 <label class=\"control-label\">Orang Tua ? <span class=\"text-error\">*</span></label>
                                 <div class=\"controls\">
                                     <input type=\"checkbox\" name=\"is_orangtua\" class=\"span5\" value=\"1\"";
@@ -334,7 +334,7 @@ class __TwigTemplate_a048c89d8c00368fbe92b8d46ae5043d41acbdbb64fb2aaeee71d759a14
             echo form_error("is_orangtua");
             echo "
                                 </div>
-                            </div>
+                            </div> -->
                             
                             <div class=\"control-group\">
                                 <div class=\"controls\">

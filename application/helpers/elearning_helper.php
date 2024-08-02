@@ -342,7 +342,23 @@ function is_admin()
     }
 
     if (!empty($_SESSION['login_' . APP_PREFIX]['admin'])) {
-        return true;
+        $pengajar_id = $_SESSION['login_' . APP_PREFIX]['admin']['login']['pengajar_id'] ?? null;
+        // Load the database library if not already loaded
+        $CI =& get_instance();
+        $CI->load->database();
+
+        // Query the database to get the user's role based on pengajar_id
+        $CI->db->select('role');
+        $CI->db->from('pengajar'); // Replace 'pengajar' with your actual table name
+        $CI->db->where('id', $pengajar_id);
+        $query = $CI->db->get();
+
+        if ($query->num_rows() > 0) {
+            $user = $query->row();
+            if ($user->role == 'kepalasekolah') {
+                return true;
+            }
+        }
     }
 
     return false;
