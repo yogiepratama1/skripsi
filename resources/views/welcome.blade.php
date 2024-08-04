@@ -2,120 +2,77 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>{{ env('JUDUL') }}</title>
+  <title>{{ env('JUDUL') }}</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
 
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Favicons -->
+  <link rel="icon" href="{{ asset('Logo.jpg') }}" type="image/x-icon">
 
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css" />
-    <link rel="stylesheet" href="assets/css/templatemo-digimedia-v1.css" />
-    <link rel="stylesheet" href="assets/css/animated.css" />
-    <link rel="stylesheet" href="assets/css/owl.css" />
-    <!--
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,600,700" rel="stylesheet">
 
-TemplateMo 568 DigiMedia
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-https://templatemo.com/tm-568-digimedia
-
--->
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
 </head>
 
 <body>
-    <!-- ***** Preloader Start ***** -->
-    <div id="js-preloader" class="js-preloader">
-        <div class="preloader-inner">
-            <span class="dot"></span>
-            <div class="dots">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center header-transparent">
+    <div class="container d-flex align-items-center">
+
+      <h1 class="logo me-auto"><a href="index.html">PT. PT Jaya Teknik Indonesia   </a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/Logo.jpg" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link " href="{{ url('login') }}">Login</a></li>
+          <li><a class="nav-link scrollto" href="#footer">(021) 23555999</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
     </div>
-    <!-- ***** Preloader End ***** -->
+  </header><!-- End Header -->
 
-    <!-- Pre-header End -->
-
-    <!-- ***** Header Area Start ***** -->
-    <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <nav class="main-nav">
-                        <!-- ***** Logo Start ***** -->
-                        <a href="index.html" class="logo">
-                            <img src="Logo.jpg" width="150px" height="100px" alt="" />
-                        </a>
-                        <!-- ***** Logo End ***** -->
-                        <!-- ***** Menu Start ***** -->
-                        <ul class="nav">
-                            <li class="scroll-to-section">
-                                <a href="#top" class="active">Home</a>
-                            </li>
-                            <li class="scroll-to-section">
-                                <div class="border-first-button">
-                                    <a href="{{ route('login') }}">Login</a>
-                                </div>
-                            </li>
-                        </ul>
-                        <a class="menu-trigger">
-                            <span>Menu</span>
-                        </a>
-                        <!-- ***** Menu End ***** -->
-                    </nav>
-                </div>
-            </div>
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="clearfix">
+    <div class="container d-flex h-100">
+      <div class="row justify-content-center align-self-center" data-aos="fade-up">
+        <div class="col-lg-6 intro-info order-lg-first order-last" data-aos="zoom-in" data-aos-delay="100">
+          <h2><span>Sistem Informasi</span> LEARNING MANAGEMENT SYSTEM KARYAWAN </h2>
+          <div>
+            <a href="{{ url('login') }}" class="btn-get-started scrollto">Mulai</a>
+          </div>
         </div>
-    </header>
-    <!-- ***** Header Area End ***** -->
 
-    <div class="main-banner wow fadeIn" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="row">
-                        <div class="col-lg-6 align-self-center">
-                            <div class="left-content show-up header-text wow fadeInLeft" data-wow-duration="1s" data-wow-delay="1s">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <h6>BMHB 2020</h6>
-                                        <h2>{{ env('JUDUl') }}</h2>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="border-first-button scroll-to-section">
-                                            <a href="{{ route('login') }}">Mulai</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="right-image wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
-                                <img src="Logo.jpg" alt="" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="col-lg-6 intro-img order-lg-last order-first" data-aos="zoom-out" data-aos-delay="200">
+          <img src="assets/img/intro-img.svg" alt="" class="img-fluid">
         </div>
+      </div>
+
     </div>
+  </section><!-- End Hero -->
 
-    <!-- Scripts -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/owl-carousel.js"></script>
-    <script src="assets/js/animation.js"></script>
-    <script src="assets/js/imagesloaded.js"></script>
-    <script src="assets/js/custom.js"></script>
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+ 
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
 </body>
 
 </html>
