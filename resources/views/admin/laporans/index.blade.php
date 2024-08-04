@@ -1,12 +1,22 @@
 @extends('layouts.admin')
 @section('content')
     <div style="margin-bottom: 10px;" class="row">
-        <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route('dashboard.laporans.create') }}">
-                Export Laporan
-            </a>
+    <div class="col-lg-12">
+            @if($laporans->isNotEmpty())
+            <form action="{{ route('dashboard.laporans.create') }}" method="GET">
+                <div class="form-group col-lg-3">
+                    <label for="start_date">Start Date:</label>
+                    <input type="date" class="form-control" id="start_date" name="start_date" required>
+                    <label for="end_date">End Date:</label>
+                    <input type="date" class="form-control" id="end_date" name="end_date" required>
+                </div>
+                <button type="submit" class="btn btn-success">Export Laporan</button>
+            </form>
+            @else
+                <button class="btn btn-success" disabled>Export Laporan</button>
+            @endif
         </div>
-    </div>
+</div>
     <!-- @if (auth()->user()->role == 'bendahara')        
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
@@ -27,43 +37,29 @@
                 <table class="table table-bordered table-striped table-hover datatable datatable-Permintaan">
                     <thead>
                         <tr>
-                            <th class="no-export" width="10">No</th>
-                            <th>Nama Pelanggan</th>
-                            <th>Motor</th>
-                            <th>Keluhan</th>
-                            <th>Harga</th>
-                            <th>Tanggal Servis</th>
+                            <th width="10">No</th>
+                            <th>Judul</th>
+                            <th>Deskripsi</th>
+                            <th>Tanggal Pelatihan</th>
+                            <th>Jumlah Peserta</th>
+                            <th>Peserta Hadir</th>
                             <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($laporans as $index => $laporan)
-                        <tr>
+                    @foreach($laporans as $key => $permintaan)
+                        <tr data-entry-id="{{ $permintaan->id }}">
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $laporan->nama_pelanggan }}</td>
-                            <td>{{ $laporan->motor }}</td>
-                            <td>{{ $laporan->keluhan }}</td>
-                            <td>{{ $laporan->harga }}</td>
-                            <td>{{ $laporan->created_at->format('d/m/Y') }}</td>
+                            <td>{{ $permintaan->judul }}</td>
+                            <td>{{ $permintaan->deskripsi }}</td>
+                            <td>{{ $permintaan->tanggal_pelatihan }}</td>
+                            <td>{{ $permintaan->peserta->count() }}</td>
+                            <td>{{ $permintaan->peserta->where('kehadiran', 'Hadir')->count() }}</td>
                             <td>
-                            @switch($laporan->status)
-                                    @case(0)
-                                        Menunggu Konfirmasi
-                                        @break
-                                    @case(1)
-                                        Diproses
-                                        @break
-                                    @case(2)
-                                        Menunggu Pembayaran
-                                        @break
-                                    @case(3)
-                                        Selesai
-                                        @break
-                                @endswitch
-
+                                {{ $permintaan->status }}
                             </td>
                         </tr>
-                        @endforeach
+                    @endforeach
                     </tbody>
                 </table>
             </div>

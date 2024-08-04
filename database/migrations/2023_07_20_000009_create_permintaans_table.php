@@ -10,16 +10,11 @@ class CreatePermintaansTable extends Migration
     {
         Schema::create('permintaans', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->string('nama_pelanggan');
-            $table->string('alamat_pelanggan');
-            $table->string('motor');
-            $table->text('keluhan');
-            $table->string('bukti_pembayaran')->nullable();
-            $table->integer('harga')->nullable();
-            $table->integer('status')->default(0);
-            $table->dateTime('tanggal_bayar')->nullable();
-            $table->text('spareparts')->nullable();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('judul');
+            $table->string('deskripsi');
+            $table->dateTime('tanggal_pelatihan')->nullable();
+            $table->string('status')->default('Menunggu Persetujuan');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -15,18 +15,24 @@ use \PDF;
 
 class LaporanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $laporans = Permintaan::where('status', 3)->get();
+        $laporans = Permintaan::where('status', 'Pelatihan Selesai')->get();
 
         return view('admin.laporans.index', compact('laporans'));
     }
 
 
-    public function create()
+
+    public function create(Request $request)
     {
-        $laporans = Permintaan::where('status', 3)->get();
-    
+        $laporans = Permintaan::where('status', 'Pelatihan Selesai');
+            // Set default dates if not provided
+        $startDate = $request->start_date ?? now()->subMonth()->toDateString(); // Default to one month ago
+        $endDate = $request->end_date ?? now()->toDateString();
+
+        $laporans = $laporans->whereBetween('tanggal_pelatihan', [$startDate, $endDate])->get();
+
         $pdf = PDF::loadView('admin.laporans.pdf', compact('laporans'));
         $pdf->setPaper('a4', 'landscape');
         return $pdf->download('laporan-list.pdf');

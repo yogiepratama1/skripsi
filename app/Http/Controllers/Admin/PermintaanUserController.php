@@ -2,38 +2,25 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Asset;
-use App\Models\Laporan;
 use App\Models\Permintaan;
 use Illuminate\Http\Request;
-use App\Models\AssetCategory;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
-use Symfony\Component\HttpFoundation\Response;
-use App\Http\Requests\MassDestroyPermintaanRequest;
 use App\Models\PermintaanUser;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\MassDestroyPermintaanRequest;
 
-class PermintaanController extends Controller
+class PermintaanUserController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $showUserTable = false;
         if (auth()->user()->role != 'user') {
-            if ($request->has('showUserTable') && $request->showUserTable) {
-                $showUserTable = true;
-            }
             $permintaans = Permintaan::all();
         } else {
-            $showUserTable = true;
-            $permintaans = Permintaan::whereHas('peserta', function ($q) {
-                $q->where('user_id', auth()->user()->id);
-            })->get();
+            $permintaans = Permintaan::where('user_id', auth()->id())->get();
         }
 
-
-        return view('admin.permintaans.index', compact('permintaans', 'showUserTable'));
+        return view('admin.permintaans.index', compact('permintaans'));
     }
 
     public function create()
@@ -76,14 +63,6 @@ class PermintaanController extends Controller
         $users = User::where('role', 'user')->get();
 
         return view('admin.permintaans.edit', compact('permintaan', 'users'));
-    }
-
-    public function editUser(PermintaanUser $permintaanUser)
-    {
-
-        $users = User::where('role', 'user')->get();
-
-        return view('admin.permintaans.editUser', compact('permintaanUser', 'users'));
     }
     public function bayar(Permintaan $permintaan)
     {
@@ -130,13 +109,6 @@ class PermintaanController extends Controller
         return redirect()->route('dashboard.permintaans.index');
     }
 
-    public function updateUser(Request $request, PermintaanUser $permintaanUser)
-    {
-        $permintaanUser->update($request->except('bukti_pembayaran'));
-
-        return redirect()->route('dashboard.permintaans.index');
-    }
-
     public function show(Permintaan $permintaan)
     {
         $permintaan->load('peserta');
@@ -162,4 +134,3 @@ class PermintaanController extends Controller
         return response(null, Response::HTTP_NO_CONTENT);
     }
 }
-

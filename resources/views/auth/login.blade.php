@@ -4,10 +4,10 @@
     <div class="login-logo">
         <div class="login-logo">
             <!-- add logo -->
-            <img src="{{ asset('logo-perusahaan2.png') }}" alt="Logo" class="img-fluid" width="250">
+            <img src="{{ asset('Logo.jpg') }}" alt="Logo" class="img-fluid" width="250">
             <br>
             <a href="{{ url('') }}">
-                SISTEM INFORMASI TRANSAKSI BERBASIS WEB PADA BENGKEL MOTOR HIDUP BARU
+                SISTEM INFORMASI LEARNING MANAGEMENT SYSTEM KARYAWAN
             </a>
         </div>
     </div>

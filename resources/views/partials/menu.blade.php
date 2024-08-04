@@ -22,14 +22,14 @@
                         </a>
                     </li>
                 @endif
-                @if (auth()->user()->role != 'pemilikbengkel')                    
+                @if (auth()->user()->role != 'penyelenggara')                    
                     <li class="nav-item">
                         <a href="{{ url("/dashboard/permintaans") }}" class="nav-link {{ request()->is("dashboard/permintaans") || request()->is("dashboard/permintaans/*") ? "active" : "" }}">
                         <img src="{{ asset('icons/pen-solid.svg') }}" alt="barang" width="20px" height="20px">
 
                             </i>
                             <p>
-                                Permintaan
+                                Pelatihan
                             </p>
                         </a>
                     </li>
@@ -49,7 +49,7 @@
                     </li>
                     @endif -->
 
-                    @if (auth()->user()->role == 'servicecounter' || auth()->user()->role == 'kasir' || auth()->user()->role == 'pemilikbengkel')
+                    @if (auth()->user()->role == 'penyelenggara' || auth()->user()->role == 'kasir' || auth()->user()->role == 'pemilikbengkel')
                     <li class="nav-item">
                         <a href="{{ url("/dashboard/laporans") }}" class="nav-link {{ request()->is("dashboard/laporans") || request()->is("dashboard/laporans/*") ? "active" : "" }}">
                         <img src="{{ asset('icons/file.svg') }}" alt="laporan" width="20px" height="20px">

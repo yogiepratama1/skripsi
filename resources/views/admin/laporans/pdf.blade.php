@@ -38,48 +38,33 @@
     </style>
 </head>
 <body>
-    <h2 style="text-align: center;">List Transaksi Servis</h2>
+    <h2 style="text-align: center;">List Pelatihan dan Kehadiran</h2>
     <table>
         <thead>
             <tr>
-                <th width="10">No</th>
-                <th>ID</th>
-                <th>Nama Pelanggan</th>
-                <th>Motor</th>
-                <th>Keluhan</th>
-                <th>Harga</th>
-                <th>Tanggal Servis</th>
-                <th>Status</th>
+                            <th width="10">No</th>
+                            <th>Judul</th>
+                            <th>Deskripsi</th>
+                            <th>Tanggal Pelatihan</th>
+                            <th>Jumlah Peserta</th>
+                            <th>Peserta Hadir</th>
+                            <th>Status</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($laporans as $index => $laporan)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $laporan->nama_pelanggan }}</td>
-                <td>{{ $laporan->motor }}</td>
-                <td>{{ $laporan->keluhan }}</td>
-                <td>{{ $laporan->harga }}</td>
-                <td>{{ $laporan->created_at->format('d/m/Y') }}</td>
-                <td>
-                @switch($laporan->status)
-                                    @case(0)
-                                        Menunggu Konfirmasi
-                                        @break
-                                    @case(1)
-                                        Diproses
-                                        @break
-                                    @case(2)
-                                        Menunggu Pembayaran
-                                        @break
-                                    @case(3)
-                                        Selesai
-                                        @break
-                                @endswitch
-
-                </td>
-            </tr>
-            @endforeach
+        @foreach($laporans as $key => $permintaan)
+                        <tr data-entry-id="{{ $permintaan->id }}">
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $permintaan->judul }}</td>
+                            <td>{{ $permintaan->deskripsi }}</td>
+                            <td>{{ $permintaan->tanggal_pelatihan }}</td>
+                            <td>{{ $permintaan->peserta->count() }}</td>
+                            <td>{{ $permintaan->peserta->where('kehadiran', 'Hadir')->count() }}</td>
+                            <td>
+                                {{ $permintaan->status }}
+                            </td>
+                        </tr>
+                    @endforeach
         </tbody>
     </table>
 </body>

@@ -53,7 +53,7 @@ https://templatemo.com/tm-568-digimedia
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
                         <a href="index.html" class="logo">
-                            <img src="logo-perusahaan2.png" width="150px" height="100px" alt="" />
+                            <img src="Logo.jpg" width="150px" height="100px" alt="" />
                         </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
@@ -100,7 +100,7 @@ https://templatemo.com/tm-568-digimedia
                         </div>
                         <div class="col-lg-6">
                             <div class="right-image wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
-                                <img src="logo-perusahaan2.png" alt="" />
+                                <img src="Logo.jpg" alt="" />
                             </div>
                         </div>
                     </div>

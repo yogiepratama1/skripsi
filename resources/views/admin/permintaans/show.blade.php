@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-header">
-        Detail Permintaan
+        Detail Pelatihan
     </div>
 
     <div class="card-body">
@@ -15,65 +15,53 @@
                         <td>{{ $permintaan->id }}</td>
                     </tr>
                     <tr>
-                        <th>Nama Pelanggan</th>
-                        <td>{{ $permintaan->nama_pelanggan }}</td>
+                        <th>Judul</th>
+                        <td>{{ $permintaan->judul }}</td>
                     </tr>
                     <tr>
-                        <th>Alamat Pelanggan</th>
-                        <td>{{ $permintaan->alamat_pelanggan }}</td>
+                        <th>Deskripsi</th>
+                        <td>{{ $permintaan->deskripsi }}</td>
                     </tr>
                     <tr>
-                        <th>Motor</th>
-                        <td>{{ $permintaan->motor }}</td>
-                    </tr>
-                    <tr>
-                        <th>Keluhan</th>
-                        <td>{{ $permintaan->keluhan }}</td>
-                    </tr>
-                    <tr>
-                        <th>Spareparts</th>
-                        <td>{{ $permintaan->spareparts }}</td>
+                        <th>Tanggal Pelatihan</th>
+                        <td>{{ $permintaan->tanggal_pelatihan ? \Carbon\Carbon::parse($permintaan->tanggal_pelatihan)->format('Y-m-d H:i') : 'Belum Ditentukan' }}</td>
                     </tr>
                     <tr>
                         <th>Status</th>
-                        <td>
-                            @switch($permintaan->status)
-                                @case(0)
-                                    Menunggu Konfirmasi
-                                    @break
-                                @case(1)
-                                    Diproses
-                                    @break
-                                @case(2)
-                                    Menunggu Pembayaran
-                                    @break
-                                @case(3)
-                                    Selesai
-                                    @break
-                            @endswitch
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Harga</th>
-                        <td>{{ $permintaan->harga }}</td>
-                    </tr>
-                    <tr>
-                        <th>Tanggal Bayar</th>
-                        <td>{{ $permintaan->tanggal_bayar ? \Carbon\Carbon::parse($permintaan->tanggal_bayar)->format('Y-m-d') : 'Belum Bayar' }}</td>
-                    </tr>
-                    <tr>
-                        <th>Bukti Pembayaran</th>
-                        <td>
-                            @if($permintaan->bukti_pembayaran)
-                            <a href="{{ asset($permintaan->bukti_pembayaran) }}" target="_blank">Lihat Bukti Pembayaran</a>
-                            @else
-                                Tidak Ada Bukti Pembayaran
-                            @endif
-                        </td>
+                        <td>{{ $permintaan->status }}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
+
+        <h4>Peserta</h4>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Kehadiran</th>
+                        <th>Feedback</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($permintaan->peserta as $peserta)
+                        <tr>
+                            <td>{{ $peserta->user->name }}</td>
+                            <td>
+                                @if($peserta->kehadiran)
+                                    Hadir
+                                @else
+                                    Tidak Hadir
+                                @endif
+                            </td>
+                            <td>{{ $peserta->feedback ?? 'Tidak ada feedback' }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
         <div class="form-group">
             <a class="btn btn-default" href="{{ route('dashboard.permintaans.index') }}">
                 Kembali ke Daftar

@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Asset;
 use App\Models\Permintaan;
+use App\Models\PermintaanUser;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -19,7 +21,7 @@ class DatabaseSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'name' => 'Pelanggan',
+                'name' => 'Peserta Pelatihan',
                 'email' => 'user@gmail.com',
                 'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
                 'no_telp' => '08152718326',
@@ -27,78 +29,76 @@ class DatabaseSeeder extends Seeder
                 'role' => 'user'
             ],
             [
-                'name' => 'Gudang',
-                'email' => 'gudang@gmail.com',
+                'name' => 'Admin',
+                'email' => 'admin@gmail.com',
                 'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
                 'no_telp' => '08625341722',
                 'alamat' => 'Jakarta',
-                'role' => 'gudang'
+                'role' => 'admin'
             ],
             [
-                'name' => 'Mekanik',
-                'email' => 'mekanik@gmail.com',
+                'name' => 'Recruitment & Appraisal Supervisor',
+                'email' => 'recruitment@gmail.com',
                 'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
                 'no_telp' => '08625341722',
                 'alamat' => 'Jakarta',
-                'role' => 'mekanik'
+                'role' => 'recruitment'
             ],
             [
-                'name' => 'Kasir',
-                'email' => 'kasir@gmail.com',
+                'name' => 'Penyelenggara Pelatihan',
+                'email' => 'penyelenggara@gmail.com',
                 'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
                 'no_telp' => '08525341721',
                 'alamat' => 'Jakarta',
-                'role' => 'kasir'
+                'role' => 'penyelenggara'
             ],
             [
-                'name' => 'Pemilik Bengkel',
-                'email' => 'pemilikbengkel@gmail.com',
+                'name' => 'Andi',
+                'email' => 'andi@gmail.com',
                 'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
-                'no_telp' => '08213341721',
+                'no_telp' => '08152718326',
                 'alamat' => 'Jakarta',
-                'role' => 'pemilikbengkel'
+                'role' => 'user'
             ],
             [
-                'name' => 'Service Counter',
-                'email' => 'servicecounter@gmail.com',
+                'name' => 'Rudi',
+                'email' => 'rudi@gmail.com',
                 'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
-                'no_telp' => '08213341721',
+                'no_telp' => '08152718326',
                 'alamat' => 'Jakarta',
-                'role' => 'servicecounter'
+                'role' => 'user'
             ],
-        ]);
 
-        Asset::create([
-            'name' => 'Oli',
-            'deskripsi' => 'Oli Motor Matic',
-        ]);
-
-        Asset::create([
-            'name' => 'Gear Box',
-            'deskripsi' => 'Gear Box Motor Matic',
         ]);
         
         Permintaan::create([
-            'user_id' => 1,
-            'nama_pelanggan' => 'Arif',
-            'alamat_pelanggan' => 'Jakarta',
-            'motor' => 'Beat FI',
-            'keluhan' => 'Ganti Oli',
-            'harga' => 50000,
-            'status' => 0,
-            'tanggal_bayar' => null,
+            'user_id' => 2,
+            'judul' => 'Pelatihan Mesin Genset',
+            'deskripsi' => 'Tata cara penggunaan mesin genset sesuai SOP',
+            'tanggal_pelatihan' => Carbon::now(),
+            'status' => 'Pelatihan Selesai'
         ]);
 
-        Permintaan::create([
+        PermintaanUser::create([
+            'permintaan_id' => 1,
             'user_id' => 1,
-            'nama_pelanggan' => 'Budi',
-            'alamat_pelanggan' => 'Jakarta',
-            'motor' => 'Vario',
-            'keluhan' => 'Ganti Oli',
-            'harga' => 50000,
-            'status' => 2,
-            'tanggal_bayar' => null,
-            'spareparts' => 'Oli',
+            'feedback' => 'Pelatihan sangat membantu dan informatif',
+            'kehadiran' => 'Hadir'
+        ]);
+        
+        Permintaan::create([
+            'user_id' => 2,
+            'judul' => 'Pelatihan Mesin Cooling',
+            'deskripsi' => 'Tata cara penggunaan mesin cooling sesuai SOP',
+            'tanggal_pelatihan' => Carbon::now()->addDays(1),
+            'status' => 'Menunggu Persetujuan'
+        ]);
+
+        PermintaanUser::create([
+            'permintaan_id' => 2,
+            'user_id' => 1,
+            'feedback' => '',
+            'kehadiran' => 'Belum Hadir'
         ]);
     }
 }

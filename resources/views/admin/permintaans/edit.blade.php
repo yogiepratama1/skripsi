@@ -3,99 +3,52 @@
 
 <div class="card">
     <div class="card-header">
-        Edit Servis
+        Edit Permintaan
     </div>
 
     <div class="card-body">
         <form method="POST" action="{{ route('dashboard.permintaans.update', [$permintaan->id]) }}" enctype="multipart/form-data">
-            @method('PUT')
             @csrf
+            @method('PUT')
             <div class="form-group">
-                <label class="required" for="nama_pelanggan">Nama Pelanggan</label>
-                <input class="form-control {{ $errors->has('nama_pelanggan') ? 'is-invalid' : '' }}" type="text" name="nama_pelanggan" id="nama_pelanggan" value="{{ old('nama_pelanggan', $permintaan->nama_pelanggan) }}" required {{ auth()->user()->role != 'user' ? 'disabled' : '' }}>
-                @if($errors->has('nama_pelanggan'))
-                    <span class="text-danger">{{ $errors->first('nama_pelanggan') }}</span>
+                <label class="required" for="judul">Judul</label>
+                <input class="form-control {{ $errors->has('judul') ? 'is-invalid' : '' }}" type="text" name="judul" id="judul" value="{{ old('judul', $permintaan->judul) }}" required>
+                @if($errors->has('judul'))
+                    <span class="text-danger">{{ $errors->first('judul') }}</span>
                 @endif
             </div>
             <div class="form-group">
-                <label class="required" for="alamat_pelanggan">Alamat Pelanggan</label>
-                <textarea class="form-control {{ $errors->has('alamat_pelanggan') ? 'is-invalid' : '' }}" name="alamat_pelanggan" id="alamat_pelanggan" rows="3" required {{ auth()->user()->role != 'user' ? 'disabled' : '' }}>{{ old('alamat_pelanggan', $permintaan->alamat_pelanggan) }}</textarea>
-                @if($errors->has('alamat_pelanggan'))
-                    <span class="text-danger">{{ $errors->first('alamat_pelanggan') }}</span>
+                <label class="required" for="deskripsi">Deskripsi</label>
+                <textarea class="form-control {{ $errors->has('deskripsi') ? 'is-invalid' : '' }}" name="deskripsi" id="deskripsi" rows="3" required>{{ old('deskripsi', $permintaan->deskripsi) }}</textarea>
+                @if($errors->has('deskripsi'))
+                    <span class="text-danger">{{ $errors->first('deskripsi') }}</span>
                 @endif
             </div>
             <div class="form-group">
-                <label class="required" for="motor">Motor</label>
-                <input class="form-control {{ $errors->has('motor') ? 'is-invalid' : '' }}" type="text" name="motor" id="motor" value="{{ old('motor', $permintaan->motor) }}" required {{ auth()->user()->role != 'user' ? 'disabled' : '' }}>
-                @if($errors->has('motor'))
-                    <span class="text-danger">{{ $errors->first('motor') }}</span>
+                <label class="required" for="tanggal_pelatihan">Tanggal Pelatihan</label>
+                <input class="form-control {{ $errors->has('tanggal_pelatihan') ? 'is-invalid' : '' }}" type="datetime-local" name="tanggal_pelatihan" id="tanggal_pelatihan" value="{{ old('tanggal_pelatihan', $permintaan->tanggal_pelatihan ? \Carbon\Carbon::parse($permintaan->tanggal_pelatihan)->format('Y-m-d\TH:i') : '') }}" required>
+                @if($errors->has('tanggal_pelatihan'))
+                    <span class="text-danger">{{ $errors->first('tanggal_pelatihan') }}</span>
                 @endif
             </div>
             <div class="form-group">
-                <label for="keluhan">Keluhan</label>
-                <textarea class="form-control {{ $errors->has('keluhan') ? 'is-invalid' : '' }}" name="keluhan" id="keluhan" rows="3" {{ auth()->user()->role != 'user' ? 'disabled' : '' }}>{{ old('keluhan', $permintaan->keluhan) }}</textarea>
-                @if($errors->has('keluhan'))
-                    <span class="text-danger">{{ $errors->first('keluhan') }}</span>
-                @endif
-            </div>
-            <!-- <div class="form-group">
-                <label for="bukti_pembayaran">Bukti Pembayaran</label>
-                <input class="form-control-file {{ $errors->has('bukti_pembayaran') ? 'is-invalid' : '' }}" type="file" name="bukti_pembayaran" id="bukti_pembayaran">
-                @if($errors->has('bukti_pembayaran'))
-                    <span class="text-danger">{{ $errors->first('bukti_pembayaran') }}</span>
-                @endif
-                @if($permintaan->bukti_pembayaran)
-                    <div class="mt-2">
-                <p>Current File: [file name or preview]</p>
-                    </div>
-                @endif
-            </div> -->
-            @if (auth()->user()->role == 'kasir')
-            <div class="form-group">
-                <label for="harga">Harga</label>
-                <input class="form-control {{ $errors->has('harga') ? 'is-invalid' : '' }}" type="number" name="harga" id="harga" value="{{ old('harga', $permintaan->harga) }}">
-                @if($errors->has('harga'))
-                    <span class="text-danger">{{ $errors->first('harga') }}</span>
-                @endif
-            </div>
-            @endif
-            @if (auth()->user()->role != 'user')                
-            <div class="form-group">
-                <label for="status">Status</label>
-                <select class="form-control {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status" id="status">
-                    <option value="0" {{ old('status', $permintaan->status) == '0' ? 'selected' : '' }}>Menunggu Konfirmasi</option>
-                    <option value="1" {{ old('status', $permintaan->status) == '1' ? 'selected' : '' }}>Diproses</option>
-                    <option value="2" {{ old('status', $permintaan->status) == '2' ? 'selected' : '' }}>Menunggu Pembayaran</option>
-                    <option value="3" {{ old('status', $permintaan->status) == '3' ? 'selected' : '' }}>Selesai</option>
-                </select>
-                @if($errors->has('status'))
-                    <span class="text-danger">{{ $errors->first('status') }}</span>
-                @endif
-            </div>
-
-            <div class="form-group">
-                @php
-                $sparepartsArray = explode(',', $permintaan->spareparts);
-                @endphp
-
-                <label for="spareparts">Sparepart yang Dipakai</label>
-                <select name="spareparts[]" id="spareparts" class="form-control select2" multiple>
-                    @foreach($assets as $asset)
-                        <option value="{{ $asset->name }}" 
-                            @if(in_array($asset->name, $sparepartsArray)) selected @endif>
-                            {{ $asset->name }}
-                        </option>
+                <label for="peserta">Peserta</label>
+                <select name="peserta[]" id="peserta" class="form-control select2" multiple>
+                    @foreach($users as $user)
+                        <option value="{{ $user->id }}" {{ in_array($user->id, old('peserta', $permintaan->peserta->pluck('user_id')->toArray())) ? 'selected' : '' }}>{{ $user->name }}</option>
                     @endforeach
                 </select>
-                </div>
-@endif
-            <!-- <div class="form-group">
-                <label for="tanggal_bayar">Tanggal Bayar</label>
-                <input class="form-control {{ $errors->has('tanggal_bayar') ? 'is-invalid' : '' }}" type="date" name="tanggal_bayar" id="tanggal_bayar" value="{{ old('tanggal_bayar', $permintaan->tanggal_bayar ? $permintaan->tanggal_bayar->format('Y-m-d') : '') }}">
-                @if($errors->has('tanggal_bayar'))
-                    <span class="text-danger">{{ $errors->first('tanggal_bayar') }}</span>
-                @endif
-            </div> -->
+            </div>
+
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select name="status" id="status" class="form-control" >
+                    <option value="Disetujui" {{ old('status', $permintaan->status == 'Disetujui') ? 'selected' : '' }}>Disetujui</option>
+                    <option value="Pelatihan Berlangsung" {{ old('status', $permintaan->status == 'Pelatihan Berlangsung') ? 'selected' : '' }}>Pelatihan Berlangsung</option>
+                    <option value="Pelatihan Selesai" {{ old('status', $permintaan->status == 'Pelatihan Selesai') ? 'selected' : '' }}>Pelatihan Selesai</option>
+            </select>
+            </div>
+
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     Update
@@ -103,7 +56,6 @@
             </div>
         </form>
     </div>
-</div>
 </div>
 
 @endsection

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\PembayaranController;
 use App\Http\Controllers\Admin\PermintaanController;
 use App\Http\Controllers\Admin\AssetStatusController;
 use App\Http\Controllers\Admin\AssetCategoryController;
+use App\Http\Controllers\Admin\PermintaanUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,10 +76,22 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'namespace' => 'Adm
     Route::post('permintaans', [PermintaanController::class, 'store'])->name('permintaans.store');
     Route::get('permintaans/{permintaan}', [PermintaanController::class, 'show'])->name('permintaans.show');
     Route::get('permintaans/{permintaan}/edit', [PermintaanController::class, 'edit'])->name('permintaans.edit');
+    Route::get('permintaans/{permintaanUser}/edit/user', [PermintaanController::class, 'editUser'])->name('permintaans.editUser');
     Route::get('permintaans/{permintaan}/bayar', [PermintaanController::class, 'bayar'])->name('permintaans.bayar');
     Route::put('permintaans/{permintaan}', [PermintaanController::class, 'update'])->name('permintaans.update');
+    Route::put('permintaans/{permintaanUser}/user', [PermintaanController::class, 'updateUser'])->name('permintaans.update.user');
     Route::delete('permintaans/{permintaan}', [PermintaanController::class, 'destroy'])->name('permintaans.destroy');
     Route::delete('permintaans/destroy', [PermintaanController::class, 'massDestroy'])->name('permintaans.massDestroy');
+
+    // Route::get('permintaansUser', [PermintaanUserController::class, 'index'])->name('permintaansUser.index');
+    // Route::get('permintaansUser/create', [PermintaanUserController::class, 'create'])->name('permintaansUser.create');
+    // Route::post('permintaansUser', [PermintaanUserController::class, 'store'])->name('permintaansUser.store');
+    // Route::get('permintaansUser/{permintaan}', [PermintaanUserController::class, 'show'])->name('permintaansUser.show');
+    // Route::get('permintaansUser/{permintaan}/edit', [PermintaanUserController::class, 'edit'])->name('permintaansUser.edit');
+    // Route::get('permintaansUser/{permintaan}/bayar', [PermintaanUserController::class, 'bayar'])->name('permintaansUser.bayar');
+    // Route::put('permintaansUser/{permintaan}', [PermintaanUserController::class, 'update'])->name('permintaansUser.update');
+    // Route::delete('permintaansUser/{permintaan}', [PermintaanUserController::class, 'destroy'])->name('permintaansUser.destroy');
+    // Route::delete('permintaansUser/destroy', [PermintaanUserController::class, 'massDestroy'])->name('permintaansUser.massDestroy');
 
     // Pembayaran
     Route::get('pembayarans', [PembayaranController::class, 'index'])->name('pembayarans.index');
