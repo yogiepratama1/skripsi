@@ -35,15 +35,15 @@ class PermintaanController extends Controller
 
     public function store(Request $request)
     {
-        if ($request->hasFile('bukti_pembayaran')) {
-            $path = $request->file('bukti_pembayaran')->store('bukti_pembayaran', 'public');
-            $request->merge(['bukti_pembayaran' => $path]);
-        }
+        // if ($request->hasFile('bukti_pembayaran')) {
+        //     $path = $request->file('bukti_pembayaran')->store('bukti_pembayaran', 'public');
+        //     $request->merge(['bukti_pembayaran' => $path]);
+        // }
         
-        if ($request->has('eskul')) {
-            $eskulString = implode(',', $request->eskul ?? []);
+        if ($request->has('produk')) {
+            $produkString = implode(',', $request->produk ?? []);
 
-            $request->merge(['eskul' => $eskulString]);
+            $request->merge(['produk' => $produkString]);
         }
 
         $request->merge(['user_id' => auth()->id()]);
@@ -63,7 +63,7 @@ class PermintaanController extends Controller
     public function setujui(Permintaan $permintaan)
     {
         $permintaan->update([
-            'disetujui' => true
+            'status' => 1
         ]);
 
         return redirect()->route('dashboard.permintaans.index');
@@ -91,10 +91,10 @@ class PermintaanController extends Controller
             $permintaan->save();
         }
 
-        if ($request->has('eskul')) {
-            $eskulString = implode(',', $request->eskul ?? []);
+        if ($request->has('produk')) {
+            $produkString = implode(',', $request->produk ?? []);
 
-            $request->merge(['eskul' => $eskulString]);
+            $request->merge(['produk' => $produkString]);
         }
 
         $permintaan->update($request->except('bukti_pembayaran'));

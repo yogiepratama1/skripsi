@@ -8,11 +8,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @if (request()->is("dashboard/permintaans") || request()->is("dashboard/permintaans/*"))
-        <title>Pendaftaran</title>
+        <title>Pemesanan</title>
     @elseif (request()->is("dashboard/absensi") || request()->is("dashboard/absensi/*"))
-        <title>Absensi</title>
+        <title>Produk</title>
     @elseif (request()->is("dashboard/assets/*") || request()->is("dashboard/assets"))
-        <title>Eskul</title>
+        <title>Produk</title>
     @else
         <title>Laporan</title>
     @endif
@@ -38,7 +38,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" rel="stylesheet" /> -->
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
-    <link rel="icon" href="{{ asset('logo-alfarizi.jpg') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('logo-gustian.jpg') }}" type="image/x-icon">
     @yield('styles')
     <style>
           .no-export, .no-export span {
@@ -102,7 +102,7 @@
         </div>
 
         <footer class="main-footer">
-            <strong> &copy;</strong> Sistem Informasi Pelaporan Kegiatan Ekstrakurikuler 
+            <strong> &copy;</strong> Sistem Informasi Pengelolaan Administrasi Perkara 
         </footer>
     </div>
     <script src="{{ asset('js/jquery.min.js') }}"></script>

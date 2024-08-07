@@ -11,8 +11,9 @@ class CreateAssetsTable extends Migration
         Schema::create('assets', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->nullable();
-            $table->longText('deskripsi')->nullable();
-            $table->timestamp('waktu_dan_jam')->nullable();
+            // $table->longText('deskripsi')->nullable();
+            $table->longText('harga')->nullable();
+            // $table->timestamp('waktu_dan_jam')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -1,15 +1,17 @@
 @extends('layouts.admin')
 @section('content')
     <div style="margin-bottom: 10px;" class="row">
+        @if (auth()->user()->role == 'admin')
         <div class="col-lg-12" style="margin-bottom: 15px;">
             <a class="btn btn-success" href="{{ route('dashboard.assets.create') }}">
-                Tambah Eskul
+                Tambah Produk
             </a>
         </div>
+        @endif
     </div>
     <div class="card">
         <div class="card-header">
-            List Eskul
+            List Produk
         </div>
 
         <div class="card-body">
@@ -18,12 +20,10 @@
                     <thead>
                         <tr>
                             <th width="10"></th>
-                            <th>Id</th>
                             <th>Name</th>
-                            <th>Deskripsi</th>
-                            <th>Waktu dan Jam</th>
-                            @if (auth()->user()->role == 'user')
-                            <th>&nbsp;</th>
+                            <th>Harga</th>
+                            @if (auth()->user()->role == 'admin')
+                            <th>Action</th>
                             @endif
                         </tr>
                     </thead>
@@ -31,11 +31,9 @@
                         @foreach($assets as $eskul)
                             <tr data-entry-id="{{ $eskul->id }}">
                                 <td></td>
-                                <td>{{ $eskul->id }}</td>
                                 <td>{{ $eskul->name }}</td>
-                                <td>{{ $eskul->deskripsi }}</td>
-                                <td>{{ $eskul->waktu_dan_jam }}</td>
-                                @if (auth()->user()->role == 'user')
+                                <td>Rp{{ number_format($eskul->harga, 2, ",", ".") }}</td>
+                                @if (auth()->user()->role == 'admin')
                                 <td>
                                     <a class="btn btn-xs btn-info" href="{{ route('dashboard.assets.edit', $eskul->id) }}">
                                         Edit

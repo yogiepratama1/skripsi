@@ -4,10 +4,10 @@
     <div class="login-logo">
         <div class="login-logo">
             <!-- add logo -->
-            <img src="{{ asset('logo-alfarizi.jpg') }}" alt="Logo" class="img-fluid" width="250">
+            <img src="{{ asset('logo-gustian.jpg') }}" alt="Logo" class="img-fluid" width="250">
             <br>
             <a href="{{ url('') }}">
-                Sistem Informasi Pelaporan Kegiatan Ekstrakurikuler
+                Sistem Informasi Pengelolaan Administrasi Perkara
             </a>
         </div>
     </div>

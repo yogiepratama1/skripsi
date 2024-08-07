@@ -38,28 +38,30 @@
     </style>
 </head>
 <body>
-    <h2 style="text-align: center;">Daftar Absensi Siswa</h2>
+    <h2 style="text-align: center;">Daftar Pemesanan</h2>
     <table class="table table-bordered table-striped table-hover datatable datatable-Permintaan">
                     <thead>
-                        <tr>
-                            <th width="10">No</th>
-                            <th>Nama Siswa</th>
-                            <th>Kelas</th>
-                            <th>Eskul</th>
-                            <th>Tanggal</th>
-                            <th>Absen</th>
+                    <tr>
+                            <th>No</th>
+                            <th>Nama Pelanggan</th>
+                            <th>Email</th>
+                            <th>Alamat</th>
+                            <th>Jumlah</th>
+                            <th>Produk</th>
+                            <th>Tanggal Pemesanan</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($laporans as $index => $laporan)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $laporan->user->name }}</td>
-                            <td>{{ $laporan->kelas }}</td>
-                            <td>{{ $laporan->absensi->asset->name }}</td>
-                            <td>{{ $laporan->absensi->waktu_dan_jam }}</td>
-                            <td>{{ $laporan->status }} </td>
-                        </tr>
+                    @foreach($laporans as $permintaan)
+                            <tr data-entry-id="{{ $permintaan->id }}">
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $permintaan->nama_pelanggan }}</td>
+                                <td>{{ $permintaan->email_pelanggan }}</td>
+                                <td>{{ $permintaan->alamat_pelanggan }}</td>
+                                <td>{{ $permintaan->jumlah }}</td>
+                                <td>{{ $permintaan->produk }}</td>
+                                <td>{{ $permintaan->created_at }}</td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>

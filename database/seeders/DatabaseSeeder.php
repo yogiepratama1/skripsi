@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'name' => 'Siswa',
+                'name' => 'Pelanggan',
                 'email' => 'user@gmail.com',
                 'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
                 'no_telp' => '08152718326',
@@ -29,63 +29,59 @@ class DatabaseSeeder extends Seeder
                 'role' => 'user'
             ],
             [
-                'name' => 'Pembina OSIS',
-                'email' => 'pembinaosis@gmail.com',
+                'name' => 'Admin',
+                'email' => 'admin@gmail.com',
                 'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
                 'no_telp' => '08625341722',
                 'alamat' => 'Jakarta',
-                'role' => 'pembinaosis'
+                'role' => 'admin'
             ],
             [
-                'name' => 'Guru Piket',
-                'email' => 'gurupiket@gmail.com',
+                'name' => 'Tim Produksi',
+                'email' => 'produksi@gmail.com',
                 'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
                 'no_telp' => '08625341722',
                 'alamat' => 'Jakarta',
-                'role' => 'gurupiket'
+                'role' => 'produksi'
             ],
             [
-                'name' => 'Wali Kelas',
-                'email' => 'walikelas@gmail.com',
+                'name' => 'Kurir',
+                'email' => 'kurir@gmail.com',
                 'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
                 'no_telp' => '08525341721',
                 'alamat' => 'Jakarta',
-                'role' => 'walikelas'
+                'role' => 'kurir'
+            ],
+            [
+                'name' => 'Manajer',
+                'email' => 'manajer@gmail.com',
+                'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
+                'no_telp' => '08525341721',
+                'alamat' => 'Jakarta',
+                'role' => 'manajer'
             ],
         ]);
 
         
         Asset::create([
-            'name' => 'Basket',
-            'deskripsi' => 'Olahraga Basket',
-            'waktu_dan_jam' => '2024-07-29 17:00:00',
+            'name' => 'Kalender',
+            'harga' => 50000
         ]);
         Asset::create([
-            'name' => 'Sepak Bola',
-            'deskripsi' => 'Olahraga Sepak Bola',
-            'waktu_dan_jam' => '2024-07-29 17:00:00',
+            'name' => 'Kaos',
+            'harga' => 50000
         ]);
         Asset::create([
-            'name' => 'Voli',
-            'deskripsi' => 'Olahraga Bola Voli',
-            'waktu_dan_jam' => '2024-07-29 16:00:00',
+            'name' => 'Sablon Kaos',
+            'harga' => 50000
         ]);
         Permintaan::create([
             'user_id' => 1,
-            'nama_siswa' => 'Roy Batty',
-            'kelas' => 'VII - A',
-            'disetujui' => true,
-            'eskul' => 'Basket, Sepak Bola',
-        ]);
-        
-        Absensi::create([
-            'asset_id' => 1,
-            'waktu_dan_jam' => '2024-07-29 17:00:00',
-        ]);
-
-        AbsensiSiswa::create([
-            'absensi_id' => 1,
-            'user_id' => 1,
+            'nama_pelanggan' => 'Roy Batty',
+            'email_pelanggan' => 'roy@gmail.com',
+            'alamat_pelanggan' => 'Jakarta',
+            'jumlah' => 10,
+            'produk' => 'Kalender',
         ]);
 
         // Asset::create([

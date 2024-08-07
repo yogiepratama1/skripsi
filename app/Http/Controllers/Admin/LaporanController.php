@@ -19,7 +19,7 @@ class LaporanController extends Controller
 {
     public function index()
     {
-        $laporans = AbsensiSiswa::with('absensi', 'user')->get();
+        $laporans = Permintaan::where('status', 5)->get();
 
         return view('admin.laporans.index', compact('laporans'));
     }
@@ -27,16 +27,14 @@ class LaporanController extends Controller
 
     public function create(Request $request)
     {
-        $laporans = AbsensiSiswa::with('absensi', 'user');
+        $laporans = Permintaan::where('status', 5);
 
         // Set default dates if not provided
         $startDate = $request->start_date ?? now()->subMonth()->toDateString(); // Default to one month ago
         $endDate = $request->end_date ?? now()->toDateString();
 
         // Apply additional where condition to filter by created_at date range
-        $laporans = $laporans->whereHas('absensi', function ($q) use ($startDate, $endDate) {
-            $q->whereBetween('waktu_dan_jam', [$startDate . " 00:00:00", $endDate . " 23:59:59"]);
-        });
+        $laporans = $laporans->whereBetween('created_at', [$startDate . " 00:00:00", $endDate . " 23:59:59"]);
         $laporans = $laporans->get();
 
         $pdf = PDF::loadView('admin.laporans.pdf', compact('laporans'));

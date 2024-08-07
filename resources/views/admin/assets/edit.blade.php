@@ -2,7 +2,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            Edit Eskul
+            Edit Produk
         </div>
 
         <div class="card-body">
@@ -10,16 +10,12 @@
                 @csrf
                 @method('PUT')
                 <div class="form-group">
-                    <label for="name">Nama Eskul</label>
+                    <label for="name">Nama Produk</label>
                     <input required type="text" class="form-control" name="name" value="{{ $asset->name }}" required>
                 </div>
                 <div class="form-group">
-                    <label for="deskripsi">Deskripsi</label>
-                    <textarea required class="form-control" name="deskripsi" required>{{ $asset->deskripsi }}</textarea>
-                </div>
-                <div class="form-group">
-                    <label for="waktu_dan_jam">Waktu dan Jam</label>
-                    <input required type="datetime-local" class="form-control" name="waktu_dan_jam" value="{{ $asset->waktu_dan_jam }}" required>
+                    <label for="name">Harga Produk</label>
+                    <input required type="number" class="form-control" name="name" value="{{ $asset->harga }}" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Update</button>
             </form>

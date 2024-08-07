@@ -4,14 +4,14 @@
         @if (auth()->user()->role == 'user')
         <div class="col-lg-12" style="margin-bottom: 15px;">
             <a class="btn btn-success" href="{{ route('dashboard.permintaans.create') }}">
-                Tambah Pendaftaran
+                Tambah Pemesanan
             </a>
         </div>
         @endif
     </div>
     <div class="card">
         <div class="card-header">
-            List Pendaftaran
+            List Pemesanan
         </div>
 
         <div class="card-body">
@@ -19,47 +19,63 @@
                 <table class="table table-bordered table-striped table-hover datatable datatable-Permintaan">
                     <thead>
                         <tr>
-                            <!-- <th width="10"></th> -->
                             <th>No</th>
-                            <th>Nama Siswa</th>
-                            <th>Kelas</th>
-                            <th>Eskul</th>
-                            <th>Diterima</th>
-                            @if (auth()->user()->role == 'user')
-                            <th>&nbsp;</th>
-                            @endif
+                            <th>Nama Pelanggan</th>
+                            <th>Email</th>
+                            <th>Alamat</th>
+                            <th>Jumlah</th>
+                            <th>Produk</th>
+                            <th>Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($permintaans as $permintaan)
                             <tr data-entry-id="{{ $permintaan->id }}">
-                                <!-- <td></td> -->
-                                <!-- <td>{{ $permintaan->id }}</td> -->
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $permintaan->nama_siswa }}</td>
-                                <!-- <td>{{ $permintaan->alamat_siswa }}</td> -->
-                                <td>{{ $permintaan->kelas }}</td>
-                                <td>{{ $permintaan->eskul }}</td>
-                                <td>{{ $permintaan->disetujui == 1 ? "Diterima" : "Belum Diterima" }}</td>
+                                <td>{{ $permintaan->nama_pelanggan }}</td>
+                                <td>{{ $permintaan->email_pelanggan }}</td>
+                                <td>{{ $permintaan->alamat_pelanggan }}</td>
+                                <td>{{ $permintaan->jumlah }}</td>
+                                <td>{{ $permintaan->produk }}</td>
                                 <td>
-                                    @if (auth()->user()->role == 'pembinaosis')
-                                    @if ($permintaan->disetujui == 0)
-
+                                    @switch($permintaan->status)
+                                        @case(0)
+                                            Menunggu Persetujuan
+                                            @break
+                                        @case(1)
+                                            Diproses
+                                            @break
+                                        @case(2)
+                                            Diproduksi
+                                            @break
+                                        @case(3)
+                                            Produksi Selesai
+                                            @break
+                                        @case(4)
+                                            Menunggu Kurir
+                                            @break
+                                        @case(5)
+                                            Dikirim Kurir
+                                            @break
+                                    @endswitch
+                                </td>
+                                <td>
+                                    @if (auth()->user()->role == 'admin' && $permintaan->status == 0)
                                     <a class="btn btn-xs btn-info" href="{{ route('dashboard.permintaans.setujui', $permintaan->id) }}">
                                         Setujui
                                     </a>
                                     @endif
-                                    @endif
-                                    @if ($permintaan->disetujui == 0)
                                     <a class="btn btn-xs btn-info" href="{{ route('dashboard.permintaans.edit', $permintaan->id) }}">
                                         Edit
                                     </a>
-                                    @endif
+                                    @if (auth()->user()->role == 'admin' || auth()->user()->role == 'user')
                                     <form action="{{ route('dashboard.permintaans.destroy', $permintaan->id) }}" method="POST" onsubmit="return confirm('Are you sure?');" style="display: inline-block;">
                                         @method('DELETE')
                                         @csrf
                                         <input type="submit" class="btn btn-xs btn-danger" value="Delete">
                                     </form>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
