@@ -3,17 +3,17 @@
 @section('content')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12" style="margin-bottom: 10px;">
-            @if (auth()->user()->role == 'user')
+            <!-- @if (auth()->user()->role == 'user')
                 <a class="btn btn-success" href="{{ route('dashboard.permintaans.create') }}">
-                    Add Servis
+                    Add Cuci
                 </a>                
-            @endif
+            @endif -->
         </div>
     </div>
 
 <div class="card">
     <div class="card-header">
-        Daftar Servis
+        Daftar Cucian
     </div>
 
     <div class="card-body">
@@ -24,9 +24,9 @@
                         <th width="10">No</th>
                         <th>ID</th>
                         <th>Nama Pelanggan</th>
-                        <th>Motor</th>
+                        <th>Mobil</th>
                         <th>Nomor Polisi</th>
-                        <th>Keluhan</th>
+                        <th>Layanan</th>
                         <th>Harga</th>
                         <th>Status</th>
                         <th>Action</th>

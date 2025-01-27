@@ -38,7 +38,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" rel="stylesheet" /> -->
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
-    <link rel="icon" href="{{ asset('logo-perusahaan2.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('logo-perusahaan.jpg') }}" type="image/x-icon">
     @yield('styles')
     <style>
           .no-export, .no-export span {
@@ -102,7 +102,7 @@
         </div>
 
         <footer class="main-footer">
-            <strong> &copy;</strong> SISTEM INFORMASI TRANSAKSI BERBASIS WEB PADA BENGKEL MOTOR HIDUP BARU 
+            <strong> &copy;</strong> SISTEM INFORMASI TRANSAKSI BERBASIS WEB PADA Auto Glaze 
         </footer>
     </div>
     <script src="{{ asset('js/jquery.min.js') }}"></script>

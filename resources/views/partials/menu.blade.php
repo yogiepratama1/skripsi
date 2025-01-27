@@ -29,7 +29,7 @@
 
                             </i>
                             <p>
-                                Permintaan
+                                Dashboard
                             </p>
                         </a>
                     </li>

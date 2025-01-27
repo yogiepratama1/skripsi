@@ -16,7 +16,7 @@
     <meta name="generator" content="Themefisher Small Apps Template v1.0" />
 
     <!-- Favicon -->
-    <link rel="icon" href="{{ asset('logo-perusahaan2.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('logo-perusahaan.jpg') }}" type="image/x-icon">
 
 <!-- PLUGINS CSS STYLE -->
 <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap/bootstrap.min.css') }}" />
@@ -34,7 +34,7 @@
     <nav class="navbar main-nav navbar-expand-lg px-2 px-sm-0 py-2 py-lg-0">
         <div class="container">
             <a class="navbar-brand"></a>
-            <img src="{{ asset('logo-perusahaan2.png') }}" alt="logo" width="50px" />
+            <img src="{{ asset('logo-perusahaan.jpg') }}" alt="logo" width="50px" />
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="ti-menu"></span>
@@ -79,14 +79,11 @@
             <div class="row align-items-center">
                 <div class="col-md-6 order-2 order-md-1 text-center text-md-left">
                     <h1 class="text-white font-weight-bold mb-4">
-                    Bengkel Motor Hidup Baru</h1>
-                    <p class="text-white mb-5">
-                        {{ env('JUDUL') }}
-                    </p>
+                    Auto Glaze</h1>
                     <a href="{{ route('login') }}" class="btn btn-main-md">Mulai</a>
                 </div>
                 <div class="col-md-6 text-center order-1 order-md-2">
-                    <img class="img-fluid" src="{{ asset('logo-perusahaan2.png') }}" alt="screenshot" />
+                    <img class="img-fluid" src="{{ asset('logo-perusahaan.jpg') }}" alt="screenshot" />
                 </div>
             </div>
         </div>
