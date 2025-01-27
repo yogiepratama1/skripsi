@@ -24,7 +24,7 @@
                 @endif
             </div>
             <div class="form-group">
-                <label class="required" for="motor">Motor</label>
+                <label class="required" for="motor">Mobil</label>
                 <input class="form-control {{ $errors->has('motor') ? 'is-invalid' : '' }}" type="text" name="motor" id="motor" value="{{ old('motor', '') }}" required>
                 @if($errors->has('motor'))
                     <span class="text-danger">{{ $errors->first('motor') }}</span>
@@ -38,7 +38,7 @@
                 @endif
             </div>
             <div class="form-group">
-                <label for="keluhan">Keluhan</label>
+                <label for="keluhan">Layanan</label>
                 <textarea class="form-control {{ $errors->has('keluhan') ? 'is-invalid' : '' }}" name="keluhan" id="keluhan" rows="3">{{ old('keluhan', '') }}</textarea>
                 @if($errors->has('keluhan'))
                     <span class="text-danger">{{ $errors->first('keluhan') }}</span>

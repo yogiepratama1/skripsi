@@ -11,7 +11,7 @@
             @method('PUT')
             @csrf
             <div class="form-group">
-                <label class="required" for="motor">Motor</label>
+                <label class="required" for="motor">Mobil</label>
                 <input disabled class="form-control {{ $errors->has('motor') ? 'is-invalid' : '' }}" type="text" name="motor" id="motor" value="{{ old('motor', $permintaan->motor) }}" required {{ auth()->user()->role != 'user' ? 'disabled' : '' }}>
                 @if($errors->has('motor'))
                     <span class="text-danger">{{ $errors->first('motor') }}</span>

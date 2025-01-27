@@ -23,8 +23,8 @@
                         <td>{{ $permintaan->alamat_pelanggan }}</td>
                     </tr>
                     <tr>
-                        <th>Motor</th>
                         <td>{{ $permintaan->motor }}</td>
+                        <th>MoMobil</th>
                     </tr>
                     <tr>
                         <th>Nomor Polisi</th>

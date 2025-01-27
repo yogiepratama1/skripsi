@@ -44,7 +44,7 @@
             <tr>
                 <th width="10">No</th>
                 <th>Nama Pelanggan</th>
-                <th>Motor</th>
+                <th>Mobil</th>
                 <th>Nomor Polisi</th>
                 <th>Keluhan</th>
                 <th>Harga</th>
