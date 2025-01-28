@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>                SISTEM INFORMASI TRANSAKSI BERBASIS WEB PADA Auto Glaze
+    <title>                Auto Glaze
 </title>
     <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" /> -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />

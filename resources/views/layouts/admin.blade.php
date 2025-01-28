@@ -102,7 +102,7 @@
         </div>
 
         <footer class="main-footer">
-            <strong> &copy;</strong> SISTEM INFORMASI TRANSAKSI BERBASIS WEB PADA Auto Glaze 
+            <strong> &copy;</strong> Auto Glaze 
         </footer>
     </div>
     <script src="{{ asset('js/jquery.min.js') }}"></script>

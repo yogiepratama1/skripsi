@@ -46,6 +46,15 @@ class PermintaanController extends Controller
             $request->merge(['spareparts' => $sparepartsString]);
         }
 
+        if ($request->has('keluhan')) {
+            $keluhanId = $request->keluhan;
+            $keluan = Asset::where('id', $keluhanId)->first();
+            $request->merge([
+                'keluhan' => $keluan->name,
+                'harga' => $keluan->harga
+            ]);
+        }
+
         $request->merge(['user_id' => auth()->id()]);
 
         $permintaan = Permintaan::create($request->all());
@@ -55,8 +64,9 @@ class PermintaanController extends Controller
     public function edit(Permintaan $permintaan)
     {
         $assets = Asset::all();
+        $keluhanId = Asset::where('name', $permintaan->keluhan)->first()->id;
 
-        return view('admin.permintaans.edit', compact('permintaan', 'assets'));
+        return view('admin.permintaans.edit', compact('permintaan', 'assets', 'keluhanId'));
     }
     public function bayar(Permintaan $permintaan)
     {
@@ -84,6 +94,15 @@ class PermintaanController extends Controller
             $sparepartsString = implode(',', $request->spareparts ?? []);
 
             $request->merge(['spareparts' => $sparepartsString]);
+        }
+
+        if ($request->has('keluhan')) {
+            $keluhanId = $request->keluhan;
+            $keluan = Asset::where('id', $keluhanId)->first();
+            $request->merge([
+                'keluhan' => $keluan->name,
+                'harga' => $keluan->harga
+            ]);
         }
 
         $permintaan->update($request->except('bukti_pembayaran'));

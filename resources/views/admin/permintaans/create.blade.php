@@ -31,15 +31,26 @@
                 @endif
             </div>
             <div class="form-group">
-                <label class="required" for="nomor_polisi">nomor_polisi</label>
+                <label class="required" for="nomor_polisi">Nomor Polisi</label>
                 <input class="form-control {{ $errors->has('nomor_polisi') ? 'is-invalid' : '' }}" type="text" name="nomor_polisi" id="nomor_polisi" value="{{ old('nomor_polisi', '') }}" required>
                 @if($errors->has('nomor_polisi'))
                     <span class="text-danger">{{ $errors->first('nomor_polisi') }}</span>
                 @endif
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="keluhan">Layanan</label>
                 <textarea class="form-control {{ $errors->has('keluhan') ? 'is-invalid' : '' }}" name="keluhan" id="keluhan" rows="3">{{ old('keluhan', '') }}</textarea>
+                @if($errors->has('keluhan'))
+                    <span class="text-danger">{{ $errors->first('keluhan') }}</span>
+                @endif
+            </div> -->
+            <div class="form-group">
+                <label class="required" for="keluhan">Layanan</label>
+                <select class="form-control select2 {{ $errors->has('permintaan') ? 'is-invalid' : '' }}" name="keluhan" id="keluhan" required>
+                    @foreach($assets as $asset)
+                        <option value="{{ $asset->id }}" {{ (old('keluhan') ? old('keluhan') : $laporan->permintaan->id ?? '') == $asset->id ? 'selected' : '' }}>{{ $asset->name }}</option>
+                    @endforeach
+                </select>
                 @if($errors->has('keluhan'))
                     <span class="text-danger">{{ $errors->first('keluhan') }}</span>
                 @endif

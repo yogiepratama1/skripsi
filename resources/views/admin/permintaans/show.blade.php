@@ -23,21 +23,21 @@
                         <td>{{ $permintaan->alamat_pelanggan }}</td>
                     </tr>
                     <tr>
+                        <th>Mobil</th>
                         <td>{{ $permintaan->motor }}</td>
-                        <th>MoMobil</th>
                     </tr>
                     <tr>
                         <th>Nomor Polisi</th>
                         <td>{{ $permintaan->nomor_polisi }}</td>
                     </tr>
                     <tr>
-                        <th>Keluhan</th>
+                        <th>Layanan</th>
                         <td>{{ $permintaan->keluhan }}</td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                         <th>Spareparts</th>
                         <td>{{ $permintaan->spareparts }}</td>
-                    </tr>
+                    </tr> -->
                     <tr>
                         <th>Status</th>
                         <td>

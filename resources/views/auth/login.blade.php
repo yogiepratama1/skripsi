@@ -7,7 +7,7 @@
             <img src="{{ asset('logo-perusahaan.jpg') }}" alt="Logo" class="img-fluid" width="250">
             <br>
             <a href="{{ url('') }}">
-                SISTEM INFORMASI TRANSAKSI BERBASIS WEB PADA Auto Glaze
+                Auto Glaze
             </a>
         </div>
     </div>

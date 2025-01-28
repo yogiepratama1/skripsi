@@ -25,7 +25,7 @@
                 @endif
             </div>
             <div class="form-group">
-                <label for="keluhan">Keluhan</label>
+                <label for="keluhan">Layanan</label>
                 <textarea disabled class="form-control {{ $errors->has('keluhan') ? 'is-invalid' : '' }}" name="keluhan" id="keluhan" rows="3" {{ auth()->user()->role != 'user' ? 'disabled' : '' }}>{{ old('keluhan', $permintaan->keluhan) }}</textarea>
                 @if($errors->has('keluhan'))
                     <span class="text-danger">{{ $errors->first('keluhan') }}</span>

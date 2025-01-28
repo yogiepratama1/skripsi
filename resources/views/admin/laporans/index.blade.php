@@ -41,9 +41,9 @@
                             <th>Nama Pelanggan</th>
                             <th>Mobil</th>
                             <th>Nomor Polisi</th>
-                            <th>Keluhan</th>
+                            <th>Layanan</th>
                             <th>Harga</th>
-                            <th>Tanggal Servis</th>
+                            <th>Tanggal</th>
                             <th>Status</th>
                         </tr>
                     </thead>

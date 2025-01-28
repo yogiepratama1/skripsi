@@ -11,17 +11,15 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                @if (auth()->user()->role == 'gudang')
-                    <li class="nav-item">
-                        <a href="{{ url("/dashboard/assets") }}" class="nav-link {{ request()->is("dashboard/assets") || request()->is("dashboard/assets/*") ? "active" : "" }}">
-                        <img src="{{ asset('icons/car-solid.svg') }}" alt="barang" width="20px" height="20px">
-                            </i>
-                            <p>
-                                Sparepart
-                            </p>
-                        </a>
-                    </li>
-                @endif
+                <li class="nav-item">
+                    <a href="{{ url("/dashboard/assets") }}" class="nav-link {{ request()->is("dashboard/assets") || request()->is("dashboard/assets/*") ? "active" : "" }}">
+                    <img src="{{ asset('icons/car-solid.svg') }}" alt="barang" width="20px" height="20px">
+                        </i>
+                        <p>
+                            List Layanan
+                        </p>
+                    </a>
+                </li>
                 @if (auth()->user()->role != 'pemilikbengkel')                    
                     <li class="nav-item">
                         <a href="{{ url("/dashboard/permintaans") }}" class="nav-link {{ request()->is("dashboard/permintaans") || request()->is("dashboard/permintaans/*") ? "active" : "" }}">

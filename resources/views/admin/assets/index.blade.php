@@ -2,14 +2,16 @@
 @section('content')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12" style="margin-bottom: 15px;">
+            @if(auth()->user()->role != 'user')
             <a class="btn btn-success" href="{{ route('dashboard.assets.create') }}">
-                Tambah Barang
+                Tambah Layanan
             </a>
+            @endif
         <div>
     </div>
 <div class="card">
     <div class="card-header">
-        List Barang
+        List Layanan
     </div>
 
     <div class="card-body">
@@ -25,8 +27,8 @@
                         <th>Harga</th>
                         <!-- <th>Jenis</th>
                         <th>Merek</th> -->
+                        @if (auth()->user()->role != 'user')                            
                         <th>&nbsp;</th>
-                        @if (auth()->user()->role == 'user')                            
                         @endif
                     </tr>
                 </thead>
@@ -42,6 +44,7 @@
                             </td>
                             <!-- <td>{{ $asset->status->name ?? '' }}</td> -->
                             <!-- <td>{{ $asset->merek ?? '' }}</td> -->
+                            @if (auth()->user()->role != 'user')
                             <td>
                                     <a class="btn btn-xs btn-info" href="{{ route('dashboard.assets.edit', $asset->id) }}">
                                         Edit
@@ -52,7 +55,6 @@
                                         <input type="submit" class="btn btn-xs btn-danger" value="Delete">
                                     </form>
                             </td>
-                            @if (auth()->user()->role == 'user')
                             @endif
                         </tr>
                     @endforeach

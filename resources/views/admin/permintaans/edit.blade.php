@@ -38,9 +38,20 @@
                     <span class="text-danger">{{ $errors->first('nomor_polisi') }}</span>
                 @endif
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="keluhan">layanan</label>
                 <textarea class="form-control {{ $errors->has('keluhan') ? 'is-invalid' : '' }}" name="keluhan" id="keluhan" rows="3" {{ auth()->user()->role != 'user' ? 'disabled' : '' }}>{{ old('keluhan', $permintaan->keluhan) }}</textarea>
+                @if($errors->has('keluhan'))
+                    <span class="text-danger">{{ $errors->first('keluhan') }}</span>
+                @endif
+            </div> -->
+            <div class="form-group">
+                <label class="required" for="keluhan">Layanan</label>
+                <select class="form-control select2 {{ $errors->has('permintaan') ? 'is-invalid' : '' }}" name="keluhan" id="keluhan" required>
+                    @foreach($assets as $asset)
+                        <option value="{{ $asset->id }}" {{ (old('keluhan') ? old('keluhan') : $keluhanId ?? '') == $asset->id ? 'selected' : '' }}>{{ $asset->name }}</option>
+                    @endforeach
+                </select>
                 @if($errors->has('keluhan'))
                     <span class="text-danger">{{ $errors->first('keluhan') }}</span>
                 @endif
@@ -57,7 +68,7 @@
                     </div>
                 @endif
             </div> -->
-            @if (auth()->user()->role == 'kasir')
+            <!-- @if (auth()->user()->role == 'kasir')
             <div class="form-group">
                 <label for="harga">Harga</label>
                 <input class="form-control {{ $errors->has('harga') ? 'is-invalid' : '' }}" type="number" name="harga" id="harga" value="{{ old('harga', $permintaan->harga) }}">
@@ -65,7 +76,7 @@
                     <span class="text-danger">{{ $errors->first('harga') }}</span>
                 @endif
             </div>
-            @endif
+            @endif -->
             @if (auth()->user()->role != 'user')                
             <div class="form-group">
                 <label for="status">Status</label>
@@ -82,7 +93,7 @@
                 @endif
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
                 @php
                 $sparepartsArray = explode(',', $permintaan->spareparts);
                 @endphp
@@ -96,7 +107,7 @@
                         </option>
                     @endforeach
                 </select>
-                </div>
+                </div> -->
 @endif
             <!-- <div class="form-group">
                 <label for="tanggal_bayar">Tanggal Bayar</label>

@@ -69,14 +69,14 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Asset::create([
-            'name' => 'Kampas Rem',
-            'deskripsi' => 'Kampas Rem Motor',
+            'name' => 'Cuci Biasa',
+            'deskripsi' => 'Cuci Biasa',
             'harga' => 50000,
         ]);
 
         Asset::create([
-            'name' => 'Rantai',
-            'deskripsi' => 'Rantai Motor',
+            'name' => 'Cuci + Wax',
+            'deskripsi' => 'Cuci + Wax',
             'harga' => 100000,
         ]);
         
@@ -84,10 +84,11 @@ class DatabaseSeeder extends Seeder
             'user_id' => 1,
             'nama_pelanggan' => 'Arif',
             'alamat_pelanggan' => 'Jakarta',
-            'motor' => 'Beat FI',
+            'motor' => 'Toyota Avanza',
             'nomor_polisi' => 'B 1234 ABC',
-            'keluhan' => 'Rem tidak berfungsi',
+            'keluhan' => 'Cuci Biasa',
             'status' => 0,
+            'harga' => 50000,
             'tanggal_bayar' => null,
         ]);
 
@@ -95,10 +96,10 @@ class DatabaseSeeder extends Seeder
             'user_id' => 1,
             'nama_pelanggan' => 'Budi',
             'alamat_pelanggan' => 'Jakarta',
-            'motor' => 'Vario',
+            'motor' => 'BMW X5',
             'nomor_polisi' => 'B 4444 ABC',
-            'keluhan' => 'Suara kasar saat jalan',
-            'harga' => 50000,
+            'keluhan' => 'Cuci + Wax',
+            'harga' => 100000,
             'status' => 2,
             'tanggal_bayar' => null,
             'spareparts' => 'Rantai',

@@ -3,11 +3,9 @@
 @section('content')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12" style="margin-bottom: 10px;">
-            <!-- @if (auth()->user()->role == 'user')
-                <a class="btn btn-success" href="{{ route('dashboard.permintaans.create') }}">
-                    Add Cuci
-                </a>                
-            @endif -->
+            <a class="btn btn-success" href="{{ route('dashboard.permintaans.create') }}">
+                Tambah Cuci
+            </a>
         </div>
     </div>
 
