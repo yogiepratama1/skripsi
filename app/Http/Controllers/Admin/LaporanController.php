@@ -17,7 +17,7 @@ class LaporanController extends Controller
 {
     public function index()
     {
-        $laporans = Permintaan::where('status', 3)->get();
+        $laporans = Permintaan::where('status', 1)->where('status_acara', 2)->get();
 
         return view('admin.laporans.index', compact('laporans'));
     }
@@ -25,7 +25,7 @@ class LaporanController extends Controller
 
     public function create(Request $request)
     {
-        $laporans = Permintaan::where('status', 3);
+        $laporans = Permintaan::where('status', 1)->where('status_acara', 2);
 
         // Set default dates if not provided
         $startDate = $request->start_date ?? now()->subMonth()->toDateString(); // Default to one month ago

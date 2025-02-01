@@ -38,13 +38,13 @@
                     <thead>
                         <tr>
                             <th class="no-export" width="10">No</th>
-                            <th>Nama Pelanggan</th>
-                            <th>Motor</th>
-                            <th>Nomor Polisi</th>
-                            <th>Keluhan</th>
-                            <th>Harga</th>
-                            <th>Tanggal Servis</th>
+                            <th>Nama Klien</th>
+                            <th>Nama Acara</th>
+                            <th>Tanggal Acara</th>
+                            <th>Kebutuhan Sponsorhip</th>
+                            <th>Anggaran</th>
                             <th>Status</th>
+                            <th>Status Acara</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,18 +52,17 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $laporan->nama_pelanggan }}</td>
-                            <td>{{ $laporan->motor }}</td>
-                            <td>{{ $laporan->nomor_polisi }}</td>
+                            <td>{{ $laporan->alamat_pelanggan }}</td>
+                            <td>{{ \Carbon\Carbon::parse($laporan->tanggal_bayar)->format('Y-m-d') }}</td>
                             <td>{{ $laporan->keluhan }}</td>
-                            <td>{{ number_format($laporan->harga, 0, ',', '.') ?? ''  }} </td>
-                            <td>{{ $laporan->created_at->format('d/m/Y') }}</td>
+                            <td>{{ number_format(is_numeric($laporan->motor) ? $laporan->motor : 0, 0, ',', '.') ?? ''  }} </td>
                             <td>
-                            @switch($laporan->status)
+                                @switch($laporan->status)
                                     @case(0)
-                                        Menunggu Konfirmasi
+                                        Not Verified
                                         @break
                                     @case(1)
-                                        Diproses
+                                        Verified
                                         @break
                                     @case(2)
                                         Menunggu Pembayaran
@@ -72,7 +71,22 @@
                                         Selesai
                                         @break
                                 @endswitch
-
+                            </td>
+                            <td>
+                                @switch($laporan->status_acara)
+                                    @case(0)
+                                        Not Started
+                                        @break
+                                    @case(1)
+                                    Ongoing
+                                        @break
+                                    @case(2)
+                                    Completed
+                                        @break
+                                    @case(3)
+                                        Selesai
+                                        @break
+                                @endswitch
                             </td>
                         </tr>
                         @endforeach

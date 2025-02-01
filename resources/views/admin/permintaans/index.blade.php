@@ -5,7 +5,7 @@
         <div class="col-lg-12" style="margin-bottom: 10px;">
             @if (auth()->user()->role == 'user')
                 <a class="btn btn-success" href="{{ route('dashboard.permintaans.create') }}">
-                    Add Servis
+                    Add Permintaan Sponsorhip
                 </a>                
             @endif
         </div>
@@ -13,7 +13,7 @@
 
 <div class="card">
     <div class="card-header">
-        Daftar Servis
+        Daftar Permintaan Sponsorhip
     </div>
 
     <div class="card-body">
@@ -22,12 +22,11 @@
                 <thead>
                     <tr>
                         <th width="10">No</th>
-                        <th>ID</th>
-                        <th>Nama Pelanggan</th>
-                        <th>Motor</th>
-                        <th>Nomor Polisi</th>
-                        <th>Keluhan</th>
-                        <th>Harga</th>
+                        <th>Nama Klien</th>
+                        <th>Nama Acara</th>
+                        <th>Tanggal Acara</th>
+                        <th>Kebutuhan Sponsorhip</th>
+                        <th>Anggaran</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -36,19 +35,18 @@
                     @foreach($permintaans as $key => $permintaan)
                         <tr data-entry-id="{{ $permintaan->id }}">
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $permintaan->id }}</td>
                             <td>{{ $permintaan->nama_pelanggan }}</td>
-                            <td>{{ $permintaan->motor }}</td>
-                            <td>{{ $permintaan->nomor_polisi }}</td>
+                            <td>{{ $permintaan->alamat_pelanggan }}</td>
+                            <td>{{ \Carbon\Carbon::parse($permintaan->tanggal_bayar)->format('Y-m-d') }}</td>
                             <td>{{ $permintaan->keluhan }}</td>
-                            <td>{{ number_format($permintaan->harga, 0, ',', '.') ?? ''  }} </td>
+                            <td>{{ number_format(is_numeric($permintaan->motor) ? $permintaan->motor : 0, 0, ',', '.') ?? ''  }} </td>
                             <td>
                                 @switch($permintaan->status)
                                     @case(0)
-                                        Menunggu Konfirmasi
+                                        Not Verified
                                         @break
                                     @case(1)
-                                        Diproses
+                                        Verified
                                         @break
                                     @case(2)
                                         Menunggu Pembayaran

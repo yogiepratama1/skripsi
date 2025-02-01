@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Asset;
 use App\Models\Permintaan;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -19,7 +20,7 @@ class DatabaseSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'name' => 'Pelanggan',
+                'name' => 'User',
                 'email' => 'user@gmail.com',
                 'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
                 'no_telp' => '08152718326',
@@ -27,81 +28,79 @@ class DatabaseSeeder extends Seeder
                 'role' => 'user'
             ],
             [
-                'name' => 'Penjaga Gudang',
-                'email' => 'gudang@gmail.com',
+                'name' => 'Tim Pengecekan Proposal',
+                'email' => 'proposal@gmail.com',
                 'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
                 'no_telp' => '08625341722',
                 'alamat' => 'Jakarta',
-                'role' => 'gudang'
+                'role' => 'proposal'
             ],
             [
-                'name' => 'Mekanik',
-                'email' => 'mekanik@gmail.com',
-                'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
-                'no_telp' => '08625341722',
-                'alamat' => 'Jakarta',
-                'role' => 'mekanik'
-            ],
-            [
-                'name' => 'Kasir',
-                'email' => 'kasir@gmail.com',
+                'name' => 'Administrasi',
+                'email' => 'admin@gmail.com',
                 'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
                 'no_telp' => '08525341721',
                 'alamat' => 'Jakarta',
-                'role' => 'kasir'
+                'role' => 'admin'
             ],
             [
-                'name' => 'Pemilik Bengkel',
-                'email' => 'pemilikbengkel@gmail.com',
+                'name' => 'Tim Monitoring',
+                'email' => 'monitoring@gmail.com',
                 'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
                 'no_telp' => '08213341721',
                 'alamat' => 'Jakarta',
-                'role' => 'pemilikbengkel'
+                'role' => 'monitoring'
             ],
             [
-                'name' => 'Service Counter',
-                'email' => 'servicecounter@gmail.com',
+                'name' => 'Manajer',
+                'email' => 'manajer@gmail.com',
                 'password' => Hash::make('password'), // You can change 'password' to the desired default password for all users
                 'no_telp' => '08213341721',
                 'alamat' => 'Jakarta',
-                'role' => 'servicecounter'
+                'role' => 'manajer'
             ],
         ]);
 
         Asset::create([
-            'name' => 'Kampas Rem',
-            'deskripsi' => 'Kampas Rem Motor',
-            'harga' => 50000,
+            'name' => 'Merchandise',
+            'deskripsi' => 'Merchandise',
+            'harga' => 10,
         ]);
 
         Asset::create([
-            'name' => 'Rantai',
-            'deskripsi' => 'Rantai Motor',
-            'harga' => 100000,
+            'name' => 'Speaker',
+            'deskripsi' => 'Speaker',
+            'harga' => 10,
+        ]);
+        Asset::create([
+            'name' => 'Media',
+            'deskripsi' => 'Media',
+            'harga' => 10,
         ]);
         
         Permintaan::create([
             'user_id' => 1,
             'nama_pelanggan' => 'Arif',
-            'alamat_pelanggan' => 'Jakarta',
-            'motor' => 'Beat FI',
-            'nomor_polisi' => 'B 1234 ABC',
-            'keluhan' => 'Rem tidak berfungsi',
+            'alamat_pelanggan' => 'Konser Amal',
+            'tanggal_bayar' => Carbon::now(),
+            'keluhan' => 'Merchandise, Media, Speaker',
+            'motor' => 2000000,
             'status' => 0,
-            'tanggal_bayar' => null,
+            'status_acara' => 0,
+            'nomor_polisi' => 'drive.google.com/123'
         ]);
 
         Permintaan::create([
             'user_id' => 1,
-            'nama_pelanggan' => 'Budi',
-            'alamat_pelanggan' => 'Jakarta',
-            'motor' => 'Vario',
-            'nomor_polisi' => 'B 4444 ABC',
-            'keluhan' => 'Suara kasar saat jalan',
-            'harga' => 50000,
-            'status' => 2,
-            'tanggal_bayar' => null,
-            'spareparts' => 'Rantai',
+            'nama_pelanggan' => 'Arif',
+            'alamat_pelanggan' => 'Konser Masjid',
+            'tanggal_bayar' => Carbon::now(),
+            'keluhan' => 'Speaker',
+            'motor' => 2000000,
+            'status' => 1,
+            'status_acara' => 2,
+            'nomor_polisi' => 'drive.google.com/123'
         ]);
+
     }
 }

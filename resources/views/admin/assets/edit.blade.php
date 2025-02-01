@@ -34,7 +34,7 @@
                 @endif
             </div> -->
             <div class="form-group">
-                <label class="required" for="harga">Harga</label>
+                <label class="required" for="harga">Stok</label>
                 <input class="form-control {{ $errors->has('harga') ? 'is-invalid' : '' }}" type="number" name="harga" id="harga" value="{{ old('harga', $asset->harga) }}" step="0.01" required>
                 @if($errors->has('harga'))
                     <span class="text-danger">{{ $errors->first('harga') }}</span>

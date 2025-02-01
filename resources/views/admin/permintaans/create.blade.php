@@ -3,47 +3,66 @@
 
 <div class="card">
     <div class="card-header">
-        Create Permintaan
+        Create Permintaan Sponsorship
     </div>
-
+    <!-- Nama Klien -> nama_pelanggan
+        Nama Acara -> alamat_pelanggan
+        Tanggal Acara -> tanggal_bayar
+        Kebutuhan Sponsorhip -> keluhan
+        Anggaran -> motor
+        Link Dokumen Proposal -> nomor_polisi -->
     <div class="card-body">
         <form method="POST" action="{{ route('dashboard.permintaans.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label class="required" for="nama_pelanggan">Nama Pelanggan</label>
+                <label class="required" for="nama_pelanggan">Nama Klien</label>
                 <input class="form-control {{ $errors->has('nama_pelanggan') ? 'is-invalid' : '' }}" type="text" name="nama_pelanggan" id="nama_pelanggan" value="{{ old('nama_pelanggan', '') }}" required>
                 @if($errors->has('nama_pelanggan'))
                     <span class="text-danger">{{ $errors->first('nama_pelanggan') }}</span>
                 @endif
             </div>
             <div class="form-group">
-                <label class="required" for="alamat_pelanggan">Alamat Pelanggan</label>
-                <textarea class="form-control {{ $errors->has('alamat_pelanggan') ? 'is-invalid' : '' }}" name="alamat_pelanggan" id="alamat_pelanggan" rows="3" required>{{ old('alamat_pelanggan', '') }}</textarea>
+                <label class="required" for="alamat_pelanggan">Nama Acara</label>
+                <input class="form-control {{ $errors->has('alamat_pelanggan') ? 'is-invalid' : '' }}" type="text" name="alamat_pelanggan" id="alamat_pelanggan" value="{{ old('alamat_pelanggan', '') }}" required>
                 @if($errors->has('alamat_pelanggan'))
                     <span class="text-danger">{{ $errors->first('alamat_pelanggan') }}</span>
                 @endif
             </div>
             <div class="form-group">
-                <label class="required" for="motor">Motor</label>
-                <input class="form-control {{ $errors->has('motor') ? 'is-invalid' : '' }}" type="text" name="motor" id="motor" value="{{ old('motor', '') }}" required>
+                <label for="tanggal_bayar">Tanggal Acara</label>
+                <input class="form-control {{ $errors->has('tanggal_bayar') ? 'is-invalid' : '' }}" type="date" name="tanggal_bayar" id="tanggal_bayar" value="{{ old('tanggal_bayar', '') }}">
+                @if($errors->has('tanggal_bayar'))
+                    <span class="text-danger">{{ $errors->first('tanggal_bayar') }}</span>
+                @endif
+            </div>
+            <div class="form-group">
+                <label class="required" for="keluhan">Kebutuhan Sponsorhip</label>
+                <textarea class="form-control {{ $errors->has('keluhan') ? 'is-invalid' : '' }}" name="keluhan" id="keluhan" rows="3" required>{{ old('keluhan', '') }}</textarea>
+                @if($errors->has('keluhan'))
+                    <span class="text-danger">{{ $errors->first('keluhan') }}</span>
+                @endif
+            </div>
+            <div class="form-group">
+                <label class="required" for="motor">Anggaran</label>
+                <input class="form-control {{ $errors->has('motor') ? 'is-invalid' : '' }}" type="number" name="motor" id="motor" value="{{ old('motor', '') }}" required>
                 @if($errors->has('motor'))
                     <span class="text-danger">{{ $errors->first('motor') }}</span>
                 @endif
             </div>
             <div class="form-group">
-                <label class="required" for="nomor_polisi">nomor_polisi</label>
-                <input class="form-control {{ $errors->has('nomor_polisi') ? 'is-invalid' : '' }}" type="text" name="nomor_polisi" id="nomor_polisi" value="{{ old('nomor_polisi', '') }}" required>
+                <label class="required" for="nomor_polisi">Link Dokumen Proposal</label>
+                <input class="form-control {{ $errors->has('nomor_polisi') ? 'is-invalid' : '' }}" type="text" name="nomor_polisi" id="nomor_polisi" value="{{ old('nomor_polisi', '') }}" required placeholder="Contoh: https://drive.google.com/...">
                 @if($errors->has('nomor_polisi'))
                     <span class="text-danger">{{ $errors->first('nomor_polisi') }}</span>
                 @endif
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="keluhan">Keluhan</label>
                 <textarea class="form-control {{ $errors->has('keluhan') ? 'is-invalid' : '' }}" name="keluhan" id="keluhan" rows="3">{{ old('keluhan', '') }}</textarea>
                 @if($errors->has('keluhan'))
                     <span class="text-danger">{{ $errors->first('keluhan') }}</span>
                 @endif
-            </div>
+            </div> -->
             <!-- <div class="form-group">
                 <label for="bukti_pembayaran">Bukti Pembayaran</label>
                 <input class="form-control-file {{ $errors->has('bukti_pembayaran') ? 'is-invalid' : '' }}" type="file" name="bukti_pembayaran" id="bukti_pembayaran">

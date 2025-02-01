@@ -15,38 +15,42 @@
                         <td>{{ $permintaan->id }}</td>
                     </tr>
                     <tr>
-                        <th>Nama Pelanggan</th>
+                        <th>Nama Klien</th>
                         <td>{{ $permintaan->nama_pelanggan }}</td>
                     </tr>
                     <tr>
-                        <th>Alamat Pelanggan</th>
+                        <th>Nama Acara</th>
                         <td>{{ $permintaan->alamat_pelanggan }}</td>
                     </tr>
                     <tr>
-                        <th>Motor</th>
-                        <td>{{ $permintaan->motor }}</td>
+                        <th>Tanggal Acara</th>
+                        <td> {{ \Carbon\Carbon::parse($permintaan->tanggal_bayar)->format('Y-m-d') }}</td>
                     </tr>
                     <tr>
-                        <th>Nomor Polisi</th>
-                        <td>{{ $permintaan->nomor_polisi }}</td>
-                    </tr>
-                    <tr>
-                        <th>Keluhan</th>
+                        <th>Kebutuhan Sponsorhip</th>
                         <td>{{ $permintaan->keluhan }}</td>
                     </tr>
                     <tr>
+                        <th>Anggaran</th>
+                        <td>{{ number_format(is_numeric($permintaan->motor) ? $permintaan->motor : 0, 0, ',', '.') ?? ''  }}</td>
+                    </tr>
+                    <tr>
+                        <th>Link Dokumen Proposal</th>
+                        <td>{{ $permintaan->nomor_polisi }}</td>
+                    </tr>
+                    <!-- <tr>
                         <th>Spareparts</th>
                         <td>{{ $permintaan->spareparts }}</td>
-                    </tr>
+                    </tr> -->
                     <tr>
                         <th>Status</th>
                         <td>
                             @switch($permintaan->status)
                                 @case(0)
-                                    Menunggu Konfirmasi
+                                    Not Verified
                                     @break
                                 @case(1)
-                                    Diproses
+                                    Verified
                                     @break
                                 @case(2)
                                     Menunggu Pembayaran
@@ -58,6 +62,22 @@
                         </td>
                     </tr>
                     <tr>
+                        <th>Status Acara</th>
+                        <td>
+                            @switch($permintaan->status_acara)
+                                @case(0)
+                                    Not Started
+                                    @break
+                                @case(1)
+                                    Completed
+                                    @break
+                                @case(2)
+                                    Completed
+                                    @break
+                            @endswitch
+                        </td>
+                    </tr>
+                    <!-- <tr>
                         <th>Harga</th>
                         <td>{{ $permintaan->harga }}</td>
                     </tr>
@@ -74,7 +94,7 @@
                                 Tidak Ada Bukti Pembayaran
                             @endif
                         </td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
         </div>

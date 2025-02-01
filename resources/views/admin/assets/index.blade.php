@@ -22,7 +22,7 @@
                         <th>Name</th>
                         <!-- <th>Harga</th> -->
                         <th>Deskripsi</th>
-                        <th>Harga</th>
+                        <th>Stok</th>
                         <!-- <th>Jenis</th>
                         <th>Merek</th> -->
                         <th>&nbsp;</th>

@@ -79,7 +79,9 @@
             <div class="row align-items-center">
                 <div class="col-md-6 order-2 order-md-1 text-center text-md-left">
                     <h1 class="text-white font-weight-bold mb-4">
-                    Bengkel Motor Hidup Baru</h1>
+                    Bengkel Motor Hidup BaruPERSEDIAAN SPONSORSHIP BERBASIS WEB PADA
+PT PAP MEDIATAMA GLOBAL INDONESIA
+</h1>
                     <p class="text-white mb-5">
                         {{ env('JUDUL') }}
                     </p>
