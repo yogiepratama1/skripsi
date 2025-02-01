@@ -2,116 +2,75 @@
 <html lang="en">
 
 <head>
-    <!-- Basic Page Needs
-  ================================================== -->
-    <meta charset="utf-8" />
-    <title>{{ env('JUDUL') }}</title>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <!-- Mobile Specific Metas
-  ================================================== -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="Bootstrap App Landing Template" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-    <meta name="author" content="Themefisher" />
-    <meta name="generator" content="Themefisher Small Apps Template v1.0" />
+  <title>Sistem Informasi CRM </title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
 
-    <!-- Favicon -->
-    <link rel="icon" href="{{ asset('logo-perusahaan2.png') }}" type="image/x-icon">
+  <!-- Favicons -->
+  <link rel="icon" href="{{ asset('logo.png') }}" type="image/x-icon">
 
-<!-- PLUGINS CSS STYLE -->
-<link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap/bootstrap.min.css') }}" />
-<link rel="stylesheet" href="{{ asset('assets/plugins/themify-icons/themify-icons.css') }}" />
-<link rel="stylesheet" href="{{ asset('assets/plugins/slick/slick.css') }}" />
-<link rel="stylesheet" href="{{ asset('assets/plugins/slick/slick-theme.css') }}" />
-<link rel="stylesheet" href="{{ asset('assets/plugins/fancybox/jquery.fancybox.min.css') }}" />
-<link rel="stylesheet" href="{{ asset('assets/plugins/aos/aos.css') }}" />
+  <!-- Vendor CSS Files -->
+  <link href="{{ asset('css/mirza/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/mirza/icon.css') }}" rel="stylesheet">
 
-<!-- CUSTOM CSS -->
-<link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
+  <!-- Template Main CSS File -->
+  <link href="{{ asset('css/mirza/main.css') }}" rel="stylesheet">
 </head>
 
-<body class="body-wrapper" data-spy="scroll" data-target=".privacy-nav">
-    <nav class="navbar main-nav navbar-expand-lg px-2 px-sm-0 py-2 py-lg-0">
-        <div class="container">
-            <a class="navbar-brand"></a>
-            <img src="{{ asset('logo-perusahaan2.png') }}" alt="logo" width="50px" />
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="ti-menu"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item dropdown active">
-                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Home
-                        </a>
-                    </li>
-                    <li class="nav-item @@about">
-                        <a class="nav-link" href="{{ route('login') }}">Login</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<body>
 
-    <!--====================================
-=            Hero Section            =
-=====================================-->
-    <section class="section gradient-banner">
-        <div class="shapes-container">
-            <div class="shape" data-aos="fade-down-left" data-aos-duration="1500" data-aos-delay="100"></div>
-            <div class="shape" data-aos="fade-down" data-aos-duration="1000" data-aos-delay="100"></div>
-            <div class="shape" data-aos="fade-up-right" data-aos-duration="1000" data-aos-delay="200"></div>
-            <div class="shape" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"></div>
-            <div class="shape" data-aos="fade-down-left" data-aos-duration="1000" data-aos-delay="100"></div>
-            <div class="shape" data-aos="fade-down-left" data-aos-duration="1000" data-aos-delay="100"></div>
-            <div class="shape" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="300"></div>
-            <div class="shape" data-aos="fade-down-right" data-aos-duration="500" data-aos-delay="200"></div>
-            <div class="shape" data-aos="fade-down-right" data-aos-duration="500" data-aos-delay="100"></div>
-            <div class="shape" data-aos="zoom-out" data-aos-duration="2000" data-aos-delay="500"></div>
-            <div class="shape" data-aos="fade-up-right" data-aos-duration="500" data-aos-delay="200"></div>
-            <div class="shape" data-aos="fade-down-left" data-aos-duration="500" data-aos-delay="100"></div>
-            <div class="shape" data-aos="fade-up" data-aos-duration="500" data-aos-delay="0"></div>
-            <div class="shape" data-aos="fade-down" data-aos-duration="500" data-aos-delay="0"></div>
-            <div class="shape" data-aos="fade-up-right" data-aos-duration="500" data-aos-delay="100"></div>
-            <div class="shape" data-aos="fade-down-left" data-aos-duration="500" data-aos-delay="0"></div>
-        </div>
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 order-2 order-md-1 text-center text-md-left">
-                    <h1 class="text-white font-weight-bold mb-4">
-                    Bengkel Motor Hidup BaruPERSEDIAAN SPONSORSHIP BERBASIS WEB PADA
-PT PAP MEDIATAMA GLOBAL INDONESIA
-</h1>
-                    <p class="text-white mb-5">
-                        {{ env('JUDUL') }}
-                    </p>
-                    <a href="{{ route('login') }}" class="btn btn-main-md">Mulai</a>
-                </div>
-                <div class="col-md-6 text-center order-1 order-md-2">
-                    <img class="img-fluid" src="{{ asset('logo-perusahaan2.png') }}" alt="screenshot" />
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--====  End of Hero Section  ====-->
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center justify-content-between">
 
-    <!-- To Top -->
-    <div class="scroll-top-to">
-        <i class="ti-angle-up"></i>
+      <h1 class="logo"><a href="index.html">
+PT PAP MEDIATAMA GLOBAL INDONESIA.</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <!-- <li><a class="nav-link scrollto" href="">(021) 5828282</a></li> -->
+          <li><a class="getstarted scrollto" href="{{ url('login') }}">Login</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 pt-2 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
+          <h1>SISTEM INFORMASI PERSEDIAAN SPONSORSHIP</h1>
+          <ul>
+            <!-- <li><i class="ri-check-line"></i> Nyaman</li>
+            <li><i class="ri-check-line"></i> Terjangkau</li>
+            <li><i class="ri-check-line"></i> Praktis</li> -->
+          </ul>
+          <div class="mt-3">
+            <a href="{{ url('login') }}" class="btn-get-started scrollto">Mulai</a>
+          </div>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2 hero-img">
+          <img src="{{ asset('hero-img.png') }}" class="img-fluid" alt="">
+        </div>
+      </div>
     </div>
 
-<!-- JAVASCRIPTS -->
-<script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/bootstrap/bootstrap.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/slick/slick.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/fancybox/jquery.fancybox.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/syotimer/jquery.syotimer.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/aos/aos.js') }}"></script>
-<!-- google map -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgeuuDfRlweIs7D6uo4wdIHVvJ0LonQ6g"></script>
-<script src="{{ asset('assets/plugins/google-map/gmap.js') }}"></script>
+  </section><!-- End Hero -->
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-<script src="{{ asset('assets/js/script.js') }}"></script>
+  <!-- Vendor JS Files -->
+  <!-- Template Main JS File -->
+
 </body>
 
 </html>
