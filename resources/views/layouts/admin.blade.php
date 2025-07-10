@@ -103,7 +103,7 @@
         </div>
 
         <footer class="main-footer">
-            <strong> &copy;</strong> Sistem Informasi CRM 
+            <strong> &copy;</strong> Sistem Informasi Distribusi Pekerjaan Instalasi Listrik 
         </footer>
     </div>
     <script src="{{ asset('js/jquery.min.js') }}"></script>

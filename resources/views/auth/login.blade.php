@@ -6,7 +6,7 @@
             <!-- add logo -->
             <img src="{{ asset('logo.png') }}" alt="Logo" class="img-fluid" width="250">
             <br>
-           Sistem Informasi CRM  
+           Sistem Informasi Distribusi Pekerjaan Instalasi Listrik  
         </div>
     </div>
     <div class="card">

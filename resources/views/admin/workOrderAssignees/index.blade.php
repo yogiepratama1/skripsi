@@ -3,16 +3,28 @@
 @section('content')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route('dashboard.permintaans.create') }}">
-                Buat Work Order
+            <a class="btn btn-success" href="{{ route('dashboard.penugasan-teknisi.create') }}">
+                Tugaskan Teknisi
             </a>
         </div>
     </div>
 
+    @if(session('successMessage'))
+    <div class="alert alert-{{ session('custom_type', 'success') }}">
+        {{ session('successMessage') }}
+    </div>
+@endif
+
     <div class="card">
         <div class="card-header">
-            Daftar Work Order 
+            Daftar Penugasan Teknisi 
         </div>
+
+        @if(session('errorMessage'))
+        <div class="alert alert-{{ session('custom_type', 'info') }}">
+            {{ session('errorMessage') }}
+        </div>
+    @endif
 
         <div class="card-body">
             <div class="table-responsive">
@@ -21,33 +33,36 @@
                         <tr>
                             <th>No</th>
                             <th>Kode</th>
-                            <th>Nama Pelanggan</th>
-                            <th>Status</th>
-                            <th>Estimasi Durasi</th>
-                            <th>Lokasi</th>
-                            <th>Tipe Instalasi</th>
+                            <th>Kode Work Order</th>
+                            <th>Status Work Order</th>
+                            <th>Nama Teknisi</th>
                             <th class="no-export">Aksi</th>
                             </tr>
                     </thead>
                     <tbody>
-                        @foreach($workOrders as $workOrder)
-                            <tr data-entry-id="{{ $workOrder->id }}">
+                        @foreach($workOrderAssignees as $assignee)
+                            <tr data-entry-id="{{ $assignee->id }}">
                                 <td class="text-center">{{ $loop->iteration }}</td>
-                                <td>{{ $workOrder->code ?? '-' }}</td>
-                                <td>{{ $workOrder->customer->name ?? '-' }}</td>
-                                <td>{{ $workOrder->status }}</td>
-                                <td>{{ $workOrder->estimated_duration ?? '-' }} Jam</td>
-                                <td>{{ $workOrder->location }}</td>
-                                <td>{{ $workOrder->installation_type }}</td>
+                                <td>{{ $assignee->code ?? '-' }}</td>
+                                <td>{{ $assignee->workOrder->code ?? '-' }}</td>
+                                <td>{{ $assignee->workOrder->status ?? '-'}} </td>
+                                <td>{{ $assignee->assigneeNames ?? '-' }}</td>
                                 <td>
-                                    <a class="btn btn-xs btn-info" href="{{ route('dashboard.permintaans.edit', $workOrder->id) }}">
+                                    @if ($assignee->workOrder->status == 'Belum Dimulai')
+                                    <form action="{{ route('dashboard.penugasan-teknisi.mulai', $assignee->id) }}" method="POST" onsubmit="return confirm('Mulai Pekerjaan?');" style="display: inline-block;">
+                                        @csrf
+                                        <input type="submit" class="btn btn-xs btn-success" value="Mulai Pekerjaan">
+                                    </form>
+                                    <a class="btn btn-xs btn-info" href="{{ route('dashboard.penugasan-teknisi.edit', $assignee->id) }}">
                                         Edit
                                     </a>
-                                    <form action="{{ route('dashboard.permintaans.destroy', $workOrder->id) }}" method="POST" onsubmit="return confirm('Are you sure?');" style="display: inline-block;">
+                                    <form action="{{ route('dashboard.penugasan-teknisi.destroy', $assignee->id) }}" method="POST" onsubmit="return confirm('Are you sure?');" style="display: inline-block;">
                                         @method('DELETE')
                                         @csrf
                                         <input type="submit" class="btn btn-xs btn-danger" value="Delete">
                                     </form>
+                                
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

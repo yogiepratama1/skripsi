@@ -8,14 +8,31 @@
     <div class="sidebar">
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                @if (auth()->user()->role != 'supervisor')
-                    
+                @if (in_array(auth()->user()->role, ['koordinator', 'teknisi']))
                     <li class="nav-item">
                         <a href="{{ url("/dashboard/permintaans") }}" class="nav-link {{ request()->is("dashboard/permintaans") || request()->is("dashboard/permintaans/*") ? "active" : "" }}">
                         <img src="{{ asset('icons/book-solid.svg') }}" alt="book" width="20px" height="20px">
                             </i>
                             <p>
-                                Pendataan
+                                Work Order
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url("/dashboard/penugasan-teknisi") }}" class="nav-link {{ request()->is("dashboard/penugasan-teknisi") || request()->is("dashboard/penugasan-teknisi/*") ? "active" : "" }}">
+                        <img src="{{ asset('icons/book-solid.svg') }}" alt="book" width="20px" height="20px">
+                            </i>
+                            <p>
+                                Penugasan Teknisi
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url("/dashboard/persetujuan-work-order") }}" class="nav-link {{ request()->is("dashboard/persetujuan-work-order") || request()->is("dashboard/persetujuan-work-order/*") ? "active" : "" }}">
+                        <img src="{{ asset('icons/book-solid.svg') }}" alt="book" width="20px" height="20px">
+                            </i>
+                            <p>
+                                Persetujuan Work Order
                             </p>
                         </a>
                     </li>

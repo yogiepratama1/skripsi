@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\WorkOrderAssigneeController;
+use App\Http\Controllers\WorkOrderEvaluationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\AssetController;
 use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\PembayaranController;
-use App\Http\Controllers\Admin\PermintaanController;
+use App\Http\Controllers\Admin\WorkOrderController;
 use App\Http\Controllers\Admin\AssetStatusController;
 use App\Http\Controllers\Admin\AssetCategoryController;
 use App\Http\Controllers\Admin\FormulirPendaftaranController;
@@ -78,30 +80,44 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'namespace' => 'Adm
     Route::get('assets-histories', [AssetsHistoryController::class, 'index'])->name('assets-histories.index');
 
     // Permintaan
-    Route::get('permintaans', [PermintaanController::class, 'index'])->name('permintaans.index');
-    Route::get('permintaans/create', [PermintaanController::class, 'create'])->name('permintaans.create');
-    Route::get('permintaans/{permintaan}/kepuasan', [PermintaanController::class, 'kepuasan'])->name('permintaans.kepuasan');
-    Route::post('permintaans/{permintaan}/kepuasan', [PermintaanController::class, 'storeKepuasan'])->name('permintaans.kepuasan.update');
-    Route::post('permintaans', [PermintaanController::class, 'store'])->name('permintaans.store');
-    Route::get('permintaans/{permintaan}', [PermintaanController::class, 'show'])->name('permintaans.show');
-    Route::get('permintaans/{permintaan}/edit', [PermintaanController::class, 'edit'])->name('permintaans.edit');
-    Route::get('permintaans/{permintaan}/promo', [PermintaanController::class, 'perancangan'])->name('permintaans.perancangan');
-    Route::put('permintaans/{permintaan}', [PermintaanController::class, 'update'])->name('permintaans.update');
-    Route::delete('permintaans/{permintaan}', [PermintaanController::class, 'destroy'])->name('permintaans.destroy');
-    Route::delete('permintaans/destroy', [PermintaanController::class, 'massDestroy'])->name('permintaans.massDestroy');
+    Route::get('permintaans', [WorkOrderController::class, 'index'])->name('permintaans.index');
+    Route::get('permintaans/create', [WorkOrderController::class, 'create'])->name('permintaans.create');
+    Route::get('permintaans/{permintaan}/kepuasan', [WorkOrderController::class, 'kepuasan'])->name('permintaans.kepuasan');
+    Route::post('permintaans/{permintaan}/kepuasan', [WorkOrderController::class, 'storeKepuasan'])->name('permintaans.kepuasan.update');
+    Route::post('permintaans', [WorkOrderController::class, 'store'])->name('permintaans.store');
+    Route::get('permintaans/{permintaan}', [WorkOrderController::class, 'show'])->name('permintaans.show');
+    Route::get('permintaans/{workOrder}/edit', [WorkOrderController::class, 'edit'])->name('permintaans.edit');
+    Route::get('permintaans/{permintaan}/promo', [WorkOrderController::class, 'perancangan'])->name('permintaans.perancangan');
+    Route::put('permintaans/{workOrder}', [WorkOrderController::class, 'update'])->name('permintaans.update');
+    Route::delete('permintaans/{workOrder}', [WorkOrderController::class, 'destroy'])->name('permintaans.destroy');
+    Route::delete('permintaans/destroy', [WorkOrderController::class, 'massDestroy'])->name('permintaans.massDestroy');
 
-    // Pembayaran
-    Route::get('promos', [PerancanganController::class, 'index'])->name('perancangans.index');
-    Route::get('promos/create/{permintaan}', [PerancanganController::class, 'create'])->name('perancangans.create');
-    Route::post('perancangans', [PerancanganController::class, 'store'])->name('perancangans.store');
-    Route::get('perancangans/{perancangan}', [PerancanganController::class, 'show'])->name('perancangans.show');
-    Route::get('perancangans/{perancangan}/setujui', [PerancanganController::class, 'setujui'])->name('perancangans.setujui');
-    Route::get('perancangans/{perancangan}/mulai', [PerancanganController::class, 'mulai'])->name('perancangans.mulai');
-    Route::get('perancangans/{perancangan}/tolak', [PerancanganController::class, 'tolak'])->name('perancangans.tolak');
-    Route::get('promos/{perancangan}/edit', [PerancanganController::class, 'edit'])->name('perancangans.edit');
-    Route::put('perancangans/{perancangan}', [PerancanganController::class, 'update'])->name('perancangans.update');
-    Route::delete('perancangans/{perancangan}', [PerancanganController::class, 'destroy'])->name('perancangans.destroy');
-    Route::delete('perancangans/destroy', [PerancanganController::class, 'massDestroy'])->name('perancangans.massDestroy');
+    // Persetujuan Work Order
+    Route::get('persetujuan-work-order', [WorkOrderEvaluationController::class, 'index'])->name('persetujuan-work-order.index');
+    Route::get('persetujuan-work-order/create', [WorkOrderEvaluationController::class, 'create'])->name('persetujuan-work-order.create');
+    Route::get('persetujuan-work-order/{workOrderEvaluation}/kepuasan', [WorkOrderEvaluationController::class, 'kepuasan'])->name('persetujuan-work-order.kepuasan');
+    Route::post('persetujuan-work-order/{workOrderEvaluation}/kepuasan', [WorkOrderEvaluationController::class, 'storeKepuasan'])->name('persetujuan-work-order.kepuasan.update');
+    Route::post('persetujuan-work-order', [WorkOrderEvaluationController::class, 'store'])->name('persetujuan-work-order.store');
+    Route::get('persetujuan-work-order/{workOrderEvaluation}', [WorkOrderEvaluationController::class, 'show'])->name('persetujuan-work-order.show');
+    Route::get('persetujuan-work-order/{workOrderEvaluation}/edit', [WorkOrderEvaluationController::class, 'edit'])->name('persetujuan-work-order.edit');
+    Route::get('persetujuan-work-order/{workOrderEvaluation}/promo', [WorkOrderEvaluationController::class, 'perancangan'])->name('persetujuan-work-order.perancangan');
+    Route::put('persetujuan-work-order/{workOrderEvaluation}', [WorkOrderEvaluationController::class, 'update'])->name('persetujuan-work-order.update');
+    Route::delete('persetujuan-work-order/{workOrderEvaluation}', [WorkOrderEvaluationController::class, 'destroy'])->name('persetujuan-work-order.destroy');
+    Route::delete('persetujuan-work-order/destroy', [WorkOrderEvaluationController::class, 'massDestroy'])->name('persetujuan-work-order.massDestroy');
+
+    // Penugasan Teknisi
+    Route::get('penugasan-teknisi', [WorkOrderAssigneeController::class, 'index'])->name('penugasan-teknisi.index');
+    Route::get('penugasan-teknisi/create', [WorkOrderAssigneeController::class, 'create'])->name('penugasan-teknisi.create');
+    Route::get('penugasan-teknisi/{workOrderAsignee}/kepuasan', [WorkOrderAssigneeController::class, 'kepuasan'])->name('penugasan-teknisi.kepuasan');
+    Route::post('penugasan-teknisi/{workOrderAsignee}/kepuasan', [WorkOrderAssigneeController::class, 'storeKepuasan'])->name('penugasan-teknisi.kepuasan.update');
+    Route::post('penugasan-teknisi', [WorkOrderAssigneeController::class, 'store'])->name('penugasan-teknisi.store');
+    Route::get('penugasan-teknisi/{workOrderAsignee}', [WorkOrderAssigneeController::class, 'show'])->name('penugasan-teknisi.show');
+    Route::get('penugasan-teknisi/{workOrderAssignee}/edit', [WorkOrderAssigneeController::class, 'edit'])->name('penugasan-teknisi.edit');
+    Route::post('penugasan-teknisi/{workOrderAssignee}/mulai', [WorkOrderAssigneeController::class, 'mulai'])->name('penugasan-teknisi.mulai');
+    Route::get('penugasan-teknisi/{workOrderAsignee}/promo', [WorkOrderAssigneeController::class, 'perancangan'])->name('penugasan-teknisi.perancangan');
+    Route::put('penugasan-teknisi/{workOrderAssignee}', [WorkOrderAssigneeController::class, 'update'])->name('penugasan-teknisi.update');
+    Route::delete('penugasan-teknisi/{workOrderAssignee}', [WorkOrderAssigneeController::class, 'destroy'])->name('penugasan-teknisi.destroy');
+    Route::delete('penugasan-teknisi/destroy', [WorkOrderAssigneeController::class, 'massDestroy'])->name('penugasan-teknisi.massDestroy');
 
     // Laporan
     Route::get('laporans', [LaporanController::class, 'index'])->name('laporans.index');
