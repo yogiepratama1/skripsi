@@ -8,13 +8,19 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @if (request()->is("dashboard/permintaans") || request()->is("dashboard/permintaans/*"))
-        <title>Pendataan</title>
+        <title>Work Order</title>
+    @elseif (request()->is("dashboard/penugasan-teknisi") || request()->is("dashboard/penugasan-teknisi/*"))
+        <title>Penugasan Teknisi</title>
+    @elseif (request()->is("dashboard/persetujuan-work-order") || request()->is("dashboard/persetujuan-work-order/*"))
+        <title>Persetujuan Work Order</title>
     @elseif (request()->is("dashboard/pembayaran") || request()->is("dashboard/pembayaran/*"))
         <title>Pembayaran</title>
     @elseif (request()->is("dashboard/assets/*") || request()->is("dashboard/assets"))
         <title>Barang</title>
-    @else
+    @elseif (request()->is("dashboard/laporans") || request()->is("dashboard/laporans/*"))
         <title>Laporan</title>
+    @else
+        <title>Sistem Informasi Distribusi Pekerjaan Instalasi Listrik</title>
     @endif
     <!-- <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" /> -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
@@ -38,7 +44,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" rel="stylesheet" /> -->
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
-    <link rel="icon" href="{{ asset('logo.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('logo-perusahaan.png') }}" type="image/x-icon">
     @yield('styles')
     <style>
           .no-export, .no-export span {

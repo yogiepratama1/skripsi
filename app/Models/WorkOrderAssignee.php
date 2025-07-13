@@ -54,4 +54,9 @@ class WorkOrderAssignee extends Model
     {
         return $this->workOrder->status === WorkOrder::BELUM_DIMULAI;
     }
+
+    public function scopeFilterByAssignee($query, $assigneeId)
+    {
+        return $query->whereJsonContains('assignee_ids', (string) $assigneeId);
+    }
 }

@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendWorkOrderMailJob;
+use App\Models\User;
+use Carbon\Carbon;
+use App\Models\WorkOrder;
 use Illuminate\Http\Request;
 use App\Models\WorkOrderEvaluation;
 
@@ -24,93 +28,55 @@ class WorkOrderEvaluationController extends Controller
         return view('admin.persetujuanWorkOrder.create', compact('teknisi', 'workOrders'));
     }
 
-    public function kepuasan(Permintaan $permintaan)
+    public function show(WorkOrderEvaluation $workOrderEvaluation)
     {
-        return view('admin.persetujuanWorkOrder.kepuasan', compact('permintaan'));
+        $workOrderEvaluation->load('workOrder');
+        return view('admin.persetujuanWorkOrder.show', compact('workOrderEvaluation'));
     }
 
-    public function storeKepuasan(Request $request, Permintaan $permintaan)
+    public function setujui(WorkOrderEvaluation $workOrderEvaluation, Request $request)
     {
-        $permintaan->update($request->all());
-
-        return redirect()->route('dashboard.penugasan-teknisi.index');
-    }
-
-    public function store(Request $request)
-    {
-        if (empty($request->work_order_id)) {
+        if ($workOrderEvaluation->status == WorkOrderEvaluation::DISETUJUI_SUPERVISOR) {
             return redirect()
                 ->back()
-                ->withErrors(['errorMessage' => 'Pilih Work Order terlebih dahulu.']);
+                ->withErrors(['errorMessage' => 'Work Order sudah disetujui.']);
         }
-        $request->merge(['assigneed_at' => Carbon::now()]);
-        WorkOrderAssignee::create(attributes: $request->all());
-        return redirect()->route('dashboard.penugasan-teknisi.index');
-    }
-
-    public function edit(WorkOrderAssignee $workOrderAssignee)
-    {
-        $workOrders = WorkOrder::where('id', $workOrderAssignee->work_order_id)
-        ->get();
-        $teknisi = User::where('role', 'teknisi')->get();
-        return view('admin.persetujuanWorkOrder.edit', compact(['workOrderAssignee','workOrders', 'teknisi']));
-    }
-
-    public function mulai(WorkOrderAssignee $workOrderAssignee)
-    {
-        $workOrderEvaluation = new WorkOrderEvaluation();
-        $workOrderEvaluation->work_order_id = $workOrderAssignee->work_order_id;
-        $workOrderEvaluation->qc_user_id = User::where('role', 'quality_control')->first()->id;
-        $workOrderEvaluation->status = WorkOrderEvaluation::DIPROSES_TEKNISI;
+        $workOrderEvaluation->status = auth()->user()->role === 'supervisor' ?
+            WorkOrderEvaluation::DISETUJUI_SUPERVISOR :
+            WorkOrderEvaluation::MENUNGGU_PERSETUJUAN_SUPERVISOR;
+        $workOrderEvaluation->approved_at = Carbon::now();
+        $workOrderEvaluation->notes = $request->notes ?? null;
         $workOrderEvaluation->save();
-        $workOrderAssignee->workOrder->status = WorkOrder::DALAM_PROSES;
-        $workOrderAssignee->workOrder->save();
 
-        return redirect()->route('dashboard.penugasan-teknisi.index')
-            ->with('successMessage', 'Work Order telah dimulai.');
-    }
+        if ($workOrderEvaluation->status == WorkOrderEvaluation::DISETUJUI_SUPERVISOR) {
+            $workOrderEvaluation->workOrder->status = WorkOrder::SELESAI;
+            $workOrderEvaluation->workOrder->end_date = Carbon::now();
+            $workOrderEvaluation->workOrder->save();
 
-    public function perancangan(Permintaan $permintaan)
-    {
-        $count = 0;
-        $perancangan = Perancangan::where('permintaan_id', $permintaan->id)->count();
-        if ($perancangan > 0) {
-            $count = $perancangan;
-            $perancangan = Perancangan::where('permintaan_id', $permintaan->id)->first();
+            $email = User::where('id', $workOrderEvaluation->workOrder->coordinator_id)->first()->email;
+            SendWorkOrderMailJob::dispatch($workOrderEvaluation->workOrder, [$email]);
+
+            return redirect()->route('dashboard.persetujuan-work-order.index')
+                ->with('successMessage', 'Work Order telah disetujui dan selesai.');
         }
-        return view('admin.perancangans.index', compact('permintaan', 'count', 'perancangan'));
-    } 
 
-    public function update(Request $request, WorkOrderAssignee $workOrderAssignee)
+        return redirect()->route('dashboard.persetujuan-work-order.index')
+            ->with('successMessage', 'Work Order telah disetujui. Silahkan menunggu persetujuan supervisor.');
+    }
+    public function revisi(WorkOrderEvaluation $workOrderEvaluation, Request $request)
     {
-        if ($workOrderAssignee->workOrder->status != WorkOrder::BELUM_DIMULAI) {
+        if ($workOrderEvaluation->status == WorkOrderEvaluation::REVISI_EVALUASI) {
             return redirect()
                 ->back()
-                ->withErrors(['errorMessage' => 'Tidak dapat merubah teknisi karena work order sudah dalam proses. Silahkan kembali ke halaman sebelumnya.']);
+                ->withErrors(['errorMessage' => 'Work Order status sudah menjadi revisi.']);
         }
-        DB::beginTransaction();
-        $workOrderAssignee->update($request->except('work_order_id'));
-        DB::commit();
-        return redirect()->route('dashboard.penugasan-teknisi.index');
-    }
 
-    // public function show(Permintaan $permintaan)
-    // {
-    //     $permintaan->load('user');
+        $workOrderEvaluation->status = WorkOrderEvaluation::REVISI_EVALUASI;
+        $workOrderEvaluation->notes = $request->notes ?? null;
+        $workOrderEvaluation->save();
 
-    //     return view('admin.persetujuanWorkOrder.show', compact('permintaan'));
-    // }
-
-    public function destroy(WorkOrderAssignee $workOrderAssignee)
-    {
-        if (!$workOrderAssignee->canBeDeletedOrEdited()) {
-            return redirect()
-                ->back()
-                ->withErrors(['errorMessage' => 'Penugasan teknisi tidak dapat dihapus karena work order sudah dimulai atau telah selesai.']);
-        }
-        $workOrderAssignee->delete();
-
-        return back();
+        return redirect()->route('dashboard.persetujuan-work-order.index')
+            ->with('successMessage', 'Work Order telah direvisi. Silahkan menunggu teknisi melakukan revisi.');
     }
 
     // public function massDestroy(MassDestroyPermintaanRequest $request)

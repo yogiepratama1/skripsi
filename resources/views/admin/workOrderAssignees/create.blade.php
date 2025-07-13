@@ -35,7 +35,7 @@
                 <label for="assignee_ids">Pilih Teknisi</label>
                 <select class="form-control select2 {{ $errors->has('assignee_ids') ? 'is-invalid' : '' }}" name="assignee_ids[]" id="assignee_ids" multiple>
                     @foreach($teknisi as $t)
-                        <option value="{{ $t->id }}" {{ (collect(old('assignee_ids'))->contains($t->id)) ? 'selected' : '' }}>{{ $t->name }}</option>
+                        <option value="{{ (int)$t->id }}" {{ (collect(old('assignee_ids'))->contains($t->id)) ? 'selected' : '' }}>{{ $t->name }}</option>
                     @endforeach
                 </select>
                 @if($errors->has('assignee_ids'))

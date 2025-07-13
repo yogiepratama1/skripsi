@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\WorkOrderEvaluation;
+use App\Jobs\SendWorkOrderMailJob;
+use \PDF;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\WorkOrder;
@@ -10,16 +11,28 @@ use App\Models\Permintaan;
 use App\Models\Perancangan;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Mail\WorkOrderAssigned;
 use App\Models\WorkOrderAssignee;
 use Illuminate\Support\Facades\DB;
+use App\Models\WorkOrderEvaluation;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\MassDestroyPermintaanRequest;
 
 class WorkOrderAssigneeController extends Controller
 {
     public function index()
     {
-        $workOrderAssignees = WorkOrderAssignee::with('workOrder')->get();
+        $workOrderAssignees = WorkOrderAssignee::with('workOrder.evaluation')
+            ->whereHas('workOrder', function ($query) {
+                $query->where('status', '!=', WorkOrder::DIBATALKAN);
+            })
+            ->get();
+        if (auth()->user()->role === 'teknisi') {
+            $workOrderAssignees = WorkOrderAssignee::filterByAssignee(auth()->user()->id)
+                ->with('workOrder.evaluation')
+                ->get();
+        }
 
         return view('admin.workOrderAssignees.index', compact('workOrderAssignees'));
     }
@@ -55,6 +68,13 @@ class WorkOrderAssigneeController extends Controller
         }
         $request->merge(['assigneed_at' => Carbon::now()]);
         WorkOrderAssignee::create(attributes: $request->all());
+        $assigneeIds = array_map(function ($id) {
+            return (int) $id;
+        }, $request->assignee_ids);
+        $emails = User::whereIn('id', $assigneeIds)->get()->pluck('email')->toArray();
+        $workOrder = WorkOrder::find($request->work_order_id);
+        SendWorkOrderMailJob::dispatch($workOrder, $emails);
+
         return redirect()->route('dashboard.penugasan-teknisi.index');
     }
 
@@ -66,14 +86,66 @@ class WorkOrderAssigneeController extends Controller
         return view('admin.workOrderAssignees.edit', compact(['workOrderAssignee','workOrders', 'teknisi']));
     }
 
+    public function selesaikan(WorkOrderAssignee $workOrderAssignee)
+    {
+        $workOrderAssignee->load('workOrder.evaluation');
+        return view('admin.workOrderAssignees.selesaikan', compact(['workOrderAssignee']));
+    }
+
+    public function selesaikanUpdate(WorkOrderAssignee $workOrderAssignee, Request $request)
+    {
+        $images = $request->file('images');
+        $imagePaths = $workOrderAssignee->workOrder->evaluation->image_paths ?? [];
+        if ($images) {
+            foreach ($images as $image) {
+                $imagePath = $image->store('work_order_images', 'public');
+                $imagePaths[] = $imagePath;
+            }
+        }
+
+        $evaluation = WorkOrderEvaluation::where('work_order_id', $workOrderAssignee->work_order_id)->first();
+        if (!$evaluation) {
+            return redirect()
+                ->back()
+                ->withErrors(['errorMessage' => 'Work Order Evaluation tidak ditemukan.']);
+        }
+
+        $evaluation->update([
+            'status' => WorkOrderEvaluation::MENUNGGU_EVALUASI,
+            'image_paths' => $imagePaths,
+            'description' => $request->description,
+        ]);
+
+        // Rename file with "signed_" prefix
+        $customerSignedFile = $request->file('customer_signed_file');
+        if ($customerSignedFile) {
+            $originalName = $customerSignedFile->getClientOriginalName();
+            $signedFileName = 'signed_' . $originalName;
+            $customerSignedFilePath = $customerSignedFile->storeAs('customer_signed_files', $signedFileName, 'public');
+            $evaluation->workOrder->update([
+                'customer_signed_file_path' => $customerSignedFilePath,
+            ]);
+        }
+
+        return redirect()->route('dashboard.penugasan-teknisi.index')->with('successMessage', 'Work Order telah diupdate.');
+    }
+
+
     public function mulai(WorkOrderAssignee $workOrderAssignee)
     {
+        if ($workOrderAssignee->workOrder->status == WorkOrder::DALAM_PROSES) {
+            return redirect()
+                ->back()
+                ->withErrors(['errorMessage' => 'Work Order sudah dimulai. Silahkan kembali ke halaman sebelumnya.']);
+        }
+
         $workOrderEvaluation = new WorkOrderEvaluation();
         $workOrderEvaluation->work_order_id = $workOrderAssignee->work_order_id;
         $workOrderEvaluation->qc_user_id = User::where('role', 'quality_control')->first()->id;
         $workOrderEvaluation->status = WorkOrderEvaluation::DIPROSES_TEKNISI;
         $workOrderEvaluation->save();
         $workOrderAssignee->workOrder->status = WorkOrder::DALAM_PROSES;
+        $workOrderAssignee->workOrder->start_date = Carbon::now();
         $workOrderAssignee->workOrder->save();
 
         return redirect()->route('dashboard.penugasan-teknisi.index')

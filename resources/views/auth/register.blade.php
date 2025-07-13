@@ -4,14 +4,14 @@
 <div class="login-box">
     <div class="login-logo">
         <!-- add logo -->
-        <img src="{{ asset('logo.png') }}" alt="Logo" class="img-fluid" width="250">
+        <img src="{{ asset('logo-perusahaan.png') }}" alt="Logo" class="img-fluid" width="250">
         <br>
         Sistem Informasi Distribusi Pekerjaan Instalasi Listrik 
     </div>
     <div class="card">
         <div class="card-body login-card-body">
             <p class="login-box-msg">
-                Register
+                Daftar Akun Teknisi
             </p>
 
             @if(session()->has('message'))
@@ -34,6 +34,7 @@
                 </div>
 
                 <div class="form-group">
+                    <small class="text-muted" style="font-size: 0.92em;">Pastikan alamat email aktif!</small>
                     <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" required autocomplete="email" placeholder="Email" name="email" value="{{ old('email', null) }}">
 
                     @if($errors->has('email'))

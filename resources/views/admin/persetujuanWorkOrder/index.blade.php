@@ -9,7 +9,7 @@
 
     <div class="card">
         <div class="card-header">
-            Daftar Work Order Aktif
+            Daftar Persetujuan Work Order
         </div>
 
         @if(session('errorMessage'))
@@ -27,7 +27,6 @@
                             <th>Kode</th>
                             <th>Kode Work Order</th>
                             <th>Status</th>
-                            <th>Tanggal Disetujui</th>
                             <th class="no-export">Aksi</th>
                         </tr>
                     </thead>
@@ -38,7 +37,6 @@
                                 <td>{{ $evaluation->code ?? '-' }}</td>
                                 <td>{{ $evaluation->workOrder->code ?? '-' }}</td>
                                 <td>{{ $evaluation->status ?? '-' }}</td>
-                                <td>{{ $evaluation->approved_at ? \Carbon\Carbon::parse($evaluation->approved_at)->format('d-m-Y') : '-' }}</td>
                                 <td>
                                     <a class="btn btn-xs btn-primary" href="{{ route('dashboard.persetujuan-work-order.show', $evaluation->id) }}">
                                         Detail

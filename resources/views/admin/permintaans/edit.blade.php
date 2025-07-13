@@ -41,7 +41,14 @@
                 @endif
             </div>
 
-            
+            <div class="form-group">
+                <label for="installation_date">Tanggal Instalasi</label>
+                <input class="form-control {{ $errors->has('installation_date') ? 'is-invalid' : '' }}" type="date" name="installation_date" id="installation_date" value="{{ old('installation_date', $workOrder->installation_date ? \Carbon\Carbon::parse($workOrder->installation_date)->format('Y-m-d') : '') }}">
+                @if($errors->has('installation_date'))
+                    <span class="text-danger">{{ $errors->first('installation_date') }}</span>
+                @endif
+            </div>
+
             <div class="form-group">
                 <label for="estimated_duration">Estimasi Durasi (Jam)</label>
                 <input class="form-control {{ $errors->has('estimated_duration') ? 'is-invalid' : '' }}" type="number" name="estimated_duration" id="estimated_duration" value="{{ old('estimated_duration', $workOrder->estimated_duration) }}">
@@ -49,7 +56,7 @@
                 <span class="text-danger">{{ $errors->first('estimated_duration') }}</span>
                 @endif
             </div>
-            
+
             <div class="form-group">
                 <label for="location">Lokasi</label>
                 <input class="form-control {{ $errors->has('location') ? 'is-invalid' : '' }}" type="text" name="location" id="location" value="{{ old('location', $workOrder->location) }}">
@@ -57,7 +64,7 @@
                 <span class="text-danger">{{ $errors->first('location') }}</span>
                 @endif
             </div>
-            
+
             <div class="form-group">
                 <label for="status">Status</label>
                 <select class="form-control {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status" id="status">

@@ -33,7 +33,7 @@ Route::get('/', function() {
         // }
     
         return view('welcome');
-    });
+    })->name('homepage');
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::get('register', [LoginController::class, 'showRegisterForm'])->name('register');
 Route::post('login', [LoginController::class, 'login']);
@@ -95,13 +95,12 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'namespace' => 'Adm
     // Persetujuan Work Order
     Route::get('persetujuan-work-order', [WorkOrderEvaluationController::class, 'index'])->name('persetujuan-work-order.index');
     Route::get('persetujuan-work-order/create', [WorkOrderEvaluationController::class, 'create'])->name('persetujuan-work-order.create');
-    Route::get('persetujuan-work-order/{workOrderEvaluation}/kepuasan', [WorkOrderEvaluationController::class, 'kepuasan'])->name('persetujuan-work-order.kepuasan');
-    Route::post('persetujuan-work-order/{workOrderEvaluation}/kepuasan', [WorkOrderEvaluationController::class, 'storeKepuasan'])->name('persetujuan-work-order.kepuasan.update');
     Route::post('persetujuan-work-order', [WorkOrderEvaluationController::class, 'store'])->name('persetujuan-work-order.store');
     Route::get('persetujuan-work-order/{workOrderEvaluation}', [WorkOrderEvaluationController::class, 'show'])->name('persetujuan-work-order.show');
     Route::get('persetujuan-work-order/{workOrderEvaluation}/edit', [WorkOrderEvaluationController::class, 'edit'])->name('persetujuan-work-order.edit');
-    Route::get('persetujuan-work-order/{workOrderEvaluation}/promo', [WorkOrderEvaluationController::class, 'perancangan'])->name('persetujuan-work-order.perancangan');
     Route::put('persetujuan-work-order/{workOrderEvaluation}', [WorkOrderEvaluationController::class, 'update'])->name('persetujuan-work-order.update');
+    Route::put('persetujuan-work-order/{workOrderEvaluation}/setujui', [WorkOrderEvaluationController::class, 'setujui'])->name('persetujuan-work-order.setujui');
+    Route::put('persetujuan-work-order/{workOrderEvaluation}/revisi', [WorkOrderEvaluationController::class, 'revisi'])->name('persetujuan-work-order.revisi');
     Route::delete('persetujuan-work-order/{workOrderEvaluation}', [WorkOrderEvaluationController::class, 'destroy'])->name('persetujuan-work-order.destroy');
     Route::delete('persetujuan-work-order/destroy', [WorkOrderEvaluationController::class, 'massDestroy'])->name('persetujuan-work-order.massDestroy');
 
@@ -112,6 +111,8 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'namespace' => 'Adm
     Route::post('penugasan-teknisi/{workOrderAsignee}/kepuasan', [WorkOrderAssigneeController::class, 'storeKepuasan'])->name('penugasan-teknisi.kepuasan.update');
     Route::post('penugasan-teknisi', [WorkOrderAssigneeController::class, 'store'])->name('penugasan-teknisi.store');
     Route::get('penugasan-teknisi/{workOrderAsignee}', [WorkOrderAssigneeController::class, 'show'])->name('penugasan-teknisi.show');
+    Route::get('penugasan-teknisi/{workOrderAssignee}/selesaikan', [WorkOrderAssigneeController::class, 'selesaikan'])->name('penugasan-teknisi.selesaikan');
+    Route::put('penugasan-teknisi/{workOrderAssignee}/selesaikan', [WorkOrderAssigneeController::class, 'selesaikanUpdate'])->name('penugasan-teknisi.selesaikan.update');
     Route::get('penugasan-teknisi/{workOrderAssignee}/edit', [WorkOrderAssigneeController::class, 'edit'])->name('penugasan-teknisi.edit');
     Route::post('penugasan-teknisi/{workOrderAssignee}/mulai', [WorkOrderAssigneeController::class, 'mulai'])->name('penugasan-teknisi.mulai');
     Route::get('penugasan-teknisi/{workOrderAsignee}/promo', [WorkOrderAssigneeController::class, 'perancangan'])->name('penugasan-teknisi.perancangan');
@@ -121,12 +122,23 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'namespace' => 'Adm
 
     // Laporan
     Route::get('laporans', [LaporanController::class, 'index'])->name('laporans.index');
-    Route::get('laporans/create', [LaporanController::class, 'create'])->name('laporans.create');
+    Route::post('laporans/{workOrder}/create-detail', [LaporanController::class, 'createDetail'])->name('laporans.create-detail');
+    Route::post('laporans/create-list', [LaporanController::class, 'createList'])->name('laporans.create-list');
     Route::post('laporans', [LaporanController::class, 'store'])->name('laporans.store');
     Route::get('laporans/{laporan}', [LaporanController::class, 'show'])->name('laporans.show');
     Route::get('laporans/{laporan}/edit', [LaporanController::class, 'edit'])->name('laporans.edit');
     Route::put('laporans/{laporan}', [LaporanController::class, 'update'])->name('laporans.update');
     Route::delete('laporans/{laporan}', [LaporanController::class, 'destroy'])->name('laporans.destroy');
     Route::delete('laporans/destroy', [LaporanController::class, 'massDestroy'])->name('laporans.massDestroy');
+
+    Route::get('/test-email', function () {
+        \Mail::raw('Ini email percobaan dari Laravel', function ($message) {
+            $message->to('pratamayogie131@gmail.com')
+                    ->subject('Test Email');
+        });
+
+    return 'Email terkirim!';
+});
+
 });
 

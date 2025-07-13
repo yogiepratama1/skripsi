@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Models\Customer;
 use App\Models\WorkOrderApproval;
 use App\Models\WorkOrderAssignee;
@@ -12,12 +13,24 @@ class WorkOrder extends Model
 {
     public $fillable = [
         'code',
+        'coordinator_id',
         'customer_id',
         'status',
         'estimated_duration',
         'location',
         'installation_type',
-        'description'
+        'description',
+        'installation_date',
+        'start_date',
+        'end_date',
+        'customer_signed_file_path'
+    ];
+
+    public $with = ['customer', 'assignee', 'evaluation', 'approval'];
+    public $casts = [
+        'installation_date' => 'datetime',
+        'start_date' => 'datetime',
+        'end_date' => 'datetime',
     ];
 
     public const BELUM_DIMULAI = 'Belum Dimulai';
@@ -51,6 +64,11 @@ class WorkOrder extends Model
             );
             $model->save();
         });
+    }
+
+    public function coordinator()
+    {
+        return $this->belongsTo(User::class, 'coordinator_id');
     }
 
     public function customer()

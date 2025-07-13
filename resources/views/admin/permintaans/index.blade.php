@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+    @if (auth()->user()->role == 'koordinator')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
             <a class="btn btn-success" href="{{ route('dashboard.permintaans.create') }}">
@@ -8,6 +9,7 @@
             </a>
         </div>
     </div>
+    @endif
 
     <div class="card">
         <div class="card-header">
@@ -19,12 +21,12 @@
                 <table class="table table-bordered table-striped table-hover datatable datatable-Permintaan">
                     <thead>
                         <tr>
-                            <th>No</th>
                             <th>Kode</th>
                             <th>Nama Pelanggan</th>
                             <th>Status</th>
                             <th>Estimasi Durasi</th>
                             <th>Lokasi</th>
+                            <th>Tanggal Instalasi</th>
                             <th>Tipe Instalasi</th>
                             <th class="no-export">Aksi</th>
                             </tr>
@@ -32,14 +34,15 @@
                     <tbody>
                         @foreach($workOrders as $workOrder)
                             <tr data-entry-id="{{ $workOrder->id }}">
-                                <td class="text-center">{{ $loop->iteration }}</td>
                                 <td>{{ $workOrder->code ?? '-' }}</td>
                                 <td>{{ $workOrder->customer->name ?? '-' }}</td>
                                 <td>{{ $workOrder->status }}</td>
                                 <td>{{ $workOrder->estimated_duration ?? '-' }} Jam</td>
                                 <td>{{ $workOrder->location }}</td>
+                                <td>{{ \Carbon\Carbon::parse($workOrder->installation_date)->format('Y-m-d') }}</td>
                                 <td>{{ $workOrder->installation_type }}</td>
                                 <td>
+                                    @if ($workOrder->status == 'Belum Dimulai' && auth()->user()->role == 'koordinator')
                                     <a class="btn btn-xs btn-info" href="{{ route('dashboard.permintaans.edit', $workOrder->id) }}">
                                         Edit
                                     </a>
@@ -48,6 +51,7 @@
                                         @csrf
                                         <input type="submit" class="btn btn-xs btn-danger" value="Delete">
                                     </form>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

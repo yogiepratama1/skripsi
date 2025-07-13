@@ -33,9 +33,16 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            if(Auth::user()->role == 'supervisor') {
+            if (in_array(auth()->user()->role, ['koordinator'])) {
+                return redirect()->route('dashboard.permintaans.index');
+            } elseif (in_array(auth()->user()->role, ['teknisi'])) {
+                return redirect()->route('dashboard.penugasan-teknisi.index');
+            } elseif (in_array(auth()->user()->role, ['quality_control', 'supervisor'])) {
+                return redirect()->route('dashboard.persetujuan-work-order.index');
+            } elseif (in_array(auth()->user()->role, ['general_manager'])) {
                 return redirect()->route('dashboard.laporans.index');
             }
+
             return redirect()->route('dashboard.permintaans.index');
         } else {
             // Authentication failed
@@ -52,9 +59,8 @@ class LoginController extends Controller
         ]);
 
         $credentials['password'] = bcrypt($credentials['password']);
-
-        $user = User::create($credentials);
-        $user->update(['role' => 'user']);
+        $credentials['role'] = 'teknisi';
+        User::create($credentials);
 
         return redirect()->route('dashboard.permintaans.index');
     }

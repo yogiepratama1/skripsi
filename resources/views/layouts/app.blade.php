@@ -18,7 +18,7 @@
     <link href="{{ asset('css/icheck-bootstrap.min.css') }}" rel="stylesheet" />
     <!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" /> -->
     @yield('styles')
-    <link rel="icon" href="{{ asset('logo.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('logo-perusahaan.png') }}" type="image/x-icon">
 
 </head>
 

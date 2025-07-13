@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\WorkOrder;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,21 +17,21 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'name' => 'Koordinator',
+            'name' => 'Riyanto Upi',
             'email' => 'koordinator@gmail.com',
             'password' => bcrypt('password'),
             'role' => 'koordinator',
         ]);
 
         User::create([
-            'name' => 'Teknisi Rizky',
+            'name' => 'Rizky Pratama',
             'email' => 'rizky@gmail.com',
             'password' => bcrypt('password'),
             'role' => 'teknisi',
         ]);
 
         User::create([
-            'name' => 'Teknisi Mardi',
+            'name' => 'Mardi Setiawan',
             'email' => 'mardi@gmail.com',
             'password' => bcrypt('password'),
             'role' => 'teknisi',
@@ -68,11 +69,13 @@ class DatabaseSeeder extends Seeder
             'location' => 'Jl. Raya No. 1',
         ]);
         WorkOrder::create([
+            'coordinator_id' => 1, // Assuming the first user is the coordinator
             'customer_id' => 1,
             'location' => 'Jl. Raya No. 1',
             'installation_type' => 'Pemasangan Baru',
             'estimated_duration' => 3, // in hours
             'status' => 'Belum Dimulai',
+            'installation_date' => Carbon::now()
         ]);
 
         Customer::create([
@@ -81,11 +84,13 @@ class DatabaseSeeder extends Seeder
             'location' => 'Jl. Kebon Jeruk No. 5',
         ]);
         WorkOrder::create([
+            'coordinator_id' => 1, // Assuming the first user is the coordinator
             'customer_id' => 2,
             'location' => 'Jl. Kebon Jeruk No. 5',
             'installation_type' => 'Pemasangan Baru',
             'estimated_duration' => 2, // in hours
             'status' => 'Belum Dimulai',
+            'installation_date' => Carbon::now()
         ]);
 
         Customer::create([
@@ -94,11 +99,13 @@ class DatabaseSeeder extends Seeder
             'location' => 'Jl. Merdeka No. 7',
         ]);
         WorkOrder::create([
+            'coordinator_id' => 1, // Assuming the first user is the coordinator
             'customer_id' => 3,
             'location' => 'Jl. Merdeka No. 7',
             'installation_type' => 'Pemasangan Baru',
             'estimated_duration' => 4, // in hours
             'status' => 'Belum Dimulai',
+            'installation_date' => Carbon::now()
         ]);
     }
 }

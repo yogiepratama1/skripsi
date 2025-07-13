@@ -39,44 +39,38 @@
 </head>
 
 <body>
-    <h1>Laporan Pelanggan dan Promo</h1>
+    <h1>Daftar Laporan Work Order</h1>
     <div class="table-responsive">
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Nama</th>
-                    <th>Alamat</th>
-                    <th>No Hp</th>
-                    <th>Barang</th>
-                    <th>Jumlah</th>
-                    <th>Total</th>
-                    <th>Promo</th>
-                    <th>Tanggal Promo</th>
-                    <th>Kepuasan</th>
+                    <th>No</th>
+                    <th>Kode</th>
+                    <th>Nama Pelanggan</th>
+                    <th>Status</th>
+                    <th>Estimasi Durasi</th>
+                    <th>Lokasi</th>
+                    <th>Tipe Instalasi</th>
+                    <th>Tanggal Selesai</th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach ($permintaans as $permintaan)                                
-                <tr data-entry-id="{{ $permintaan->id }}">
-                    <td class="text-center">{{ $permintaan->id ?? '' }}</td>
-                    <td>{{ $permintaan->nama ?? '' }}</td>
-                    <td>{{ $permintaan->alamat ?? '' }}</td>
-                    <td>{{ $permintaan->no_hp ?? '' }}</td>
-                    <td>{{ $permintaan->barang ?? '' }}</td>
-                    <td>{{ $permintaan->jumlah ?? '' }}</td>
-                    <td>{{ number_format($permintaan->total_harga ?? 0, 0, ',', '.') }}</td>
-                    @if ($permintaan->perancangan != null)
-                                <td>{{ $permintaan->perancangan->promo ?? '' }}</td>
-                                <td>{{ $permintaan->perancangan->tanggal_promo ? \Carbon\Carbon::parse($permintaan->perancangan->tanggal_promo)->format('Y-m-d') : '' }}</td>
-                                @else
-                                <td></td>                                    
-                                <td></td>                                    
-                                @endif
-                    <td>{{ $permintaan->kepuasan ?? '' }}</td>
-                </tr>
-                @endforeach
-            </tbody>
+                <tbody>
+                    @foreach($workOrders as $workOrder)
+                        <tr data-entry-id="{{ $workOrder->id }}">
+                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td>{{ $workOrder->code ?? '-' }}</td>
+                            <td>{{ $workOrder->customer->name ?? '-' }}</td>
+                            <td>{{ $workOrder->status }}</td>
+                            <td>{{ $workOrder->estimated_duration ?? '-' }} Jam</td>
+                            <td>{{ $workOrder->location }}</td>
+                            <td>{{ $workOrder->installation_type }}</td>
+                            <td>{{ $workOrder->evaluation->approved_at ? $workOrder->evaluation->approved_at->format('d-m-Y H:i') : '-' }}</td>
+                            <td>
+                                {{-- Aksi lain jika diperlukan --}}
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
         </table>
     </div>
 </body>

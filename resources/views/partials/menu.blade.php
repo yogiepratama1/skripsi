@@ -27,6 +27,8 @@
                             </p>
                         </a>
                     </li>
+                    @endif
+                    @if (in_array(auth()->user()->role, ['quality_control', 'supervisor']))
                     <li class="nav-item">
                         <a href="{{ url("/dashboard/persetujuan-work-order") }}" class="nav-link {{ request()->is("dashboard/persetujuan-work-order") || request()->is("dashboard/persetujuan-work-order/*") ? "active" : "" }}">
                         <img src="{{ asset('icons/book-solid.svg') }}" alt="book" width="20px" height="20px">
@@ -38,20 +40,7 @@
                     </li>
                     @endif
 
-                    <!-- @if (auth()->user()->role == 'vendor' || auth()->user()->role == 'finance')
-                    <li class="nav-item">
-                        <a href="{{ url("/dashboard/pembayarans") }}" class="nav-link {{ request()->is("dashboard/pembayarans") || request()->is("dashboard/pembayarans/*") ? "active" : "" }}">
-                            <i class="fa-fw nav-icon far fa-money-bill-alt">
-
-                            </i>
-                            <p>
-                                Pembayaran
-                            </p>
-                        </a>
-                    </li>
-                    @endif -->
-
-                    @if (auth()->user()->role == 'supervisor')
+                    @if (in_array(auth()->user()->role, ['koordinator', 'general_manager', 'supervisor']))
                     <li class="nav-item">
                         <a href="{{ url("/dashboard/laporans") }}" class="nav-link {{ request()->is("dashboard/laporans") || request()->is("dashboard/laporans/*") ? "active" : "" }}">
                         <img src="{{ asset('icons/file.svg') }}" alt="laporan" width="20px" height="20px">

@@ -46,6 +46,14 @@
             </div>
 
             <div class="form-group">
+                <label for="installation_date">Tanggal Instalasi</label>
+                <input class="form-control {{ $errors->has('installation_date') ? 'is-invalid' : '' }}" type="date" name="installation_date" id="installation_date" value="{{ old('installation_date') }}">
+                @if($errors->has('installation_date'))
+                    <span class="text-danger">{{ $errors->first('installation_date') }}</span>
+                @endif
+            </div>
+
+            <div class="form-group">
                 <label for="estimated_duration">Estimasi Durasi (Jam)</label>
                 <input class="form-control {{ $errors->has('estimated_duration') ? 'is-invalid' : '' }}" type="number" name="estimated_duration" id="estimated_duration" value="{{ old('estimated_duration') }}">
                 @if($errors->has('estimated_duration'))
